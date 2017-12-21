@@ -62,7 +62,7 @@ def get_sex_from_id(sex_id):
 def get_all_value_notes():
     """
     Returns a dictionary of all value notes and their IDs
-    :return: Data value notes and their associated codes that are used in Fingertips as a tuple of tuples
+    :return: Data value notes and their associated codes that are used in Fingertips as a list of tuples
     """
     value_notes = get_data_in_tuple(base_url + 'value_notes')
     return value_notes

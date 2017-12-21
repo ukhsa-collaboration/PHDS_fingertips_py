@@ -39,3 +39,24 @@ def get_all_data_for_profile(profile_id, parent_area_type_id=15, filter_by_area_
             df = df.loc[df['Area Code'] == filter_by_area_codes]
         df = df.reset_index()
     return df
+
+
+def get_all_data_for_indicators(indicators, area_type_id, parent_area_type_id=15, filter_by_area_codes=None):
+    """
+    Returns a dataframe of data for given indicators at an area
+    :param indicators: List or integer or string of indicator Ids
+    :param area_type_id: ID of area type (eg. CCG, Upper Tier Local Authority) used in Fingertips as integer or string
+    :param parent_area_type_id: Area type of parent area - defaults to England value
+    :param filter_by_area_codes: Option to limit returned data to areas. Areas as either string or list of strings
+    :return: Dataframe of data for given indicators at an area
+    """
+    url_suffix = 'all_data/csv/by_indicator_id?indicator_ids={}&child_area_type_id={}&parent_area_type_id={}'
+    if isinstance(indicators, list):
+        indicators = ','.join(indicators)
+    else:
+        indicators = str(indicators)
+    populated_url = url_suffix.format(indicators, str(area_type_id), str(parent_area_type_id))
+    df = pd.read_csv(base_url + populated_url)
+    df.reset_index()
+    return df
+
