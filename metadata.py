@@ -1,4 +1,6 @@
+import pandas as pd
 from api_calls import get_data_in_tuple, base_url, make_request, get_json
+from urllib.error import HTTPError
 
 
 def get_all_ages():
@@ -191,3 +193,97 @@ def get_profile_by_name(profile_name):
     else:
         return profile_obj
 
+
+def get_metadata_for_indicator(indicator_ids):
+    """
+    Returns a dataframe of metadata for a given indicator ID or list of indicator IDs
+    :param indicator_ids: Number or list of numbers used to identify an indicator within Fingertips as integer or string
+    :return: Dataframe object with metadate for the indicator ID
+    """
+    url_suffix = "indicator_metadata/csv/by_indicator_id?indicator_ids={}"
+    if isinstance(indicator_ids, list):
+        indicator_ids = ','.join(list(map(str, indicator_ids)))
+    try:
+        df = pd.read_csv(base_url + url_suffix.format(str(indicator_ids)))
+    except HTTPError:
+        raise NameError('Indicator {} does not exist'.format(indicator_ids))
+    return df
+
+
+def get_metadata_for_domain(group_ids):
+    """
+    Returns a dataframe of metadata for a given domain ID or list of domain IDs
+    :param group_ids: Number or list of numbers used to identify a domain within Fingertips as integer or string
+    :return: Dataframe object with metadate for the indicators for a given domain ID
+    """
+    url_suffix = "indicator_metadata/csv/by_group_id?group_id={}"
+    if isinstance(group_ids, list):
+        df = pd.DataFrame()
+        for group_id in group_ids:
+            try:
+                df = df.append(pd.read_csv(base_url + url_suffix.format(str(group_id))))
+            except HTTPError:
+                raise NameError('Domain {} does not exist'.format(group_id))
+    else:
+        try:
+            df = pd.read_csv(base_url + url_suffix.format(str(group_ids)))
+        except HTTPError:
+            raise NameError('Domain {} does not exist'.format(group_ids))
+    return df
+
+
+def get_metadata_for_profile(profile_ids):
+    """
+    Returns a dataframe of metadata for a given profile ID or list of profile IDs
+    :param profile_ids: ID or list of IDs used in fingertips to identify a profile as integer or string
+    :return: Dataframe object with metadata for the indicators for a given group ID
+    """
+    url_suffix = "indicator_metadata/csv/by_profile_id?profile_id={}"
+    if isinstance(profile_ids, list):
+        df = pd.DataFrame()
+        for profile_id in profile_ids:
+            try:
+                df = df.append(pd.read_csv(base_url + url_suffix.format(str(profile_id))))
+            except HTTPError:
+                raise NameError('Profile {} does not exist'.format(profile_id))
+    else:
+        try:
+            df = pd.read_csv(base_url + url_suffix.format(str(profile_ids)))
+        except HTTPError:
+            raise NameError('Profile {} does not exist'.format(profile_ids))
+    return df
+
+
+def get_metadata(indicator_ids=None, domain_ids=None, profile_ids=None):
+    """
+    Returns a dataframe object of metadata for a given indicator, domain, and/or profile given the relevant IDs. At
+    least one of these IDs has to be given otherwise an error is raised
+    :param indicator_ids: [OPTIONAL] Number used to identify an indicator within Fingertips as integer or string
+    :param domain_ids: [OPTIONAL] Number used to identify a domain within Fingertips as integer or string
+    :param profile_ids: [OPTIONAL] ID used in fingertips to identify a profile as integer or string
+    :return: A dataframe object with metadata for the given IDs or an error
+    """
+    if indicator_ids and domain_ids and profile_ids:
+        df = get_metadata_for_profile(profile_ids)
+        df = df.append(get_metadata_for_domain(domain_ids))
+        df = df.append(get_metadata_for_indicator(indicator_ids))
+        return df
+    if indicator_ids and domain_ids:
+        df = get_metadata_for_domain(domain_ids)
+        df = df.append(get_metadata_for_indicator(indicator_ids))
+        return df
+    if indicator_ids and profile_ids:
+        df = get_metadata_for_profile(profile_ids)
+        df = df.append(get_metadata_for_indicator(indicator_ids))
+        return df
+    if domain_ids and profile_ids:
+        df = get_metadata_for_profile(profile_ids)
+        df = df.append(get_metadata_for_domain(domain_ids))
+        return df
+    if profile_ids:
+        return get_metadata_for_profile(profile_ids)
+    if domain_ids:
+        return get_metadata_for_domain(domain_ids)
+    if indicator_ids:
+        return get_metadata_for_indicator(indicator_ids)
+    raise NameError('Must use a valid indicator IDs, domain IDs or profile IDs')
