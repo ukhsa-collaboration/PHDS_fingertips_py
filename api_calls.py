@@ -1,6 +1,5 @@
 import requests
 import json
-from requests.structures import CaseInsensitiveDict
 
 
 def make_request(url, attr=None):
