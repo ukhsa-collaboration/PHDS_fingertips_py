@@ -1,6 +1,6 @@
 import pandas as pd
-from api_calls import get_data_in_tuple, base_url, make_request, get_json
 from urllib.error import HTTPError
+from .api_calls import get_data_in_tuple, base_url, make_request, get_json
 
 
 def get_all_ages():

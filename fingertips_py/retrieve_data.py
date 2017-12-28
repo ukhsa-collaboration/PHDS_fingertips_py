@@ -1,6 +1,6 @@
 import pandas as pd
-from api_calls import base_url
-from metadata import get_area_type_ids_for_profile
+from .api_calls import base_url
+from .metadata import get_area_type_ids_for_profile
 
 
 def get_data_by_indicator_ids(indicator_ids, area_type_id, parent_area_type_id=15):
