@@ -1,5 +1,6 @@
 import requests
 import json
+import pandas as pd
 
 
 def make_request(url, attr=None):
@@ -24,6 +25,18 @@ def get_json(url):
     req = requests.get(url)
     json_resp = json.loads(req.content.decode('utf-8'))
     return json_resp
+
+
+def get_json_return_df(url):
+    """
+    Returns a transposed dataframe of a JSON response
+    :param url: Url
+    :return: dataframe
+    """
+    req = requests.get(url)
+    df = pd.read_json(req.content, encoding='utf-8')
+    df = df.transpose()
+    return df
 
 
 def get_data_in_tuple(url):

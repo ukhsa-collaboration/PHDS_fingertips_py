@@ -1,6 +1,6 @@
 import pandas as pd
 from urllib.error import HTTPError
-from .api_calls import get_data_in_tuple, base_url, make_request, get_json
+from .api_calls import get_data_in_tuple, base_url, make_request, get_json, get_json_return_df
 
 
 def get_all_ages():
@@ -90,7 +90,7 @@ def get_areas_for_area_type(area_type_id):
     return areas
 
 
-def get_metatdata_for_indicator(indicator_number):
+def get_metadata_for_indicator(indicator_number):
     """
     Returns the metadata for an indicator given the indicator number as integer or string
     :param indicator_number: Number used to identify an indicator within Fingertips as integer or string
@@ -100,13 +100,26 @@ def get_metatdata_for_indicator(indicator_number):
     return metadata
 
 
+def get_metadata_for_all_indicators(include_definition='no', include_system_content='no'):
+    """
+    Returns the metadata for all indicators in a dataframe
+    :param include_definition: optional to include definitions
+    :param include_system_content: optional to include system content
+    :return: dataframe of all indicators
+    """
+    url = 'indicator_metadata/all?include_definition={}&include_system_content={}'
+    url_suffix = url.format(include_definition, include_system_content)
+    metadata_df = get_json_return_df(base_url + url_suffix)
+    return metadata_df
+
+
 def get_rate_and_calculation_for_indicator(indicator_number):
     """
     Returns the rata and calculation method for a given indicator
     :param indicator_number: Number used to identify an indicator within Fingertips as integer or string
     :return: A tuple of rate and calculation method from Fingetips metadata
     """
-    metadata = get_metatdata_for_indicator(indicator_number)
+    metadata = get_metadata_for_indicator(indicator_number)
     rate = metadata[str(indicator_number)]['Unit']['Value']
     calc_metadata = metadata[str(indicator_number)]['ConfidenceIntervalMethod']['Name']
     if 'wilson' in calc_metadata.lower():
@@ -194,7 +207,7 @@ def get_profile_by_name(profile_name):
         return profile_obj
 
 
-def get_metadata_for_indicator(indicator_ids):
+def get_metadata_for_indicator_as_dataframe(indicator_ids):
     """
     Returns a dataframe of metadata for a given indicator ID or list of indicator IDs
     :param indicator_ids: Number or list of numbers used to identify an indicator within Fingertips as integer or string
@@ -210,7 +223,7 @@ def get_metadata_for_indicator(indicator_ids):
     return df
 
 
-def get_metadata_for_domain(group_ids):
+def get_metadata_for_domain_as_dataframe(group_ids):
     """
     Returns a dataframe of metadata for a given domain ID or list of domain IDs
     :param group_ids: Number or list of numbers used to identify a domain within Fingertips as integer or string
@@ -232,7 +245,7 @@ def get_metadata_for_domain(group_ids):
     return df
 
 
-def get_metadata_for_profile(profile_ids):
+def get_metadata_for_profile_as_dataframe(profile_ids):
     """
     Returns a dataframe of metadata for a given profile ID or list of profile IDs
     :param profile_ids: ID or list of IDs used in fingertips to identify a profile as integer or string
@@ -261,29 +274,29 @@ def get_metadata(indicator_ids=None, domain_ids=None, profile_ids=None):
     :param indicator_ids: [OPTIONAL] Number used to identify an indicator within Fingertips as integer or string
     :param domain_ids: [OPTIONAL] Number used to identify a domain within Fingertips as integer or string
     :param profile_ids: [OPTIONAL] ID used in fingertips to identify a profile as integer or string
-    :return: A dataframe object with metadata for the given IDs or an error
+    :return: A dataframe object with metadata for the given IDs or an error if nothing is specified
     """
     if indicator_ids and domain_ids and profile_ids:
-        df = get_metadata_for_profile(profile_ids)
-        df = df.append(get_metadata_for_domain(domain_ids))
-        df = df.append(get_metadata_for_indicator(indicator_ids))
+        df = get_metadata_for_profile_as_dataframe(profile_ids)
+        df = df.append(get_metadata_for_domain_as_dataframe(domain_ids))
+        df = df.append(get_metadata_for_indicator_as_dataframe(indicator_ids))
         return df
     if indicator_ids and domain_ids:
-        df = get_metadata_for_domain(domain_ids)
-        df = df.append(get_metadata_for_indicator(indicator_ids))
+        df = get_metadata_for_domain_as_dataframe(domain_ids)
+        df = df.append(get_metadata_for_indicator_as_dataframe(indicator_ids))
         return df
     if indicator_ids and profile_ids:
-        df = get_metadata_for_profile(profile_ids)
-        df = df.append(get_metadata_for_indicator(indicator_ids))
+        df = get_metadata_for_profile_as_dataframe(profile_ids)
+        df = df.append(get_metadata_for_indicator_as_dataframe(indicator_ids))
         return df
     if domain_ids and profile_ids:
-        df = get_metadata_for_profile(profile_ids)
-        df = df.append(get_metadata_for_domain(domain_ids))
+        df = get_metadata_for_profile_as_dataframe(profile_ids)
+        df = df.append(get_metadata_for_domain_as_dataframe(domain_ids))
         return df
     if profile_ids:
-        return get_metadata_for_profile(profile_ids)
+        return get_metadata_for_profile_as_dataframe(profile_ids)
     if domain_ids:
-        return get_metadata_for_domain(domain_ids)
+        return get_metadata_for_domain_as_dataframe(domain_ids)
     if indicator_ids:
-        return get_metadata_for_indicator(indicator_ids)
+        return get_metadata_for_indicator_as_dataframe(indicator_ids)
     raise NameError('Must use a valid indicator IDs, domain IDs or profile IDs')
