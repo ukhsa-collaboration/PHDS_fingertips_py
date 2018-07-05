@@ -59,4 +59,3 @@ def get_all_data_for_indicators(indicators, area_type_id, parent_area_type_id=15
     df = pd.read_csv(base_url + populated_url)
     df.reset_index()
     return df
-

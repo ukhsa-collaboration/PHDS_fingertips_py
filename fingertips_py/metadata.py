@@ -100,6 +100,15 @@ def get_metadata_for_indicator(indicator_number):
     return metadata
 
 
+def get_metadata_for_all_indicators_from_csv():
+    """
+    Returns a dataframe from the csv of all metadata for all indicators
+    :return: A dataframe of all metadata for all indicators
+    """
+    metadata = pd.read_csv(base_url + 'indicator_metadata/csv/all')
+    return metadata
+
+
 def get_metadata_for_all_indicators(include_definition='no', include_system_content='no'):
     """
     Returns the metadata for all indicators in a dataframe
