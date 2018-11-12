@@ -1,6 +1,6 @@
 import pandas as pd
-from .api_calls import base_url
-from .metadata import get_area_type_ids_for_profile
+from .api_calls import base_url, get_json_return_df
+from .metadata import get_area_type_ids_for_profile, get_metadata_for_all_indicators, get_all_areas
 
 
 def get_data_by_indicator_ids(indicator_ids, area_type_id, parent_area_type_id=15):
@@ -52,10 +52,29 @@ def get_all_data_for_indicators(indicators, area_type_id, parent_area_type_id=15
     """
     url_suffix = 'all_data/csv/by_indicator_id?indicator_ids={}&child_area_type_id={}&parent_area_type_id={}'
     if isinstance(indicators, list):
-        indicators = ','.join(indicators)
+        if any(isinstance(ind, int) for ind in indicators):
+            indicators = ','.join(str(ind) for ind in indicators)
+        else:
+            indicators = ','.join(indicators)
     else:
         indicators = str(indicators)
     populated_url = url_suffix.format(indicators, str(area_type_id), str(parent_area_type_id))
     df = pd.read_csv(base_url + populated_url)
     df.reset_index()
+    return df
+
+
+def get_all_areas_for_all_indicators():
+    """
+    Returns a dataframe of all indicators and their geographical breakdowns
+    :return: Dataframe of all indicators and their geographical breakdowns
+    """
+    url_suffix = 'available_data'
+    df = get_json_return_df(base_url + url_suffix, transpose=False)
+    indicator_metadata = get_metadata_for_all_indicators()
+    df = pd.merge(df, indicator_metadata[['Descriptive']], left_on='IndicatorId', right_index=True)
+    df['IndicatorName'] = df.apply(lambda x: x['Descriptive']['NameLong'], axis=1)
+    areas = get_all_areas()
+    df['GeographicalArea'] = df.apply(lambda x: areas[x['AreaTypeId']]['Name'], axis=1)
+    df = df[['IndicatorId', 'IndicatorName', 'GeographicalArea', 'AreaTypeId']]
     return df

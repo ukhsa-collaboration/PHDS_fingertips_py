@@ -12,6 +12,11 @@ def get_all_ages():
     return ages
 
 
+def get_all_areas():
+    areas = make_request(base_url + 'area_types', 'Id')
+    return areas
+
+
 def get_age_id(age):
     """
     Returns an ID for a given age
