@@ -27,7 +27,7 @@ def get_json(url):
     return json_resp
 
 
-def get_json_return_df(url):
+def get_json_return_df(url, transpose=True):
     """
     Returns a transposed dataframe of a JSON response
     :param url: Url
@@ -35,7 +35,8 @@ def get_json_return_df(url):
     """
     req = requests.get(url)
     df = pd.read_json(req.content, encoding='utf-8')
-    df = df.transpose()
+    if transpose:
+        df = df.transpose()
     return df
 
 
