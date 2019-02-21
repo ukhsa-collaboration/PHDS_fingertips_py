@@ -43,6 +43,7 @@ def defined_qcut(df, value_series, number_of_bins, bins_for_extras, labels=False
         series[series > -1] = idx
         series_to_add = series_to_add.append(series)
     df['bins'] = series_to_add
+    df['bins'] = df['bins'] + 1
     df = df.reset_index()
     return df
 
@@ -63,17 +64,17 @@ extra_areas = {
 def deprivation_decile(area_type_id, year='2015', area_code=None):
     """
     Takes in an area type id and returns a pandas series of deprivation deciles for those areas (with the areas as an
-    index. If a specific area is requested, it returns just the deprivation decile value. Values are coded in a pythonic
-    way with the least deprived having a score of 0, and most deprived having a score of 9.
+    index. If a specific area is requested, it returns just the deprivation decile value.
     :param area_type_id: Area type id as denoted by the fingertips API
     :param year: Year of deprivation score
     :param area_code: Optional. Area code for area type to return a single value for that area
     :return: A pandas series of deprivation scores with area codes as the index. Or single value if area is specified.
     """
-    warnings.warn('Caution, the deprivation deciles are being calculated on the fly and might show some inconsistencies from the live fingertips site.')
+    warnings.warn('Caution, the deprivation deciles are being calculated on the fly and might show some inconsistencies'
+                  ' from the live fingertips site.')
     acceptable_deprivation_years_la = ['2010', '2015']
-    acceptable_deprivation_years_gp = ['2010', '2011', '2012', '2015']
-    acceptable_area_types = [101, 102, 7, 153]
+    acceptable_deprivation_years_gp = ['2015']
+    acceptable_area_types = [3, 101, 102, 7, 153]
     order_of_extra_values = []
     if not isinstance(year, str):
         year = str(year)
@@ -81,17 +82,16 @@ def deprivation_decile(area_type_id, year='2015', area_code=None):
         raise ValueError \
             ('The acceptable years are 2010 and 2015 for local authorities and CCGs, please select one of these')
     elif year not in acceptable_deprivation_years_gp:
-        raise ValueError('The acceptable years are 2010, 2011, 2012 and 2015, please select one of these')
+        raise ValueError('The acceptable years are 2015, please select this')
     if area_type_id not in acceptable_area_types:
-        raise ValueError('Currently, we support deprivation decile for District & UA, County & UA and GP area types')
-    if year is not '2015':
-        indicator_id = 338
-        if area_type_id == 102:
-            order_of_extra_values = [6, 9, 0, 1, 2, 3, 4, 5, 7, 8]
+        raise ValueError('Currently, we support deprivation decile for District & UA, County & UA, MSOA and GP area '
+                         'types')
+    if area_type_id == 3:
+        indicator_id = 93275
     else:
         indicator_id = 91872
-        if area_type_id == 102:
-            order_of_extra_values = [0, 9, 1, 2, 3, 4, 5, 6, 7, 8]
+    if area_type_id == 102:
+        order_of_extra_values = [0, 9, 1, 2, 3, 4, 5, 6, 7, 8]
     area_dep_dec = get_data_by_indicator_ids(indicator_id, area_type_id)
     area_dep_dec = area_dep_dec[area_dep_dec['Area Code'] != 'E92000001']
     if not order_of_extra_values:

@@ -34,7 +34,10 @@ def get_json_return_df(url, transpose=True):
     :return: dataframe
     """
     req = requests.get(url)
-    df = pd.read_json(req.content, encoding='utf-8')
+    try:
+        df = pd.read_json(req.content, encoding='utf-8')
+    except ValueError:
+        df = pd.DataFrame.from_dict([req.json()])
     if transpose:
         df = df.transpose()
     return df

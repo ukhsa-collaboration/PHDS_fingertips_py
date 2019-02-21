@@ -12,6 +12,13 @@ def get_data_by_indicator_ids(indicator_ids, area_type_id, parent_area_type_id=1
     :return: A dataframe of data relating to the given indicators
     """
     url_suffix = 'all_data/csv/by_indicator_id?indicator_ids={}&child_area_type_id={}&parent_area_type_id={}'
+    if isinstance(indicator_ids, list):
+        if any(isinstance(ind, int) for ind in indicator_ids):
+            indicator_ids = ','.join(str(ind) for ind in indicator_ids)
+        else:
+            indicator_ids = ','.join(indicator_ids)
+    else:
+        indicator_ids = str(indicator_ids)
     populated_url = url_suffix.format(indicator_ids, str(area_type_id), parent_area_type_id)
     df = pd.read_csv(base_url + populated_url)
     return df
