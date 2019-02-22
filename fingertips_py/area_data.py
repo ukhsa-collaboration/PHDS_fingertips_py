@@ -88,11 +88,14 @@ def deprivation_decile(area_type_id, year='2015', area_code=None):
                          'types')
     if area_type_id == 3:
         indicator_id = 93275
+        area_dep_dec = get_data_by_indicator_ids(indicator_id, area_type_id, parent_area_type_id=101, profile_id=143,
+                                                 include_sortable_time_periods=True)
     else:
         indicator_id = 91872
+        area_dep_dec = get_data_by_indicator_ids(indicator_id, area_type_id)
     if area_type_id == 102:
         order_of_extra_values = [0, 9, 1, 2, 3, 4, 5, 6, 7, 8]
-    area_dep_dec = get_data_by_indicator_ids(indicator_id, area_type_id)
+
     area_dep_dec = area_dep_dec[area_dep_dec['Area Code'] != 'E92000001']
     if not order_of_extra_values:
         order_of_extra_values = extra_areas[area_dep_dec['Value'].count() % 10]

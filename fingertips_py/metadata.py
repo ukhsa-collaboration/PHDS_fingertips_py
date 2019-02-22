@@ -1,6 +1,7 @@
 import pandas as pd
-from urllib.error import HTTPError
-from .api_calls import get_data_in_tuple, base_url, make_request, get_json, get_json_return_df
+import requests
+from urllib.error import HTTPError, URLError
+from .api_calls import get_data_in_tuple, base_url, make_request, get_json, get_json_return_df, deal_with_url_error
 
 
 def get_all_ages():
@@ -110,7 +111,10 @@ def get_metadata_for_all_indicators_from_csv():
     Returns a dataframe from the csv of all metadata for all indicators
     :return: A dataframe of all metadata for all indicators
     """
-    metadata = pd.read_csv(base_url + 'indicator_metadata/csv/all')
+    try:
+        metadata = pd.read_csv(base_url + 'indicator_metadata/csv/all')
+    except URLError:
+        metadata = deal_with_url_error(base_url + 'indicator_metadata/csv/all')
     return metadata
 
 
@@ -234,6 +238,8 @@ def get_metadata_for_indicator_as_dataframe(indicator_ids):
         df = pd.read_csv(base_url + url_suffix.format(str(indicator_ids)))
     except HTTPError:
         raise NameError('Indicator {} does not exist'.format(indicator_ids))
+    except URLError:
+        df = deal_with_url_error(base_url + url_suffix.format(str(indicator_ids)))
     return df
 
 
@@ -251,11 +257,15 @@ def get_metadata_for_domain_as_dataframe(group_ids):
                 df = df.append(pd.read_csv(base_url + url_suffix.format(str(group_id))))
             except HTTPError:
                 raise NameError('Domain {} does not exist'.format(group_id))
+            except URLError:
+                df = deal_with_url_error(base_url + url_suffix.format(str(group_id)))
     else:
         try:
             df = pd.read_csv(base_url + url_suffix.format(str(group_ids)))
         except HTTPError:
             raise NameError('Domain {} does not exist'.format(group_ids))
+        except URLError:
+            df = deal_with_url_error(base_url + url_suffix.format(str(group_ids)))
     return df
 
 
@@ -273,11 +283,15 @@ def get_metadata_for_profile_as_dataframe(profile_ids):
                 df = df.append(pd.read_csv(base_url + url_suffix.format(str(profile_id))))
             except HTTPError:
                 raise NameError('Profile {} does not exist'.format(profile_id))
+            except URLError:
+                df = deal_with_url_error(base_url + url_suffix.format(str(profile_id)))
     else:
         try:
             df = pd.read_csv(base_url + url_suffix.format(str(profile_ids)))
         except HTTPError:
             raise NameError('Profile {} does not exist'.format(profile_ids))
+        except URLError:
+            df = deal_with_url_error(base_url + url_suffix.format(str(profile_ids)))
     return df
 
 

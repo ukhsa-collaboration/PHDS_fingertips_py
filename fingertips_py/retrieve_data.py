@@ -1,17 +1,32 @@
 import pandas as pd
-from .api_calls import base_url, get_json_return_df
+import requests
+from urllib.error import URLError
+from .api_calls import base_url, get_json_return_df, deal_with_url_error
 from .metadata import get_area_type_ids_for_profile, get_metadata_for_all_indicators, get_all_areas
 
 
-def get_data_by_indicator_ids(indicator_ids, area_type_id, parent_area_type_id=15):
+def get_data_by_indicator_ids(indicator_ids, area_type_id, parent_area_type_id=15, profile_id=None,
+                              include_sortable_time_periods=None):
     """
     Returns a dataframe of indicator data given a list of indicators and area types
     :param indicator_ids: List of indicator IDs as strings
     :param area_type_id: ID of area type (eg. CCG, Upper Tier Local Authority) used in Fingertips as integer or string
     :param parent_area_type_id: Area type of parent area - defaults to England value
+    :param profile_id: Id of profile to select by as either int or string
+    :param include_sortable_time_periods: Boolean as to whether to include a sort-friendly data field
     :return: A dataframe of data relating to the given indicators
     """
+
     url_suffix = 'all_data/csv/by_indicator_id?indicator_ids={}&child_area_type_id={}&parent_area_type_id={}'
+    if profile_id and not include_sortable_time_periods:
+        url_addition = '&profile_id={}'.format(str(profile_id))
+        url_suffix = url_suffix + url_addition
+    elif include_sortable_time_periods and not profile_id:
+        url_addition = '&include_sortable_time_periods=yes'
+        url_suffix = url_suffix + url_addition
+    elif profile_id and include_sortable_time_periods:
+        url_addition = '&profile_id={}&include_sortable_time_periods=yes'.format(str(profile_id))
+        url_suffix = url_suffix + url_addition
     if isinstance(indicator_ids, list):
         if any(isinstance(ind, int) for ind in indicator_ids):
             indicator_ids = ','.join(str(ind) for ind in indicator_ids)
@@ -20,7 +35,10 @@ def get_data_by_indicator_ids(indicator_ids, area_type_id, parent_area_type_id=1
     else:
         indicator_ids = str(indicator_ids)
     populated_url = url_suffix.format(indicator_ids, str(area_type_id), parent_area_type_id)
-    df = pd.read_csv(base_url + populated_url)
+    try:
+        df = pd.read_csv(base_url + populated_url)
+    except URLError:
+        df = deal_with_url_error(base_url + populated_url)
     return df
 
 
@@ -37,7 +55,10 @@ def get_all_data_for_profile(profile_id, parent_area_type_id=15, filter_by_area_
     df = pd.DataFrame()
     for area in area_types:
         populated_url = url_suffix.format(area, parent_area_type_id, profile_id)
-        df_returned = pd.read_csv(base_url + populated_url)
+        try:
+            df_returned = pd.read_csv(base_url + populated_url)
+        except URLError:
+            df_returned = deal_with_url_error(base_url + populated_url)
         df = df.append(df_returned)
     if filter_by_area_codes:
         if isinstance(filter_by_area_codes, list):
@@ -66,7 +87,10 @@ def get_all_data_for_indicators(indicators, area_type_id, parent_area_type_id=15
     else:
         indicators = str(indicators)
     populated_url = url_suffix.format(indicators, str(area_type_id), str(parent_area_type_id))
-    df = pd.read_csv(base_url + populated_url)
+    try:
+        df = pd.read_csv(base_url + populated_url)
+    except URLError:
+        df = deal_with_url_error(base_url + populated_url)
     df.reset_index()
     return df
 
