@@ -1,3 +1,10 @@
+"""
+area_data.py
+==================================
+Functions to retrieve data that are specific to areas and relevant to all indicators. For example: Deprivation decile.
+"""
+
+
 import pandas as pd
 import warnings
 from .retrieve_data import get_data_by_indicator_ids
@@ -6,6 +13,7 @@ from .retrieve_data import get_data_by_indicator_ids
 def defined_qcut(df, value_series, number_of_bins, bins_for_extras, labels=False):
     """
     Allows users to define how values are split into bins when clustering.
+
     :param df: Dataframe of values
     :param value_series: Name of value column to rank upon
     :param number_of_bins: Integer of number of bins to create
@@ -65,6 +73,7 @@ def deprivation_decile(area_type_id, year='2015', area_code=None):
     """
     Takes in an area type id and returns a pandas series of deprivation deciles for those areas (with the areas as an
     index. If a specific area is requested, it returns just the deprivation decile value.
+
     :param area_type_id: Area type id as denoted by the fingertips API
     :param year: Year of deprivation score
     :param area_code: Optional. Area code for area type to return a single value for that area

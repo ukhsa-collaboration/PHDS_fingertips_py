@@ -1,5 +1,11 @@
+"""
+retrieve_data.py
+==================================
+A group of functions to retrieve data from fingertips by indicator, profile, domain (group), or geography.
+"""
+
+
 import pandas as pd
-import requests
 from urllib.error import URLError
 from .api_calls import base_url, get_json_return_df, deal_with_url_error
 from .metadata import get_area_type_ids_for_profile, get_metadata_for_all_indicators, get_all_areas
@@ -8,7 +14,8 @@ from .metadata import get_area_type_ids_for_profile, get_metadata_for_all_indica
 def get_data_by_indicator_ids(indicator_ids, area_type_id, parent_area_type_id=15, profile_id=None,
                               include_sortable_time_periods=None):
     """
-    Returns a dataframe of indicator data given a list of indicators and area types
+    Returns a dataframe of indicator data given a list of indicators and area types.
+
     :param indicator_ids: List of indicator IDs as strings
     :param area_type_id: ID of area type (eg. CCG, Upper Tier Local Authority) used in Fingertips as integer or string
     :param parent_area_type_id: Area type of parent area - defaults to England value
@@ -44,7 +51,8 @@ def get_data_by_indicator_ids(indicator_ids, area_type_id, parent_area_type_id=1
 
 def get_all_data_for_profile(profile_id, parent_area_type_id=15, filter_by_area_codes=None):
     """
-    Returns a dataframe of data for all indicators within a profile
+    Returns a dataframe of data for all indicators within a profile.
+
     :param profile_id: ID used in fingertips to identify a profile as integer or string
     :param parent_area_type_id: Area type of parent area - defaults to England value
     :param filter_by_area_codes: Option to limit returned data to areas. Areas as either string or list of strings.
@@ -71,7 +79,8 @@ def get_all_data_for_profile(profile_id, parent_area_type_id=15, filter_by_area_
 
 def get_all_data_for_indicators(indicators, area_type_id, parent_area_type_id=15, filter_by_area_codes=None):
     """
-    Returns a dataframe of data for given indicators at an area
+    Returns a dataframe of data for given indicators at an area.
+
     :param indicators: List or integer or string of indicator Ids
     :param area_type_id: ID of area type (eg. CCG, Upper Tier Local Authority) used in Fingertips as integer or string
     :param parent_area_type_id: Area type of parent area - defaults to England value
@@ -97,7 +106,8 @@ def get_all_data_for_indicators(indicators, area_type_id, parent_area_type_id=15
 
 def get_all_areas_for_all_indicators():
     """
-    Returns a dataframe of all indicators and their geographical breakdowns
+    Returns a dataframe of all indicators and their geographical breakdowns.
+
     :return: Dataframe of all indicators and their geographical breakdowns
     """
     url_suffix = 'available_data'
@@ -113,7 +123,8 @@ def get_all_areas_for_all_indicators():
 
 def get_data_for_indicator_at_all_available_geographies(indicator_id):
     """
-    Returns a dataframe of all data for an indicator for all available geographies
+    Returns a dataframe of all data for an indicator for all available geographies.
+
     :param indicator_id: Indicator id
     :return: Dataframe of data for indicator for all available areas for all time periods
     """

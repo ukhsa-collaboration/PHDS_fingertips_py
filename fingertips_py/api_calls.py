@@ -1,3 +1,10 @@
+"""
+api_calls.py
+==================================
+A group of functions to query the fingertips api and retrieve data in a variety of formats.
+"""
+
+
 import requests
 import json
 import pandas as pd
@@ -24,7 +31,8 @@ def make_request(url, attr=None):
 
 def get_json(url):
     """
-    Returns a JSON object from url response
+    :param url: A url to make a request
+    :return: A parsed JSON object
     """
     try:
         req = requests.get(url)
@@ -36,9 +44,9 @@ def get_json(url):
 
 def get_json_return_df(url, transpose=True):
     """
-    Returns a transposed dataframe of a JSON response
-    :param url: Url
-    :return: dataframe
+    :param url: A url to make a request
+    :param transpose: [OPTIONAL] transposes dataframe. Default True.
+    :return: Dataframe generated from JSON response.
     """
     try:
         req = requests.get(url)
@@ -55,7 +63,9 @@ def get_json_return_df(url, transpose=True):
 
 def get_data_in_tuple(url):
     """
-    Returns a url response as a tuple
+
+    :param url: A url to make a request
+    :return: A tuple of returned data
     """
     try:
         req = requests.get(url)
@@ -70,6 +80,10 @@ def get_data_in_tuple(url):
 
 
 def deal_with_url_error(url):
+    """
+    :param url: A url that returns a URL Error based on SSL errors
+    :return: A dataframe from the URL with varify set to false.
+    """
     req = requests.get(url, verify=False)
     s = str(req.content, 'utf-8')
     data = StringIO(s)

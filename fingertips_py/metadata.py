@@ -1,12 +1,20 @@
+"""
+metadata.py
+==================================
+Calls used to retrieve metadata about areas, ages, sexes, value notes, calculation methods, rates, and indicator
+metadata.
+"""
+
+
 import pandas as pd
-import requests
 from urllib.error import HTTPError, URLError
 from .api_calls import get_data_in_tuple, base_url, make_request, get_json, get_json_return_df, deal_with_url_error
 
 
 def get_all_ages():
     """
-    Returns a dictionary of all the age categories and their IDs
+    Returns a dictionary of all the age categories and their IDs.
+
     :return: Age codes used in fingertips in a tuple
     """
     ages = get_data_in_tuple(base_url + 'ages')
@@ -14,13 +22,19 @@ def get_all_ages():
 
 
 def get_all_areas():
+    """
+    Retreives all area types.
+
+    :return: A dictionary of all area types used in Fingertips
+    """
     areas = make_request(base_url + 'area_types', 'Id')
     return areas
 
 
 def get_age_id(age):
     """
-    Returns an ID for a given age
+    Returns an ID for a given age.
+
     :param age: Search term of an age or age range as a string
     :return: Code used in fingertips to represent the age or age range as a string
     """
@@ -30,7 +44,8 @@ def get_age_id(age):
 
 def get_age_from_id(age_id):
     """
-    Returns a age name from given id
+    Returns a age name from given id.
+
     :param age_id: Age id used in fingertips as an integer
     :return: Age or age range as a string
     """
@@ -40,7 +55,8 @@ def get_age_from_id(age_id):
 
 def get_all_sexes():
     """
-    Returns a tuple of all sex categories and their IDs
+    Returns a tuple of all sex categories and their IDs.
+
     :return: Sex categories used in fingertips with associated codes as a tuple
     """
     sexes = get_data_in_tuple(base_url + 'sexes')
@@ -49,7 +65,8 @@ def get_all_sexes():
 
 def get_sex_id(sex):
     """
-    Returns an ID for a given sex
+    Returns an ID for a given sex.
+
     :param sex: Sex category as string (Case sensitive)
     :return: ID used in fingertips to represent the sex as integer
     """
@@ -59,7 +76,8 @@ def get_sex_id(sex):
 
 def get_sex_from_id(sex_id):
     """
-    Returns a sex name given an id
+    Returns a sex name given an id.
+
     :param sex_id: ID used in fingertips to represent the sex as integer
     :return: Sex category as string
     """
@@ -69,7 +87,8 @@ def get_sex_from_id(sex_id):
 
 def get_all_value_notes():
     """
-    Returns a dictionary of all value notes and their IDs
+    Returns a dictionary of all value notes and their IDs.
+
     :return: Data value notes and their associated codes that are used in Fingertips as a list of tuples
     """
     value_notes = get_data_in_tuple(base_url + 'value_notes')
@@ -78,7 +97,8 @@ def get_all_value_notes():
 
 def get_value_note_id(value_note):
     """
-    Returns a value note ID for a given value note
+    Returns a value note ID for a given value note.
+
     :param value_note: Value note as string
     :return: ID used in fingertips to represent the value note as integer
     """
@@ -88,7 +108,8 @@ def get_value_note_id(value_note):
 
 def get_areas_for_area_type(area_type_id):
     """
-    Returns a dictionary of areas that match an area type id given the id as integer or string
+    Returns a dictionary of areas that match an area type id given the id as integer or string.
+
     :param area_type_id: ID of area type (eg. CCG, Upper Tier Local Authority) used in Fingertips as integer or string
     :return: A dictionary of dictionaries with area codes and the names of those areas
     """
@@ -98,7 +119,8 @@ def get_areas_for_area_type(area_type_id):
 
 def get_metadata_for_indicator(indicator_number):
     """
-    Returns the metadata for an indicator given the indicator number as integer or string
+    Returns the metadata for an indicator given the indicator number as integer or string.
+
     :param indicator_number: Number used to identify an indicator within Fingertips as integer or string
     :return: A dictionary of metadata for the given indicator
     """
@@ -108,7 +130,8 @@ def get_metadata_for_indicator(indicator_number):
 
 def get_metadata_for_all_indicators_from_csv():
     """
-    Returns a dataframe from the csv of all metadata for all indicators
+    Returns a dataframe from the csv of all metadata for all indicators.
+
     :return: A dataframe of all metadata for all indicators
     """
     try:
@@ -120,7 +143,8 @@ def get_metadata_for_all_indicators_from_csv():
 
 def get_metadata_for_all_indicators(include_definition='no', include_system_content='no'):
     """
-    Returns the metadata for all indicators in a dataframe
+    Returns the metadata for all indicators in a dataframe.
+
     :param include_definition: optional to include definitions
     :param include_system_content: optional to include system content
     :return: dataframe of all indicators
@@ -133,7 +157,8 @@ def get_metadata_for_all_indicators(include_definition='no', include_system_cont
 
 def get_rate_and_calculation_for_indicator(indicator_number):
     """
-    Returns the rata and calculation method for a given indicator
+    Returns the rata and calculation method for a given indicator.
+
     :param indicator_number: Number used to identify an indicator within Fingertips as integer or string
     :return: A tuple of rate and calculation method from Fingetips metadata
     """
@@ -151,7 +176,8 @@ def get_rate_and_calculation_for_indicator(indicator_number):
 
 def get_area_types_as_dict():
     """
-    Returns all area types and related information such as Id and name
+    Returns all area types and related information such as Id and name.
+
     :return: A dictionary of area types
     """
     areas = get_json(base_url + 'area_types')
@@ -160,7 +186,8 @@ def get_area_types_as_dict():
 
 def get_profile_by_id(profile_id):
     """
-    Returns a profile as an dictionary which contains information about domains and sequencing
+    Returns a profile as an dictionary which contains information about domains and sequencing.
+
     :param profile_id: ID used in fingertips to identify a profile as integer or string
     :return: A dictionary of information about the profile
     """
@@ -169,7 +196,8 @@ def get_profile_by_id(profile_id):
 
 def get_all_profiles():
     """
-    Returns all profiles
+    Returns all profiles.
+
     :return: A dictionary of all profiles in fingertips including information on domains and sequencing
     """
     profiles = get_json(base_url + 'profiles')
@@ -178,7 +206,8 @@ def get_all_profiles():
 
 def get_domains_in_profile(profile_id):
     """
-    Returns the domain IDs for a given profile
+    Returns the domain IDs for a given profile.
+
     :param profile_id: ID used in fingertips to identify a profile as integer or string
     :return: A list of domain IDs
     """
@@ -188,7 +217,8 @@ def get_domains_in_profile(profile_id):
 
 def get_area_types_for_profile(profile_id):
     """
-    Retrieves all the area types that have data for a given profile
+    Retrieves all the area types that have data for a given profile.
+
     :param profile_id: ID used in fingertips to identify a profile as integer or string
     :return: A list of dictionaries of area types with relevant information
     """
@@ -197,7 +227,8 @@ def get_area_types_for_profile(profile_id):
 
 def get_area_type_ids_for_profile(profile_id):
     """
-    Returns a list of area types used within a given profile
+    Returns a list of area types used within a given profile.
+
     :param profile_id: ID used in fingertips to identify a profile as integer or string
     :return: A list of area types used within a given profile
     """
@@ -210,7 +241,8 @@ def get_area_type_ids_for_profile(profile_id):
 
 def get_profile_by_name(profile_name):
     """
-    Returns a profile object given a name to search - try to be specific to get better results
+    Returns a profile object given a name to search - try to be specific to get better results.
+
     :param profile_name: A string or part of a string that is used as the profile name
     :return: A dictionary of the profile metadata including domain information or an error message
     """
@@ -227,7 +259,8 @@ def get_profile_by_name(profile_name):
 
 def get_metadata_for_indicator_as_dataframe(indicator_ids):
     """
-    Returns a dataframe of metadata for a given indicator ID or list of indicator IDs
+    Returns a dataframe of metadata for a given indicator ID or list of indicator IDs.
+
     :param indicator_ids: Number or list of numbers used to identify an indicator within Fingertips as integer or string
     :return: Dataframe object with metadate for the indicator ID
     """
@@ -245,7 +278,8 @@ def get_metadata_for_indicator_as_dataframe(indicator_ids):
 
 def get_metadata_for_domain_as_dataframe(group_ids):
     """
-    Returns a dataframe of metadata for a given domain ID or list of domain IDs
+    Returns a dataframe of metadata for a given domain ID or list of domain IDs.
+
     :param group_ids: Number or list of numbers used to identify a domain within Fingertips as integer or string
     :return: Dataframe object with metadate for the indicators for a given domain ID
     """
@@ -271,7 +305,8 @@ def get_metadata_for_domain_as_dataframe(group_ids):
 
 def get_metadata_for_profile_as_dataframe(profile_ids):
     """
-    Returns a dataframe of metadata for a given profile ID or list of profile IDs
+    Returns a dataframe of metadata for a given profile ID or list of profile IDs.
+
     :param profile_ids: ID or list of IDs used in fingertips to identify a profile as integer or string
     :return: Dataframe object with metadata for the indicators for a given group ID
     """
@@ -298,7 +333,8 @@ def get_metadata_for_profile_as_dataframe(profile_ids):
 def get_metadata(indicator_ids=None, domain_ids=None, profile_ids=None):
     """
     Returns a dataframe object of metadata for a given indicator, domain, and/or profile given the relevant IDs. At
-    least one of these IDs has to be given otherwise an error is raised
+    least one of these IDs has to be given otherwise an error is raised.
+
     :param indicator_ids: [OPTIONAL] Number used to identify an indicator within Fingertips as integer or string
     :param domain_ids: [OPTIONAL] Number used to identify a domain within Fingertips as integer or string
     :param profile_ids: [OPTIONAL] ID used in fingertips to identify a profile as integer or string
