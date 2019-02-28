@@ -1,0 +1,279 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="y" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="y" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>fingertips_py &mdash; fingertips_py 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> fingertips_py
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">fingertips_py</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#licence">Licence</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">fingertips_py</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>fingertips_py</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/readme.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="fingertips-py">
+<h1>fingertips_py<a class="headerlink" href="#fingertips-py" title="Permalink to this headline">¶</a></h1>
+<p>This is a python package to interact with Public Health England's
+<a class="reference external" href="https://fingertips.phe.org.uk/">Fingertips</a> data tool. Fingertips is a
+major repository of population and public health indicators for England.
+The site presents the information in many ways to improve accessibility
+for a wide range of audiences ranging from public health professionals
+and researchers to the general public. The information presented is a
+mixture of data available from other public sources, and those that are
+available through user access agreements with other organisations. The
+source of each indicator presented is available using the
+<code class="docutils literal notranslate"><span class="pre">get_metadata_for_indicator()</span></code> function.</p>
+<p>This package can be used to load data from the Fingertips API into
+python for further use.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>This packaged should be installed using pip:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">fingertips_py</span>
+</pre></div>
+</div>
+<p>Or it can be compiled from source (still requires pip):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">theendoftheurl</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>fingertips_py should be imported and used in line with standard python
+conventions. It is suggested that if the whole package is to be imported
+then the following convention is used:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">fingertips_py</span> <span class="k">as</span> <span class="nn">ftp</span>
+</pre></div>
+</div>
+<p>The package returns data in a variety of types dependent on the
+function.</p>
+<p>For more information on any function, you can use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="o">*</span><span class="n">fingertips_py</span> <span class="n">function</span> <span class="n">name</span><span class="o">*</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Or you can view the documents <a class="reference external" href="#">here</a></p>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>This is an example of a workflow for retrieving data for the indicator
+on <em>Healthy Life Expectancy at Birth</em> from the <em>Public Health Outcomes
+Framework</em> profile.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>import fingertips_py as ftp
+
+
+phof = ftp.get_profile_by_name(&#39;public health outcomes framework&#39;)
+phof_meta = ftp.get_metadata_for_profile_as_dataframe(phof[&#39;Id&#39;])
+indicator_meta = phof_indicators[phof_meta[&#39;Indicator&#39;].str.contains(&#39;Healthy&#39;)]
+print(indicator_meta)
+
+    Indicator ID                                          Indicator  ...   
+0          90362            0.1i - Healthy life expectancy at birth  ... 
+55         92543  2.05ii - Proportion of children aged 2-2½yrs r...  ...
+</pre></div>
+</div>
+<p>We can see that the <em>Healthy life expectancy at birth</em> indicator has an
+id of 90362. The data for this indicator at all geographical breakdowns
+can be retrieved using <code class="docutils literal notranslate"><span class="pre">get_data_for_indicator_at_all_available_geographies()</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">healthy_life_data</span> <span class="o">=</span> <span class="n">ftp</span><span class="o">.</span><span class="n">get_data_for_indicator_at_all_available_geographies</span><span class="p">(</span><span class="mi">90362</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="licence">
+<h2>Licence<a class="headerlink" href="#licence" title="Permalink to this headline">¶</a></h2>
+<p>This project is released under the <a class="reference external" href="https://opensource.org/licenses/GPL-3.0">GPL-3</a>
+licence.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Public Health England
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-XXXXXXX-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+   
+
+</body>
+</html>

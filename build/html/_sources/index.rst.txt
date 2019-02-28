@@ -19,6 +19,7 @@ Welcome to fingertips_py's documentation!
    :maxdepth: 3
    :caption: Contents:
 
+   fingertips_py/readme.md
 
 
 Indices and tables
