@@ -114,7 +114,7 @@ def get_all_areas_for_all_indicators():
     df = get_json_return_df(base_url + url_suffix, transpose=False)
     indicator_metadata = get_metadata_for_all_indicators()
     df = pd.merge(df, indicator_metadata[['Descriptive']], left_on='IndicatorId', right_index=True)
-    df['IndicatorName'] = df.apply(lambda x: x['Descriptive']['NameLong'], axis=1)
+    df['IndicatorName'] = df.apply(lambda x: x['Descriptive']['Name'], axis=1)
     areas = get_all_areas()
     df['GeographicalArea'] = df.apply(lambda x: areas[x['AreaTypeId']]['Name'], axis=1)
     df = df[['IndicatorId', 'IndicatorName', 'GeographicalArea', 'AreaTypeId']]
