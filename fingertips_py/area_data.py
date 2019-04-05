@@ -74,13 +74,13 @@ def deprivation_decile(area_type_id, year='2015', area_code=None):
     Takes in an area type id and returns a pandas series of deprivation deciles for those areas (with the areas as an
     index. If a specific area is requested, it returns just the deprivation decile value.
 
-    :param area_type_id: Area type id as denoted by the fingertips API
+    :param area_type_id: Area type id as denoted by the Fingertips API
     :param year: Year of deprivation score
     :param area_code: Optional. Area code for area type to return a single value for that area
     :return: A pandas series of deprivation scores with area codes as the index. Or single value if area is specified.
     """
     warnings.warn('Caution, the deprivation deciles are being calculated on the fly and might show some inconsistencies'
-                  ' from the live fingertips site.')
+                  ' from the live Fingertips site.')
     acceptable_deprivation_years_la = ['2010', '2015']
     acceptable_deprivation_years_gp = ['2015']
     acceptable_area_types = [3, 101, 102, 7, 153]

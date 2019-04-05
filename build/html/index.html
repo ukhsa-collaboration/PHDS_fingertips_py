@@ -161,10 +161,10 @@ metadata.</p>
 <dl class="function">
 <dt id="fingertips_py.metadata.get_age_from_id">
 <code class="descclassname">fingertips_py.metadata.</code><code class="descname">get_age_from_id</code><span class="sig-paren">(</span><em>age_id</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.metadata.get_age_from_id" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a age name from given id.</p>
+<dd><p>Returns an age name from given id.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>age_id</strong> -- Age id used in fingertips as an integer</p>
+<dd class="field-odd"><p><strong>age_id</strong> -- Age id used in Fingertips as an integer</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Age or age range as a string</p>
@@ -181,7 +181,7 @@ metadata.</p>
 <dd class="field-odd"><p><strong>age</strong> -- Search term of an age or age range as a string</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Code used in fingertips to represent the age or age range as a string</p>
+<dd class="field-even"><p>Code used in Fingertips to represent the age or age range as a string</p>
 </dd>
 </dl>
 </dd></dl>
@@ -192,7 +192,7 @@ metadata.</p>
 <dd><p>Returns a dictionary of all the age categories and their IDs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Age codes used in fingertips in a tuple</p>
+<dd class="field-odd"><p>Age codes used in Fingertips in a tuple</p>
 </dd>
 </dl>
 </dd></dl>
@@ -214,7 +214,7 @@ metadata.</p>
 <dd><p>Returns all profiles.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>A dictionary of all profiles in fingertips including information on domains and sequencing</p>
+<dd class="field-odd"><p>A dictionary of all profiles in Fingertips including information on domains and sequencing</p>
 </dd>
 </dl>
 </dd></dl>
@@ -225,7 +225,7 @@ metadata.</p>
 <dd><p>Returns a tuple of all sex categories and their IDs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Sex categories used in fingertips with associated codes as a tuple</p>
+<dd class="field-odd"><p>Sex categories used in Fingertips with associated codes as a tuple</p>
 </dd>
 </dl>
 </dd></dl>
@@ -247,7 +247,7 @@ metadata.</p>
 <dd><p>Returns a list of area types used within a given profile.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>profile_id</strong> -- ID used in fingertips to identify a profile as integer or string</p>
+<dd class="field-odd"><p><strong>profile_id</strong> -- ID used in Fingertips to identify a profile as integer or string</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>A list of area types used within a given profile</p>
@@ -258,7 +258,7 @@ metadata.</p>
 <dl class="function">
 <dt id="fingertips_py.metadata.get_area_types_as_dict">
 <code class="descclassname">fingertips_py.metadata.</code><code class="descname">get_area_types_as_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.metadata.get_area_types_as_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns all area types and related information such as Id and name.</p>
+<dd><p>Returns all area types and related information such as ID and name.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>A dictionary of area types</p>
@@ -272,7 +272,7 @@ metadata.</p>
 <dd><p>Retrieves all the area types that have data for a given profile.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>profile_id</strong> -- ID used in fingertips to identify a profile as integer or string</p>
+<dd class="field-odd"><p><strong>profile_id</strong> -- ID used in Fingertips to identify a profile as integer or string</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>A list of dictionaries of area types with relevant information</p>
@@ -286,7 +286,7 @@ metadata.</p>
 <dd><p>Returns a dictionary of areas that match an area type id given the id as integer or string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>area_type_id</strong> -- ID of area type (eg. CCG, Upper Tier Local Authority) used in Fingertips as integer or string</p>
+<dd class="field-odd"><p><strong>area_type_id</strong> -- ID of area type (ID of General Practice is 7 etc) used in Fingertips as integer or string</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>A dictionary of dictionaries with area codes and the names of those areas</p>
@@ -300,7 +300,7 @@ metadata.</p>
 <dd><p>Returns the domain IDs for a given profile.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>profile_id</strong> -- ID used in fingertips to identify a profile as integer or string</p>
+<dd class="field-odd"><p><strong>profile_id</strong> -- ID used in Fingertips to identify a profile as integer or string</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>A list of domain IDs</p>
@@ -318,7 +318,7 @@ least one of these IDs has to be given otherwise an error is raised.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>indicator_ids</strong> -- [OPTIONAL] Number used to identify an indicator within Fingertips as integer or string</p></li>
 <li><p><strong>domain_ids</strong> -- [OPTIONAL] Number used to identify a domain within Fingertips as integer or string</p></li>
-<li><p><strong>profile_ids</strong> -- [OPTIONAL] ID used in fingertips to identify a profile as integer or string</p></li>
+<li><p><strong>profile_ids</strong> -- [OPTIONAL] ID used in Fingertips to identify a profile as integer or string</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -364,7 +364,7 @@ least one of these IDs has to be given otherwise an error is raised.</p>
 <dd class="field-odd"><p><strong>group_ids</strong> -- Number or list of numbers used to identify a domain within Fingertips as integer or string</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Dataframe object with metadate for the indicators for a given domain ID</p>
+<dd class="field-even"><p>Dataframe object with metadata for the indicators for a given domain ID</p>
 </dd>
 </dl>
 </dd></dl>
@@ -403,10 +403,24 @@ least one of these IDs has to be given otherwise an error is raised.</p>
 <dd><p>Returns a dataframe of metadata for a given profile ID or list of profile IDs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>profile_ids</strong> -- ID or list of IDs used in fingertips to identify a profile as integer or string</p>
+<dd class="field-odd"><p><strong>profile_ids</strong> -- ID or list of IDs used in Fingertips to identify a profile as integer or string</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Dataframe object with metadata for the indicators for a given group ID</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.metadata.get_multiplier_and_calculation_for_indicator">
+<code class="descclassname">fingertips_py.metadata.</code><code class="descname">get_multiplier_and_calculation_for_indicator</code><span class="sig-paren">(</span><em>indicator_number</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.metadata.get_multiplier_and_calculation_for_indicator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the multiplier and calculation method for a given indicator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>indicator_number</strong> -- Number used to identify an indicator within Fingertips as integer or string</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A tuple of multiplier and calculation method from Fingetips metadata</p>
 </dd>
 </dl>
 </dd></dl>
@@ -417,7 +431,7 @@ least one of these IDs has to be given otherwise an error is raised.</p>
 <dd><p>Returns a profile as an dictionary which contains information about domains and sequencing.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>profile_id</strong> -- ID used in fingertips to identify a profile as integer or string</p>
+<dd class="field-odd"><p><strong>profile_id</strong> -- ID used in Fingertips to identify a profile as integer or string</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>A dictionary of information about the profile</p>
@@ -440,26 +454,12 @@ least one of these IDs has to be given otherwise an error is raised.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="fingertips_py.metadata.get_rate_and_calculation_for_indicator">
-<code class="descclassname">fingertips_py.metadata.</code><code class="descname">get_rate_and_calculation_for_indicator</code><span class="sig-paren">(</span><em>indicator_number</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.metadata.get_rate_and_calculation_for_indicator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the rata and calculation method for a given indicator.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>indicator_number</strong> -- Number used to identify an indicator within Fingertips as integer or string</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A tuple of rate and calculation method from Fingetips metadata</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
 <dt id="fingertips_py.metadata.get_sex_from_id">
 <code class="descclassname">fingertips_py.metadata.</code><code class="descname">get_sex_from_id</code><span class="sig-paren">(</span><em>sex_id</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.metadata.get_sex_from_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a sex name given an id.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>sex_id</strong> -- ID used in fingertips to represent the sex as integer</p>
+<dd class="field-odd"><p><strong>sex_id</strong> -- ID used in Fingertips to represent the sex as integer</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Sex category as string</p>
@@ -476,7 +476,7 @@ least one of these IDs has to be given otherwise an error is raised.</p>
 <dd class="field-odd"><p><strong>sex</strong> -- Sex category as string (Case sensitive)</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>ID used in fingertips to represent the sex as integer</p>
+<dd class="field-even"><p>ID used in Fingertips to represent the sex as integer</p>
 </dd>
 </dl>
 </dd></dl>
@@ -490,7 +490,7 @@ least one of these IDs has to be given otherwise an error is raised.</p>
 <dd class="field-odd"><p><strong>value_note</strong> -- Value note as string</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>ID used in fingertips to represent the value note as integer</p>
+<dd class="field-even"><p>ID used in Fingertips to represent the value note as integer</p>
 </dd>
 </dl>
 </dd></dl>
@@ -498,7 +498,7 @@ least one of these IDs has to be given otherwise an error is raised.</p>
 </div>
 <span class="target" id="module-fingertips_py.api_calls"></span><div class="section" id="api-calls-py">
 <h2>api_calls.py<a class="headerlink" href="#api-calls-py" title="Permalink to this headline">¶</a></h2>
-<p>A group of functions to query the fingertips api and retrieve data in a variety of formats.</p>
+<p>A group of functions to query the Fingertips api and retrieve data in a variety of formats.</p>
 <dl class="function">
 <dt id="fingertips_py.api_calls.deal_with_url_error">
 <code class="descclassname">fingertips_py.api_calls.</code><code class="descname">deal_with_url_error</code><span class="sig-paren">(</span><em>url</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.api_calls.deal_with_url_error" title="Permalink to this definition">¶</a></dt>
@@ -573,7 +573,7 @@ least one of these IDs has to be given otherwise an error is raised.</p>
 </div>
 <span class="target" id="module-fingertips_py.retrieve_data"></span><div class="section" id="retrieve-data-py">
 <h2>retrieve_data.py<a class="headerlink" href="#retrieve-data-py" title="Permalink to this headline">¶</a></h2>
-<p>A group of functions to retrieve data from fingertips by indicator, profile, domain (group), or geography.</p>
+<p>A group of functions to retrieve data from Fingertips by indicator, profile, domain (group), or geography.</p>
 <dl class="function">
 <dt id="fingertips_py.retrieve_data.get_all_areas_for_all_indicators">
 <code class="descclassname">fingertips_py.retrieve_data.</code><code class="descname">get_all_areas_for_all_indicators</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.retrieve_data.get_all_areas_for_all_indicators" title="Permalink to this definition">¶</a></dt>
@@ -593,7 +593,7 @@ least one of these IDs has to be given otherwise an error is raised.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>indicators</strong> -- List or integer or string of indicator Ids</p></li>
-<li><p><strong>area_type_id</strong> -- ID of area type (eg. CCG, Upper Tier Local Authority) used in Fingertips as integer or string</p></li>
+<li><p><strong>area_type_id</strong> -- ID of area type (eg. ID of General Practice is 7 etc) used in Fingertips as integer or string</p></li>
 <li><p><strong>parent_area_type_id</strong> -- Area type of parent area - defaults to England value</p></li>
 <li><p><strong>filter_by_area_codes</strong> -- Option to limit returned data to areas. Areas as either string or list of strings</p></li>
 </ul>
@@ -606,13 +606,14 @@ least one of these IDs has to be given otherwise an error is raised.</p>
 
 <dl class="function">
 <dt id="fingertips_py.retrieve_data.get_all_data_for_profile">
-<code class="descclassname">fingertips_py.retrieve_data.</code><code class="descname">get_all_data_for_profile</code><span class="sig-paren">(</span><em>profile_id</em>, <em>parent_area_type_id=15</em>, <em>filter_by_area_codes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.retrieve_data.get_all_data_for_profile" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">fingertips_py.retrieve_data.</code><code class="descname">get_all_data_for_profile</code><span class="sig-paren">(</span><em>profile_id</em>, <em>parent_area_type_id=15</em>, <em>area_type_id=None</em>, <em>filter_by_area_codes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.retrieve_data.get_all_data_for_profile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a dataframe of data for all indicators within a profile.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>profile_id</strong> -- ID used in fingertips to identify a profile as integer or string</p></li>
+<li><p><strong>profile_id</strong> -- ID used in Fingertips to identify a profile as integer or string</p></li>
 <li><p><strong>parent_area_type_id</strong> -- Area type of parent area - defaults to England value</p></li>
+<li><p><strong>area_type_id</strong> -- Option to only return data for a given area type. Area type ids are string, int or a list.</p></li>
 <li><p><strong>filter_by_area_codes</strong> -- Option to limit returned data to areas. Areas as either string or list of strings.</p></li>
 </ul>
 </dd>
@@ -632,7 +633,7 @@ least one of these IDs has to be given otherwise an error is raised.</p>
 <li><p><strong>indicator_ids</strong> -- List of indicator IDs as strings</p></li>
 <li><p><strong>area_type_id</strong> -- ID of area type (eg. CCG, Upper Tier Local Authority) used in Fingertips as integer or string</p></li>
 <li><p><strong>parent_area_type_id</strong> -- Area type of parent area - defaults to England value</p></li>
-<li><p><strong>profile_id</strong> -- Id of profile to select by as either int or string</p></li>
+<li><p><strong>profile_id</strong> -- ID of profile to select by as either int or string</p></li>
 <li><p><strong>include_sortable_time_periods</strong> -- Boolean as to whether to include a sort-friendly data field</p></li>
 </ul>
 </dd>
@@ -688,7 +689,7 @@ index. If a specific area is requested, it returns just the deprivation decile v
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>area_type_id</strong> -- Area type id as denoted by the fingertips API</p></li>
+<li><p><strong>area_type_id</strong> -- Area type id as denoted by the Fingertips API</p></li>
 <li><p><strong>year</strong> -- Year of deprivation score</p></li>
 <li><p><strong>area_code</strong> -- Optional. Area code for area type to return a single value for that area</p></li>
 </ul>

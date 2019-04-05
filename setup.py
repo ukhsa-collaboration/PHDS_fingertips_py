@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='fingertips_py',
-    version='0.1',
+    version='0.2',
     packages=['fingertips_py'],
     url='https://gitlab.phe.gov.uk/Russell.Plunkett/fingertips_py.git',
     license='',

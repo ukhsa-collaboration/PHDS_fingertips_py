@@ -1,7 +1,7 @@
 """
 api_calls.py
 ==================================
-A group of functions to query the fingertips api and retrieve data in a variety of formats.
+A group of functions to query the Fingertips api and retrieve data in a variety of formats.
 """
 
 

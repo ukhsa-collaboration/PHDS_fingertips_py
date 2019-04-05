@@ -7,8 +7,8 @@ from ..metadata import get_metadata_for_profile_as_dataframe, get_metadata, get_
     get_metadata_for_domain_as_dataframe, get_all_value_notes, get_profile_by_name, get_area_types_for_profile,\
     get_domains_in_profile, get_all_profiles, get_area_types_as_dict, get_age_from_id, get_area_type_ids_for_profile, \
     get_profile_by_id, get_age_id, get_all_ages, get_all_sexes, get_areas_for_area_type, get_metadata_for_indicator, \
-    get_rate_and_calculation_for_indicator, get_sex_from_id, get_sex_id, get_value_note_id, \
-    get_metadata_for_all_indicators, get_metadata_for_all_indicators_from_csv
+    get_multiplier_and_calculation_for_indicator, get_sex_from_id, get_sex_id, get_value_note_id, \
+    get_metadata_for_all_indicators, get_metadata_for_all_indicators_from_csv, get_all_areas
 from ..area_data import deprivation_decile
 
 
@@ -40,6 +40,13 @@ def test_get_all_data_for_profile():
     assert data.shape[1] == 26
 
 
+def test_get_all_areas():
+    data = get_all_areas()
+    assert isinstance(data, dict) is True
+    assert isinstance(data[1], dict) is True
+    assert isinstance(data[1]['Name'], str) is True
+
+
 def test_get_all_data_for_indicators():
     data = get_all_data_for_indicators([92949, 247], area_type_id=102)
     assert isinstance(data, pd.DataFrame) is True
@@ -67,7 +74,7 @@ def test_get_data_for_indicator_at_all_available_geographies():
 def test_get_metadata_for_profile_as_dataframe():
     data = get_metadata_for_profile_as_dataframe(84)
     assert isinstance(data, pd.DataFrame) is True
-    assert data.shape[1] == 31
+    assert data.shape[1] == 30
 
 
 def test_get_metadata():
@@ -79,31 +86,31 @@ def test_get_metadata():
     data_profile_and_indicators = get_metadata(indicator_ids=[92949, 247], profile_ids=84)
     data_all = get_metadata(indicator_ids=[92949, 247], domain_ids=[1938133052, 1938132811], profile_ids=84)
     assert isinstance(data_indicators, pd.DataFrame) is True
-    assert data_indicators.shape[1] == 31
+    assert data_indicators.shape[1] == 30
     assert isinstance(data_domain, pd.DataFrame) is True
-    assert data_domain.shape[1] == 31
+    assert data_domain.shape[1] == 30
     assert isinstance(data_profile, pd.DataFrame) is True
-    assert data_profile.shape[1] == 31
+    assert data_profile.shape[1] == 30
     assert isinstance(data_indicators_and_domain, pd.DataFrame) is True
-    assert data_indicators_and_domain.shape[1] == 31
+    assert data_indicators_and_domain.shape[1] == 30
     assert isinstance(data_domain_and_profile, pd.DataFrame) is True
-    assert data_domain_and_profile.shape[1] == 31
+    assert data_domain_and_profile.shape[1] == 30
     assert isinstance(data_profile_and_indicators, pd.DataFrame) is True
-    assert data_profile_and_indicators.shape[1] == 31
+    assert data_profile_and_indicators.shape[1] == 30
     assert isinstance(data_all, pd.DataFrame) is True
-    assert data_all.shape[1] == 31
+    assert data_all.shape[1] == 30
 
 
 def test_get_metadata_for_indicator_as_dataframe():
     data = get_metadata_for_indicator_as_dataframe(247)
     assert isinstance(data, pd.DataFrame) is True
-    assert data.shape[1] == 31
+    assert data.shape[1] == 30
 
 
 def test_get_metadata_for_domain_as_dataframe():
     data = get_metadata_for_domain_as_dataframe(1938132811)
     assert isinstance(data, pd.DataFrame) is True
-    assert data.shape[1] == 31
+    assert data.shape[1] == 30
 
 
 def test_get_all_value_notes():
@@ -186,8 +193,8 @@ def test_get_metadata_for_indicator():
     assert isinstance(data, dict) is True
 
 
-def test_get_rate_and_calculation_for_indicator():
-    data = get_rate_and_calculation_for_indicator(247)
+def test_get_multiplier_and_calculation_for_indicator():
+    data = get_multiplier_and_calculation_for_indicator(247)
     assert isinstance(data, tuple) is True
     assert data[0] == 100
 
@@ -216,7 +223,7 @@ def test_get_metadata_for_all_indicators():
 def test_get_metadata_for_all_indicators_from_csv():
     data = get_metadata_for_all_indicators_from_csv()
     assert isinstance(data, pd.DataFrame) is True
-    assert data.shape[1] == 31
+    assert data.shape[1] == 30
 
 
 def test_deprivation_decile():
