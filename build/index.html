@@ -1,0 +1,768 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="y" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="y" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Welcome to fingertips_py&#39;s documentation! &mdash; fingertips_py 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+          
+
+          
+            <a href="#" class="icon icon-home"> fingertips_py
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Welcome to fingertips_py's documentation!</a><ul>
+<li><a class="reference internal" href="#metadata-py">metadata.py</a></li>
+<li><a class="reference internal" href="#api-calls-py">api_calls.py</a></li>
+<li><a class="reference internal" href="#retrieve-data-py">retrieve_data.py</a></li>
+<li><a class="reference internal" href="#area-data-py">area_data.py</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">fingertips_py</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>Welcome to fingertips_py's documentation!</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-fingertips_py.metadata">
+<span id="welcome-to-fingertips-py-s-documentation"></span><h1>Welcome to fingertips_py's documentation!<a class="headerlink" href="#module-fingertips_py.metadata" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="metadata-py">
+<h2>metadata.py<a class="headerlink" href="#metadata-py" title="Permalink to this headline">¶</a></h2>
+<p>Calls used to retrieve metadata about areas, ages, sexes, value notes, calculation methods, rates, and indicator
+metadata.</p>
+<dl class="function">
+<dt id="fingertips_py.metadata.get_age_from_id">
+<code class="descclassname">fingertips_py.metadata.</code><code class="descname">get_age_from_id</code><span class="sig-paren">(</span><em>age_id</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.metadata.get_age_from_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an age name from given id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>age_id</strong> -- Age id used in fingertips as an integer</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Age or age range as a string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.metadata.get_age_id">
+<code class="descclassname">fingertips_py.metadata.</code><code class="descname">get_age_id</code><span class="sig-paren">(</span><em>age</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.metadata.get_age_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an ID for a given age.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>age</strong> -- Search term of an age or age range as a string</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Code used in fingertips to represent the age or age range as a string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.metadata.get_all_ages">
+<code class="descclassname">fingertips_py.metadata.</code><code class="descname">get_all_ages</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.metadata.get_all_ages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary of all the age categories and their IDs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Age codes used in fingertips in a tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.metadata.get_all_areas">
+<code class="descclassname">fingertips_py.metadata.</code><code class="descname">get_all_areas</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.metadata.get_all_areas" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retreives all area types.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A dictionary of all area types used in Fingertips</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.metadata.get_all_profiles">
+<code class="descclassname">fingertips_py.metadata.</code><code class="descname">get_all_profiles</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.metadata.get_all_profiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all profiles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A dictionary of all profiles in Fingertips including information on domains and sequencing</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.metadata.get_all_sexes">
+<code class="descclassname">fingertips_py.metadata.</code><code class="descname">get_all_sexes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.metadata.get_all_sexes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tuple of all sex categories and their IDs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Sex categories used in fingertips with associated codes as a tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.metadata.get_all_value_notes">
+<code class="descclassname">fingertips_py.metadata.</code><code class="descname">get_all_value_notes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.metadata.get_all_value_notes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary of all value notes and their IDs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Data value notes and their associated codes that are used in Fingertips as a list of tuples</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.metadata.get_area_type_ids_for_profile">
+<code class="descclassname">fingertips_py.metadata.</code><code class="descname">get_area_type_ids_for_profile</code><span class="sig-paren">(</span><em>profile_id</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.metadata.get_area_type_ids_for_profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of area types used within a given profile.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>profile_id</strong> -- ID used in Fingertips to identify a profile as integer or string</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of area types used within a given profile</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.metadata.get_area_types_as_dict">
+<code class="descclassname">fingertips_py.metadata.</code><code class="descname">get_area_types_as_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.metadata.get_area_types_as_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all area types and related information such as ID and name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A dictionary of area types</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.metadata.get_area_types_for_profile">
+<code class="descclassname">fingertips_py.metadata.</code><code class="descname">get_area_types_for_profile</code><span class="sig-paren">(</span><em>profile_id</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.metadata.get_area_types_for_profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves all the area types that have data for a given profile.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>profile_id</strong> -- ID used in Fingertips to identify a profile as integer or string</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of dictionaries of area types with relevant information</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.metadata.get_areas_for_area_type">
+<code class="descclassname">fingertips_py.metadata.</code><code class="descname">get_areas_for_area_type</code><span class="sig-paren">(</span><em>area_type_id</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.metadata.get_areas_for_area_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary of areas that match an area type id given the id as integer or string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>area_type_id</strong> -- ID of area type (ID of General Practice is 7 etc) used in Fingertips as integer or string</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dictionary of dictionaries with area codes and the names of those areas</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.metadata.get_domains_in_profile">
+<code class="descclassname">fingertips_py.metadata.</code><code class="descname">get_domains_in_profile</code><span class="sig-paren">(</span><em>profile_id</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.metadata.get_domains_in_profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the domain IDs for a given profile.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>profile_id</strong> -- ID used in Fingertips to identify a profile as integer or string</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of domain IDs</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.metadata.get_metadata">
+<code class="descclassname">fingertips_py.metadata.</code><code class="descname">get_metadata</code><span class="sig-paren">(</span><em>indicator_ids=None</em>, <em>domain_ids=None</em>, <em>profile_ids=None</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.metadata.get_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dataframe object of metadata for a given indicator, domain, and/or profile given the relevant IDs. At
+least one of these IDs has to be given otherwise an error is raised.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>indicator_ids</strong> -- [OPTIONAL] Number used to identify an indicator within Fingertips as integer or string</p></li>
+<li><p><strong>domain_ids</strong> -- [OPTIONAL] Number used to identify a domain within Fingertips as integer or string</p></li>
+<li><p><strong>profile_ids</strong> -- [OPTIONAL] ID used in Fingertips to identify a profile as integer or string</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dataframe object with metadata for the given IDs or an error if nothing is specified</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.metadata.get_metadata_for_all_indicators">
+<code class="descclassname">fingertips_py.metadata.</code><code class="descname">get_metadata_for_all_indicators</code><span class="sig-paren">(</span><em>include_definition='no'</em>, <em>include_system_content='no'</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.metadata.get_metadata_for_all_indicators" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the metadata for all indicators in a dataframe.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>include_definition</strong> -- optional to include definitions</p></li>
+<li><p><strong>include_system_content</strong> -- optional to include system content</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>dataframe of all indicators</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.metadata.get_metadata_for_all_indicators_from_csv">
+<code class="descclassname">fingertips_py.metadata.</code><code class="descname">get_metadata_for_all_indicators_from_csv</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.metadata.get_metadata_for_all_indicators_from_csv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dataframe from the csv of all metadata for all indicators.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A dataframe of all metadata for all indicators</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.metadata.get_metadata_for_domain_as_dataframe">
+<code class="descclassname">fingertips_py.metadata.</code><code class="descname">get_metadata_for_domain_as_dataframe</code><span class="sig-paren">(</span><em>group_ids</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.metadata.get_metadata_for_domain_as_dataframe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dataframe of metadata for a given domain ID or list of domain IDs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>group_ids</strong> -- Number or list of numbers used to identify a domain within Fingertips as integer or string</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dataframe object with metadata for the indicators for a given domain ID</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.metadata.get_metadata_for_indicator">
+<code class="descclassname">fingertips_py.metadata.</code><code class="descname">get_metadata_for_indicator</code><span class="sig-paren">(</span><em>indicator_number</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.metadata.get_metadata_for_indicator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the metadata for an indicator given the indicator number as integer or string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>indicator_number</strong> -- Number used to identify an indicator within Fingertips as integer or string</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dictionary of metadata for the given indicator</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.metadata.get_metadata_for_indicator_as_dataframe">
+<code class="descclassname">fingertips_py.metadata.</code><code class="descname">get_metadata_for_indicator_as_dataframe</code><span class="sig-paren">(</span><em>indicator_ids</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.metadata.get_metadata_for_indicator_as_dataframe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dataframe of metadata for a given indicator ID or list of indicator IDs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>indicator_ids</strong> -- Number or list of numbers used to identify an indicator within Fingertips as integer or string</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dataframe object with metadate for the indicator ID</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.metadata.get_metadata_for_profile_as_dataframe">
+<code class="descclassname">fingertips_py.metadata.</code><code class="descname">get_metadata_for_profile_as_dataframe</code><span class="sig-paren">(</span><em>profile_ids</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.metadata.get_metadata_for_profile_as_dataframe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dataframe of metadata for a given profile ID or list of profile IDs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>profile_ids</strong> -- ID or list of IDs used in Fingertips to identify a profile as integer or string</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dataframe object with metadata for the indicators for a given group ID</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.metadata.get_multiplier_and_calculation_for_indicator">
+<code class="descclassname">fingertips_py.metadata.</code><code class="descname">get_multiplier_and_calculation_for_indicator</code><span class="sig-paren">(</span><em>indicator_number</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.metadata.get_multiplier_and_calculation_for_indicator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the multiplier and calculation method for a given indicator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>indicator_number</strong> -- Number used to identify an indicator within Fingertips as integer or string</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A tuple of multiplier and calculation method from Fingetips metadata</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.metadata.get_profile_by_id">
+<code class="descclassname">fingertips_py.metadata.</code><code class="descname">get_profile_by_id</code><span class="sig-paren">(</span><em>profile_id</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.metadata.get_profile_by_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a profile as an dictionary which contains information about domains and sequencing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>profile_id</strong> -- ID used in Fingertips to identify a profile as integer or string</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dictionary of information about the profile</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.metadata.get_profile_by_name">
+<code class="descclassname">fingertips_py.metadata.</code><code class="descname">get_profile_by_name</code><span class="sig-paren">(</span><em>profile_name</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.metadata.get_profile_by_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a profile object given a name to search - try to be specific to get better results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>profile_name</strong> -- A string or part of a string that is used as the profile name</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dictionary of the profile metadata including domain information or an error message</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.metadata.get_sex_from_id">
+<code class="descclassname">fingertips_py.metadata.</code><code class="descname">get_sex_from_id</code><span class="sig-paren">(</span><em>sex_id</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.metadata.get_sex_from_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a sex name given an id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sex_id</strong> -- ID used in fingertips to represent the sex as integer</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Sex category as string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.metadata.get_sex_id">
+<code class="descclassname">fingertips_py.metadata.</code><code class="descname">get_sex_id</code><span class="sig-paren">(</span><em>sex</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.metadata.get_sex_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an ID for a given sex.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sex</strong> -- Sex category as string (Case sensitive)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>ID used in fingertips to represent the sex as integer</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.metadata.get_value_note_id">
+<code class="descclassname">fingertips_py.metadata.</code><code class="descname">get_value_note_id</code><span class="sig-paren">(</span><em>value_note</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.metadata.get_value_note_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a value note ID for a given value note.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value_note</strong> -- Value note as string</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>ID used in fingertips to represent the value note as integer</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<span class="target" id="module-fingertips_py.api_calls"></span><div class="section" id="api-calls-py">
+<h2>api_calls.py<a class="headerlink" href="#api-calls-py" title="Permalink to this headline">¶</a></h2>
+<p>A group of functions to query the fingertips api and retrieve data in a variety of formats.</p>
+<dl class="function">
+<dt id="fingertips_py.api_calls.deal_with_url_error">
+<code class="descclassname">fingertips_py.api_calls.</code><code class="descname">deal_with_url_error</code><span class="sig-paren">(</span><em>url</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.api_calls.deal_with_url_error" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>url</strong> -- A url that returns a URL Error based on SSL errors</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dataframe from the URL with varify set to false.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.api_calls.get_data_in_tuple">
+<code class="descclassname">fingertips_py.api_calls.</code><code class="descname">get_data_in_tuple</code><span class="sig-paren">(</span><em>url</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.api_calls.get_data_in_tuple" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>url</strong> -- A url to make a request</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A tuple of returned data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.api_calls.get_json">
+<code class="descclassname">fingertips_py.api_calls.</code><code class="descname">get_json</code><span class="sig-paren">(</span><em>url</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.api_calls.get_json" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>url</strong> -- A url to make a request</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A parsed JSON object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.api_calls.get_json_return_df">
+<code class="descclassname">fingertips_py.api_calls.</code><code class="descname">get_json_return_df</code><span class="sig-paren">(</span><em>url</em>, <em>transpose=True</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.api_calls.get_json_return_df" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>url</strong> -- A url to make a request</p></li>
+<li><p><strong>transpose</strong> -- [OPTIONAL] transposes dataframe. Default True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dataframe generated from JSON response.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.api_calls.make_request">
+<code class="descclassname">fingertips_py.api_calls.</code><code class="descname">make_request</code><span class="sig-paren">(</span><em>url</em>, <em>attr=None</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.api_calls.make_request" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>url</strong> -- A url to make a request</p></li>
+<li><p><strong>attr</strong> -- The attribute that needs to be returned</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a dict of the attribute and associated data</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<span class="target" id="module-fingertips_py.retrieve_data"></span><div class="section" id="retrieve-data-py">
+<h2>retrieve_data.py<a class="headerlink" href="#retrieve-data-py" title="Permalink to this headline">¶</a></h2>
+<p>A group of functions to retrieve data from Fingertips by indicator, profile, domain (group), or geography.</p>
+<dl class="function">
+<dt id="fingertips_py.retrieve_data.get_all_areas_for_all_indicators">
+<code class="descclassname">fingertips_py.retrieve_data.</code><code class="descname">get_all_areas_for_all_indicators</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.retrieve_data.get_all_areas_for_all_indicators" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dataframe of all indicators and their geographical breakdowns.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dataframe of all indicators and their geographical breakdowns</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.retrieve_data.get_all_data_for_indicators">
+<code class="descclassname">fingertips_py.retrieve_data.</code><code class="descname">get_all_data_for_indicators</code><span class="sig-paren">(</span><em>indicators</em>, <em>area_type_id</em>, <em>parent_area_type_id=15</em>, <em>filter_by_area_codes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.retrieve_data.get_all_data_for_indicators" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dataframe of data for given indicators at an area.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>indicators</strong> -- List or integer or string of indicator Ids</p></li>
+<li><p><strong>area_type_id</strong> -- ID of area type (eg. ID of General Practice is 7 etc) used in Fingertips as integer or string</p></li>
+<li><p><strong>parent_area_type_id</strong> -- Area type of parent area - defaults to England value</p></li>
+<li><p><strong>filter_by_area_codes</strong> -- Option to limit returned data to areas. Areas as either string or list of strings</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dataframe of data for given indicators at an area</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.retrieve_data.get_all_data_for_profile">
+<code class="descclassname">fingertips_py.retrieve_data.</code><code class="descname">get_all_data_for_profile</code><span class="sig-paren">(</span><em>profile_id</em>, <em>parent_area_type_id=15</em>, <em>area_type_id=None</em>, <em>filter_by_area_codes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.retrieve_data.get_all_data_for_profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dataframe of data for all indicators within a profile.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>profile_id</strong> -- ID used in Fingertips to identify a profile as integer or string</p></li>
+<li><p><strong>parent_area_type_id</strong> -- Area type of parent area - defaults to England value</p></li>
+<li><p><strong>area_type_id</strong> -- Option to only return data for a given area type. Area type ids are string, int or a list.</p></li>
+<li><p><strong>filter_by_area_codes</strong> -- Option to limit returned data to areas. Areas as either string or list of strings.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dataframe of data for all indicators within a profile with any filters applied</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.retrieve_data.get_data_by_indicator_ids">
+<code class="descclassname">fingertips_py.retrieve_data.</code><code class="descname">get_data_by_indicator_ids</code><span class="sig-paren">(</span><em>indicator_ids</em>, <em>area_type_id</em>, <em>parent_area_type_id=15</em>, <em>profile_id=None</em>, <em>include_sortable_time_periods=None</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.retrieve_data.get_data_by_indicator_ids" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dataframe of indicator data given a list of indicators and area types.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>indicator_ids</strong> -- List of indicator IDs as strings</p></li>
+<li><p><strong>area_type_id</strong> -- ID of area type (eg. CCG, Upper Tier Local Authority) used in Fingertips as integer or string</p></li>
+<li><p><strong>parent_area_type_id</strong> -- Area type of parent area - defaults to England value</p></li>
+<li><p><strong>profile_id</strong> -- ID of profile to select by as either int or string</p></li>
+<li><p><strong>include_sortable_time_periods</strong> -- Boolean as to whether to include a sort-friendly data field</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dataframe of data relating to the given indicators</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.retrieve_data.get_data_for_indicator_at_all_available_geographies">
+<code class="descclassname">fingertips_py.retrieve_data.</code><code class="descname">get_data_for_indicator_at_all_available_geographies</code><span class="sig-paren">(</span><em>indicator_id</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.retrieve_data.get_data_for_indicator_at_all_available_geographies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dataframe of all data for an indicator for all available geographies.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>indicator_id</strong> -- Indicator id</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dataframe of data for indicator for all available areas for all time periods</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<span class="target" id="module-fingertips_py.area_data"></span><div class="section" id="area-data-py">
+<h2>area_data.py<a class="headerlink" href="#area-data-py" title="Permalink to this headline">¶</a></h2>
+<p>Functions to retrieve data that are specific to areas and relevant to all indicators. For example: Deprivation decile.</p>
+<dl class="function">
+<dt id="fingertips_py.area_data.defined_qcut">
+<code class="descclassname">fingertips_py.area_data.</code><code class="descname">defined_qcut</code><span class="sig-paren">(</span><em>df</em>, <em>value_series</em>, <em>number_of_bins</em>, <em>bins_for_extras</em>, <em>labels=False</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.area_data.defined_qcut" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allows users to define how values are split into bins when clustering.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> -- Dataframe of values</p></li>
+<li><p><strong>value_series</strong> -- Name of value column to rank upon</p></li>
+<li><p><strong>number_of_bins</strong> -- Integer of number of bins to create</p></li>
+<li><p><strong>bins_for_extras</strong> -- Ordered list of bin numbers to assign uneven splits</p></li>
+<li><p><strong>labels</strong> -- Optional. Labels for bins if required</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dataframe with a new column 'bins' which contains the cluster numbers</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fingertips_py.area_data.deprivation_decile">
+<code class="descclassname">fingertips_py.area_data.</code><code class="descname">deprivation_decile</code><span class="sig-paren">(</span><em>area_type_id</em>, <em>year='2015'</em>, <em>area_code=None</em><span class="sig-paren">)</span><a class="headerlink" href="#fingertips_py.area_data.deprivation_decile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes in an area type id and returns a pandas series of deprivation deciles for those areas (with the areas as an
+index. If a specific area is requested, it returns just the deprivation decile value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>area_type_id</strong> -- Area type id as denoted by the Fingertips API</p></li>
+<li><p><strong>year</strong> -- Year of deprivation score</p></li>
+<li><p><strong>area_code</strong> -- Optional. Area code for area type to return a single value for that area</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A pandas series of deprivation scores with area codes as the index. Or single value if area is specified.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Public Health England
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-XXXXXXX-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+   
+
+</body>
+</html>
