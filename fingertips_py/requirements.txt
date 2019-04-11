@@ -1,4 +1,3 @@
 pandas
 requests
-json
 pytest
