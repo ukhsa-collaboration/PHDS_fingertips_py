@@ -80,11 +80,18 @@
             
               <!-- Local TOC -->
               <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Welcome to fingertips_py's documentation</a><ul>
+<li><a class="reference internal" href="#">Welcome to fingertips_py's documentation</a></li>
+<li><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#licence">Licence</a><ul>
 <li><a class="reference internal" href="#metadata-py">metadata.py</a></li>
 <li><a class="reference internal" href="#api-calls-py">api_calls.py</a></li>
 <li><a class="reference internal" href="#retrieve-data-py">retrieve_data.py</a></li>
 <li><a class="reference internal" href="#area-data-py">area_data.py</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
@@ -152,10 +159,82 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-fingertips_py.metadata">
-<span id="welcome-to-fingertips-py-s-documentation"></span><h1>Welcome to fingertips_py's documentation<a class="headerlink" href="#module-fingertips_py.metadata" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="metadata-py">
-<h2>metadata.py<a class="headerlink" href="#metadata-py" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="welcome-to-fingertips-py-s-documentation">
+<h1>Welcome to fingertips_py's documentation<a class="headerlink" href="#welcome-to-fingertips-py-s-documentation" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>This is a python package to interact with Public Health England's
+[Fingertips](<a class="reference external" href="https://fingertips.phe.org.uk/">https://fingertips.phe.org.uk/</a>) data tool. Fingertips is a
+major repository of population and public health indicators for England.
+The site presents the information in many ways to improve accessibility
+for a wide range of audiences ranging from public health professionals
+and researchers to the general public. The information presented is a
+mixture of data available from other public sources, and those that are
+available through user access agreements with other organisations. The
+source of each indicator presented is available using the
+<cite>get_metadata_for_indicator()</cite> function.</p>
+<p>This package can be used to load data from the Fingertips API into
+python for further use.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>This packaged should be installed using pip:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">pip</span> <span class="pre">install</span> <span class="pre">fingertips_py</span>
+<span class="pre">`</span></code></p>
+<p>Or it can be compiled from source (still requires pip):</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">pip</span> <span class="pre">install</span> <span class="pre">git+https://github.com/PublicHealthEngland/PHDS_fingertips_py.git</span>
+<span class="pre">`</span></code></p>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>fingertips_py should be imported and used in line with standard python
+conventions. It is suggested that if the whole package is to be imported</p>
+<blockquote>
+<div><p>then the following convention is used:</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">import</span> <span class="pre">fingertips_py</span> <span class="pre">as</span> <span class="pre">ftp</span>
+<span class="pre">`</span></code></p>
+<p>The package returns data in a variety of types dependent on the
+function.</p>
+<p>For more information on any function, you can use:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">help(*fingertips_py</span> <span class="pre">function</span> <span class="pre">name*)</span>
+<span class="pre">`</span></code></p>
+<p>Or you can view the documents [here](<a class="reference external" href="https://fingertips-py.readthedocs.io/en/latest/">https://fingertips-py.readthedocs.io/en/latest/</a>).</p>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>This is an example of a workflow for retrieving data for the indicator
+on <em>Healthy Life Expectancy at Birth</em> from the <em>Public Health Outcomes
+Framework</em> profile.</p>
+<p><a href="#id1"><span class="problematic" id="id2">``</span></a>`
+import fingertips_py as ftp</p>
+<p>phof = ftp.get_profile_by_name('public health outcomes framework')
+phof_meta = ftp.get_metadata_for_profile_as_dataframe(phof['Id'])
+indicator_meta = phof_indicators[phof_meta['Indicator'].str.contains('Healthy')]
+print(indicator_meta)</p>
+<blockquote>
+<div><p>Indicator ID                                          Indicator  ...</p>
+</div></blockquote>
+<p>0          90362            0.1i - Healthy life expectancy at birth  ...
+55         92543  2.05ii - Proportion of children aged 2-2½yrs r...  ...
+<a href="#id3"><span class="problematic" id="id4">``</span></a><a href="#id5"><span class="problematic" id="id6">`</span></a></p>
+<p>We can see that the <em>Healthy life expectancy at birth</em> indicator has an
+id of 90362. The data for this indicator at all geographical breakdowns
+can be retrieved using <cite>get_data_for_indicator_at_all_available_geographies()</cite></p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">healthy_life_data</span> <span class="pre">=</span> <span class="pre">ftp.get_data_for_indicator_at_all_available_geographies(90362)</span>
+<span class="pre">`</span></code></p>
+</div>
+<div class="section" id="licence">
+<h2>Licence<a class="headerlink" href="#licence" title="Permalink to this headline">¶</a></h2>
+<p>This project is released under the [GPL-3](<a class="reference external" href="https://opensource.org/licenses/GPL-3.0">https://opensource.org/licenses/GPL-3.0</a>)
+licence.</p>
+<span class="target" id="module-fingertips_py.metadata"></span><div class="section" id="metadata-py">
+<h3>metadata.py<a class="headerlink" href="#metadata-py" title="Permalink to this headline">¶</a></h3>
 <p>Calls used to retrieve metadata about areas, ages, sexes, value notes, calculation methods, rates, and indicator
 metadata.</p>
 <dl class="function">
@@ -497,7 +576,7 @@ least one of these IDs has to be given otherwise an error is raised.</p>
 
 </div>
 <span class="target" id="module-fingertips_py.api_calls"></span><div class="section" id="api-calls-py">
-<h2>api_calls.py<a class="headerlink" href="#api-calls-py" title="Permalink to this headline">¶</a></h2>
+<h3>api_calls.py<a class="headerlink" href="#api-calls-py" title="Permalink to this headline">¶</a></h3>
 <p>A group of functions to query the Fingertips api and retrieve data in a variety of formats.</p>
 <dl class="function">
 <dt id="fingertips_py.api_calls.deal_with_url_error">
@@ -572,7 +651,7 @@ least one of these IDs has to be given otherwise an error is raised.</p>
 
 </div>
 <span class="target" id="module-fingertips_py.retrieve_data"></span><div class="section" id="retrieve-data-py">
-<h2>retrieve_data.py<a class="headerlink" href="#retrieve-data-py" title="Permalink to this headline">¶</a></h2>
+<h3>retrieve_data.py<a class="headerlink" href="#retrieve-data-py" title="Permalink to this headline">¶</a></h3>
 <p>A group of functions to retrieve data from Fingertips by indicator, profile, domain (group), or geography.</p>
 <dl class="function">
 <dt id="fingertips_py.retrieve_data.get_all_areas_for_all_indicators">
@@ -659,7 +738,7 @@ least one of these IDs has to be given otherwise an error is raised.</p>
 
 </div>
 <span class="target" id="module-fingertips_py.area_data"></span><div class="section" id="area-data-py">
-<h2>area_data.py<a class="headerlink" href="#area-data-py" title="Permalink to this headline">¶</a></h2>
+<h3>area_data.py<a class="headerlink" href="#area-data-py" title="Permalink to this headline">¶</a></h3>
 <p>Functions to retrieve data that are specific to areas and relevant to all indicators. For example: Deprivation decile.</p>
 <dl class="function">
 <dt id="fingertips_py.area_data.defined_qcut">
@@ -702,6 +781,7 @@ index. If a specific area is requested, it returns just the deprivation decile v
 
 </div>
 <div class="toctree-wrapper compound">
+</div>
 </div>
 </div>
 <div class="section" id="indices-and-tables">

@@ -26,7 +26,7 @@ pip install fingertips_py
 Or it can be compiled from source (still requires pip):
 
 ```
-pip install git+https://github.com/theendoftheurl.git
+pip install git+https://github.com/PublicHealthEngland/PHDS_fingertips_py.git
 ```
 
 ## Usage
@@ -48,7 +48,7 @@ For more information on any function, you can use:
 help(*fingertips_py function name*)
 ```
 
-Or you can view the documents [here]()
+Or you can view the documents [here](https://fingertips-py.readthedocs.io/en/latest/).
 
 ## Example
 
