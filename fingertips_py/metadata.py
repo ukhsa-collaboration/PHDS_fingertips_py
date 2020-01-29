@@ -11,27 +11,31 @@ from urllib.error import HTTPError, URLError
 from .api_calls import get_data_in_tuple, base_url, make_request, get_json, get_json_return_df, deal_with_url_error
 
 
-def get_all_ages():
+def get_all_ages(is_test=False):
     """
     Returns a dictionary of all the age categories and their IDs.
 
     :return: Age codes used in Fingertips in a tuple
     """
     ages = get_data_in_tuple(base_url + 'ages')
+    if is_test:
+        return ages, base_url + 'ages'
     return ages
 
 
-def get_all_areas():
+def get_all_areas(is_test=False):
     """
     Retreives all area types.
 
     :return: A dictionary of all area types used in Fingertips
     """
     areas = make_request(base_url + 'area_types', 'Id')
+    if is_test:
+        return areas, base_url + 'area_types'
     return areas
 
 
-def get_age_id(age):
+def get_age_id(age, is_test=False):
     """
     Returns an ID for a given age.
 
@@ -39,10 +43,12 @@ def get_age_id(age):
     :return: Code used in Fingertips to represent the age or age range as a string
     """
     ages = make_request(base_url + 'ages', 'Name')
+    if is_test:
+        return ages[age]['Id'], base_url + 'ages'
     return ages[age]['Id']
 
 
-def get_age_from_id(age_id):
+def get_age_from_id(age_id, is_test=False):
     """
     Returns an age name from given id.
 
@@ -50,20 +56,24 @@ def get_age_from_id(age_id):
     :return: Age or age range as a string
     """
     ages = make_request(base_url + 'ages', 'Id')
+    if is_test:
+        return ages[age_id]['Name'], base_url + 'ages'
     return ages[age_id]['Name']
 
 
-def get_all_sexes():
+def get_all_sexes(is_test=False):
     """
     Returns a tuple of all sex categories and their IDs.
 
     :return: Sex categories used in Fingertips with associated codes as a tuple
     """
     sexes = get_data_in_tuple(base_url + 'sexes')
+    if is_test:
+        return sexes, base_url + 'sexes'
     return sexes
 
 
-def get_sex_id(sex):
+def get_sex_id(sex, is_test=False):
     """
     Returns an ID for a given sex.
 
@@ -71,10 +81,12 @@ def get_sex_id(sex):
     :return: ID used in Fingertips to represent the sex as integer
     """
     sexes = make_request(base_url + 'sexes', 'Name')
+    if is_test:
+        return sexes[sex]['Id'], base_url + 'sexes'
     return sexes[sex]['Id']
 
 
-def get_sex_from_id(sex_id):
+def get_sex_from_id(sex_id, is_test=False):
     """
     Returns a sex name given an id.
 
@@ -82,20 +94,24 @@ def get_sex_from_id(sex_id):
     :return: Sex category as string
     """
     sexes = make_request(base_url + 'sexes', 'Id')
+    if is_test:
+        return sexes[sex_id]['Name'], base_url + 'sexes'
     return sexes[sex_id]['Name']
 
 
-def get_all_value_notes():
+def get_all_value_notes(is_test=False):
     """
     Returns a dictionary of all value notes and their IDs.
 
     :return: Data value notes and their associated codes that are used in Fingertips as a list of tuples
     """
     value_notes = get_data_in_tuple(base_url + 'value_notes')
+    if is_test:
+        return value_notes, base_url + 'value_notes'
     return value_notes
 
 
-def get_value_note_id(value_note):
+def get_value_note_id(value_note, is_test=False):
     """
     Returns a value note ID for a given value note.
 
@@ -103,10 +119,12 @@ def get_value_note_id(value_note):
     :return: ID used in Fingertips to represent the value note as integer
     """
     value_notes = make_request(base_url + 'value_notes', 'Text')
+    if is_test:
+        return value_notes[value_note]['Id'], base_url + 'value_notes'
     return value_notes[value_note]['Id']
 
 
-def get_areas_for_area_type(area_type_id):
+def get_areas_for_area_type(area_type_id, is_test=False):
     """
     Returns a dictionary of areas that match an area type id given the id as integer or string.
 
@@ -114,10 +132,12 @@ def get_areas_for_area_type(area_type_id):
     :return: A dictionary of dictionaries with area codes and the names of those areas
     """
     areas = make_request(base_url + 'areas/by_area_type?area_type_id=' + str(area_type_id), 'Code')
+    if is_test:
+        return areas, base_url + 'areas/by_area_type?area_type_id=' + str(area_type_id)
     return areas
 
 
-def get_metadata_for_indicator(indicator_number):
+def get_metadata_for_indicator(indicator_number, is_test=False):
     """
     Returns the metadata for an indicator given the indicator number as integer or string.
 
@@ -125,10 +145,12 @@ def get_metadata_for_indicator(indicator_number):
     :return: A dictionary of metadata for the given indicator
     """
     metadata = get_json(base_url + 'indicator_metadata/by_indicator_id?indicator_ids=' + str(indicator_number))
+    if is_test:
+        return metadata, base_url + 'indicator_metadata/by_indicator_id?indicator_ids=' + str(indicator_number)
     return metadata
 
 
-def get_metadata_for_all_indicators_from_csv():
+def get_metadata_for_all_indicators_from_csv(is_test=False):
     """
     Returns a dataframe from the csv of all metadata for all indicators.
 
@@ -138,10 +160,12 @@ def get_metadata_for_all_indicators_from_csv():
         metadata = pd.read_csv(base_url + 'indicator_metadata/csv/all')
     except URLError:
         metadata = deal_with_url_error(base_url + 'indicator_metadata/csv/all')
+    if is_test:
+        return metadata, base_url + 'indicator_metadata/csv/all'
     return metadata
 
 
-def get_metadata_for_all_indicators(include_definition='no', include_system_content='no'):
+def get_metadata_for_all_indicators(include_definition='no', include_system_content='no', is_test=False):
     """
     Returns the metadata for all indicators in a dataframe.
 
@@ -152,6 +176,8 @@ def get_metadata_for_all_indicators(include_definition='no', include_system_cont
     url = 'indicator_metadata/all?include_definition={}&include_system_content={}'
     url_suffix = url.format(include_definition, include_system_content)
     metadata_df = get_json_return_df(base_url + url_suffix)
+    if is_test:
+        return metadata_df, base_url + url_suffix
     return metadata_df
 
 
@@ -174,13 +200,15 @@ def get_multiplier_and_calculation_for_indicator(indicator_number):
     return multiplier, calc
 
 
-def get_area_types_as_dict():
+def get_area_types_as_dict(is_test=False):
     """
     Returns all area types and related information such as ID and name.
 
     :return: A dictionary of area types
     """
     areas = get_json(base_url + 'area_types')
+    if is_test:
+        return areas, base_url + 'area_types'
     return areas
 
 

@@ -12,7 +12,7 @@ from .metadata import get_area_type_ids_for_profile, get_metadata_for_all_indica
 
 
 def get_data_by_indicator_ids(indicator_ids, area_type_id, parent_area_type_id=15, profile_id=None,
-                              include_sortable_time_periods=None):
+                              include_sortable_time_periods=None, is_test=False):
     """
     Returns a dataframe of indicator data given a list of indicators and area types.
 
@@ -46,10 +46,13 @@ def get_data_by_indicator_ids(indicator_ids, area_type_id, parent_area_type_id=1
         df = pd.read_csv(base_url + populated_url)
     except URLError:
         df = deal_with_url_error(base_url + populated_url)
+    if is_test:
+        return df, base_url + populated_url
     return df
 
 
-def get_all_data_for_profile(profile_id, parent_area_type_id=15, area_type_id=None, filter_by_area_codes=None):
+def get_all_data_for_profile(profile_id, parent_area_type_id=15, area_type_id=None, filter_by_area_codes=None,
+                             is_test=False):
     """
     Returns a dataframe of data for all indicators within a profile.
 
@@ -80,10 +83,13 @@ def get_all_data_for_profile(profile_id, parent_area_type_id=15, area_type_id=No
         elif isinstance(filter_by_area_codes, str):
             df = df.loc[df['Area Code'] == filter_by_area_codes]
         df = df.reset_index()
+    if is_test:
+        return df, base_url + populated_url
     return df
 
 
-def get_all_data_for_indicators(indicators, area_type_id, parent_area_type_id=15, filter_by_area_codes=None):
+def get_all_data_for_indicators(indicators, area_type_id, parent_area_type_id=15, filter_by_area_codes=None,
+                                is_test=False):
     """
     Returns a dataframe of data for given indicators at an area.
 
@@ -113,6 +119,8 @@ def get_all_data_for_indicators(indicators, area_type_id, parent_area_type_id=15
         elif isinstance(filter_by_area_codes, str):
             df = df.loc[df['Area Code'] == filter_by_area_codes]
         df = df.reset_index()
+    if is_test:
+        return df, base_url + populated_url
     return df
 
 
