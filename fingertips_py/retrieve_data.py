@@ -6,7 +6,7 @@ A group of functions to retrieve data from Fingertips by indicator, profile, dom
 
 
 import pandas as pd
-from urllib.error import URLError
+from urllib.error import URLError, HTTPError
 from .api_calls import base_url, get_json_return_df, deal_with_url_error
 from .metadata import get_area_type_ids_for_profile, get_metadata_for_all_indicators, get_all_areas
 
@@ -49,7 +49,7 @@ def get_data_by_indicator_ids(indicator_ids, area_type_id, parent_area_type_id=1
     return df
 
 
-def get_all_data_for_profile(profile_id, parent_area_type_id=15, area_type_id = None, filter_by_area_codes=None):
+def get_all_data_for_profile(profile_id, parent_area_type_id=15, area_type_id=None, filter_by_area_codes=None):
     """
     Returns a dataframe of data for all indicators within a profile.
 
@@ -69,6 +69,8 @@ def get_all_data_for_profile(profile_id, parent_area_type_id=15, area_type_id = 
         populated_url = url_suffix.format(area, parent_area_type_id, profile_id)
         try:
             df_returned = pd.read_csv(base_url + populated_url)
+        except HTTPError:
+            raise Exception('There has been a server error with Fingertips for this request. ')
         except URLError:
             df_returned = deal_with_url_error(base_url + populated_url)
         df = df.append(df_returned)

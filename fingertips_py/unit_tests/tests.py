@@ -217,7 +217,7 @@ def test_get_value_note_id():
 def test_get_metadata_for_all_indicators():
     data = get_metadata_for_all_indicators()
     assert isinstance(data, pd.DataFrame) is True
-    assert data.shape[1] == 9
+    assert data.shape[1] == 14
 
 
 def test_get_metadata_for_all_indicators_from_csv():
