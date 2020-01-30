@@ -212,23 +212,28 @@ def get_area_types_as_dict(is_test=False):
     return areas
 
 
-def get_profile_by_id(profile_id):
+def get_profile_by_id(profile_id, is_test=False):
     """
     Returns a profile as an dictionary which contains information about domains and sequencing.
 
     :param profile_id: ID used in Fingertips to identify a profile as integer or string
     :return: A dictionary of information about the profile
     """
+    if is_test:
+        return get_json(base_url + 'profile?profile_id=' + str(profile_id)), base_url + 'profile?profile_id=' + \
+               str(profile_id)
     return get_json(base_url + 'profile?profile_id=' + str(profile_id))
 
 
-def get_all_profiles():
+def get_all_profiles(is_test=False):
     """
     Returns all profiles.
 
     :return: A dictionary of all profiles in Fingertips including information on domains and sequencing
     """
     profiles = get_json(base_url + 'profiles')
+    if is_test:
+        return profiles, base_url + 'profiles'
     return profiles
 
 
@@ -243,13 +248,16 @@ def get_domains_in_profile(profile_id):
     return profile['GroupIds']
 
 
-def get_area_types_for_profile(profile_id):
+def get_area_types_for_profile(profile_id, is_test=False):
     """
     Retrieves all the area types that have data for a given profile.
 
     :param profile_id: ID used in Fingertips to identify a profile as integer or string
     :return: A list of dictionaries of area types with relevant information
     """
+    if is_test:
+        return get_json(base_url + 'area_types?profile_ids=' + str(profile_id)), base_url + 'area_types?profile_ids=' +\
+               str(profile_id)
     return get_json(base_url + 'area_types?profile_ids=' + str(profile_id))
 
 
