@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='fingertips_py',
-    version='0.2.1',
+    version='0.2.2',
     packages=['fingertips_py'],
     url='https://github.com/PublicHealthEngland/PHDS_fingertips_py.git',
     license='GPL-3.0',
