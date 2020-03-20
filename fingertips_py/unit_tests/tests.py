@@ -34,29 +34,34 @@ def test_get_json_return_df():
     assert isinstance(data, pd.DataFrame) is True
 
 
+# need to think about this one
 def test_get_all_data_for_profile():
-    data = get_all_data_for_profile(84)
-    assert isinstance(data, pd.DataFrame) is True
-    assert data.shape[1] == 26
+    data = get_all_data_for_profile(84, is_test=True)
+    assert isinstance(data[0], pd.DataFrame) is True
+    assert data[1] == base_url + 'all_data/csv/by_profile_id?child_area_type_id=154&parent_area_type_id=15&profile_id=84'
+    assert data[0].shape[1] == 26
 
 
 def test_get_all_areas():
-    data = get_all_areas()
-    assert isinstance(data, dict) is True
-    assert isinstance(data[1], dict) is True
-    assert isinstance(data[1]['Name'], str) is True
+    data = get_all_areas(is_test=True)
+    assert isinstance(data[0], dict) is True
+    assert isinstance(data[0][1], dict) is True
+    assert isinstance(data[0][1]['Name'], str) is True
+    assert data[1] == 'http://fingertips.phe.org.uk/api/area_types'
 
 
 def test_get_all_data_for_indicators():
-    data = get_all_data_for_indicators([92949, 247], area_type_id=102)
-    assert isinstance(data, pd.DataFrame) is True
-    assert data.shape[1] == 26
+    data = get_all_data_for_indicators([92949, 247], area_type_id=102, is_test=True)
+    assert isinstance(data[0], pd.DataFrame) is True
+    assert data[0].shape[1] == 26
+    assert data[1] == 'http://fingertips.phe.org.uk/api/all_data/csv/by_indicator_id?indicator_ids=92949,247&child_area_type_id=102&parent_area_type_id=15'
 
 
 def test_get_data_by_indicator_ids():
-    data = get_data_by_indicator_ids([92949, 247], 102)
-    assert isinstance(data, pd.DataFrame) is True
-    assert data.shape[1] == 26
+    data = get_data_by_indicator_ids([92949, 247], 102, is_test=True)
+    assert isinstance(data[0], pd.DataFrame) is True
+    assert data[0].shape[1] == 26
+    assert data[1] == 'http://fingertips.phe.org.uk/api/all_data/csv/by_indicator_id?indicator_ids=92949,247&child_area_type_id=102&parent_area_type_id=15'
 
 
 def test_get_all_areas_for_all_indicators():
@@ -102,15 +107,17 @@ def test_get_metadata():
 
 
 def test_get_metadata_for_indicator_as_dataframe():
-    data = get_metadata_for_indicator_as_dataframe(247)
-    assert isinstance(data, pd.DataFrame) is True
-    assert data.shape[1] == 30
+    data = get_metadata_for_indicator_as_dataframe(247, is_test=True)
+    assert isinstance(data[0], pd.DataFrame) is True
+    assert data[0].shape[1] == 30
+    assert data[1] == 'http://fingertips.phe.org.uk/api/indicator_metadata/csv/by_indicator_id?indicator_ids=247'
 
 
 def test_get_metadata_for_domain_as_dataframe():
-    data = get_metadata_for_domain_as_dataframe(1938132811)
-    assert isinstance(data, pd.DataFrame) is True
-    assert data.shape[1] == 30
+    data = get_metadata_for_domain_as_dataframe(1938132811, is_test=True)
+    assert isinstance(data[0], pd.DataFrame) is True
+    assert data[0].shape[1] == 30
+    assert data[1] == 'http://fingertips.phe.org.uk/api/indicator_metadata/csv/by_group_id?group_id=1938132811'
 
 
 def test_get_all_value_notes():
@@ -217,7 +224,7 @@ def test_get_value_note_id():
 def test_get_metadata_for_all_indicators():
     data = get_metadata_for_all_indicators()
     assert isinstance(data, pd.DataFrame) is True
-    assert data.shape[1] == 14
+    assert data.shape[1] == 11
 
 
 def test_get_metadata_for_all_indicators_from_csv():
