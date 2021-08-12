@@ -311,6 +311,22 @@ def get_profile_by_name(profile_name):
         return profile_obj
 
 
+def get_profile_by_key(profile_key):
+    """
+    Returns a profile object given a key (as the stub following 'profile' in the website URL). For example,
+    give, a URL of the form `https://fingertips.phe.org.uk/profile/general-practice/data#page/3/gid/2000...`,
+    the key is 'general-practice'.
+
+    :param profile_key: The exact key for the profile.
+    :return: A dictionary of the profile metadata including domain information or an error message
+    """
+    all_profiles = get_all_profiles()
+    for profile in all_profiles:
+        if profile['Key'] == profile_key:
+            return profile
+    return 'Profile could not be found'
+
+
 def get_metadata_for_indicator_as_dataframe(indicator_ids, is_test=False):
     """
     Returns a dataframe of metadata for a given indicator ID or list of indicator IDs.
