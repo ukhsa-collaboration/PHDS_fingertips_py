@@ -5,7 +5,6 @@ Calls used to retrieve metadata about areas, ages, sexes, value notes, calculati
 metadata.
 """
 
-
 import pandas as pd
 from urllib.error import HTTPError, URLError
 from .api_calls import get_data_in_tuple, base_url, make_request, get_json, get_json_return_df, deal_with_url_error
@@ -274,8 +273,8 @@ def get_area_types_for_profile(profile_id, is_test=False):
     :return: A list of dictionaries of area types with relevant information
     """
     if is_test:
-        return get_json(base_url + 'area_types?profile_ids=' + str(profile_id)), base_url + 'area_types?profile_ids=' +\
-            str(profile_id)
+        return get_json(base_url + 'area_types?profile_ids=' + str(profile_id)), base_url + 'area_types?profile_ids=' + \
+               str(profile_id)
     return get_json(base_url + 'area_types?profile_ids=' + str(profile_id))
 
 
