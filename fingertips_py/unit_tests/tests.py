@@ -133,6 +133,12 @@ def test_get_profile_by_name():
     assert data['Id'] == 84
 
 
+def test_get_profile_by_key():
+    data = get_profile_by_key("general-practice")
+    assert isinstance(data, dict) is True
+    assert data['Id'] == 20
+
+
 def test_get_area_types_for_profile():
     data = get_area_types_for_profile(84)
     assert isinstance(data, list) is True
