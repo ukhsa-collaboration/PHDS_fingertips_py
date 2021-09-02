@@ -5,7 +5,6 @@ Calls used to retrieve metadata about areas, ages, sexes, value notes, calculati
 metadata.
 """
 
-
 import pandas as pd
 from urllib.error import HTTPError, URLError
 from .api_calls import get_data_in_tuple, base_url, make_request, get_json, get_json_return_df, deal_with_url_error
@@ -274,8 +273,8 @@ def get_area_types_for_profile(profile_id, is_test=False):
     :return: A list of dictionaries of area types with relevant information
     """
     if is_test:
-        return get_json(base_url + 'area_types?profile_ids=' + str(profile_id)), base_url + 'area_types?profile_ids=' +\
-            str(profile_id)
+        return get_json(base_url + 'area_types?profile_ids=' + str(profile_id)), base_url + 'area_types?profile_ids=' + \
+               str(profile_id)
     return get_json(base_url + 'area_types?profile_ids=' + str(profile_id))
 
 
@@ -309,6 +308,22 @@ def get_profile_by_name(profile_name):
         return 'Profile could not be found'
     else:
         return profile_obj
+
+
+def get_profile_by_key(profile_key):
+    """
+    Returns a profile object given a key (as the stub following 'profile' in the website URL). For example,
+    give, a URL of the form `https://fingertips.phe.org.uk/profile/general-practice/data#page/3/gid/2000...`,
+    the key is 'general-practice'.
+
+    :param profile_key: The exact key for the profile.
+    :return: A dictionary of the profile metadata including domain information or an error message
+    """
+    all_profiles = get_all_profiles()
+    for profile in all_profiles:
+        if profile['Key'] == profile_key:
+            return profile
+    return 'Profile could not be found'
 
 
 def get_metadata_for_indicator_as_dataframe(indicator_ids, is_test=False):
