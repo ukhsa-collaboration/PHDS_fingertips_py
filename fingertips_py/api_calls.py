@@ -11,16 +11,17 @@ import pandas as pd
 from io import StringIO
 
 
-def make_request(url, attr=None):
+def make_request(url, attr=None, proxies=None):
     """
     :param url: A url to make a request
     :param attr: The attribute that needs to be returned
+    :proxies: proxies info to access the data
     :return: a dict of the attribute and associated data
     """
     try:
-        req = requests.get(url)
+        req = requests.get(url, proxies=proxies)
     except requests.exceptions.SSLError:
-        req = requests.get(url, verify=False)
+        req = requests.get(url, verify=False, proxies=proxies)
     json_response = json.loads(req.content.decode('utf-8'))
     data = {}
     for item in json_response:
@@ -29,29 +30,31 @@ def make_request(url, attr=None):
     return data
 
 
-def get_json(url):
+def get_json(url, proxies=None):
     """
     :param url: A url to make a request
+    :proxies: proxies info to access the data
     :return: A parsed JSON object
     """
     try:
-        req = requests.get(url)
+        req = requests.get(url, proxies=proxies)
     except requests.exceptions.SSLError:
-        req = requests.get(url, verify=False)
+        req = requests.get(url, verify=False, proxies=proxies)
     json_resp = json.loads(req.content.decode('utf-8'))
     return json_resp
 
 
-def get_json_return_df(url, transpose=True):
+def get_json_return_df(url, transpose=True, proxies=None):
     """
     :param url: A url to make a request
     :param transpose: [OPTIONAL] transposes dataframe. Default True.
+    :proxies: proxies info to access the data
     :return: Dataframe generated from JSON response.
     """
     try:
-        req = requests.get(url)
+        req = requests.get(url, proxies=proxies)
     except requests.exceptions.SSLError:
-        req = requests.get(url, verify=False)
+        req = requests.get(url, verify=False, proxies=proxies)
     try:
         df = pd.read_json(req.content, encoding='utf-8')
     except ValueError:
@@ -61,16 +64,16 @@ def get_json_return_df(url, transpose=True):
     return df
 
 
-def get_data_in_tuple(url):
+def get_data_in_tuple(url, proxies=None):
     """
-
     :param url: A url to make a request
+    :proxies: proxies info to access the data
     :return: A tuple of returned data
     """
     try:
-        req = requests.get(url)
+        req = requests.get(url, proxies=proxies)
     except requests.exceptions.SSLError:
-        req = requests.get(url, verify=False)
+        req = requests.get(url, verify=False, proxies=proxies)
     json_resp = json.loads(req.content.decode('utf-8'))
     tup = [tuple(d.values()) for d in json_resp]
     if isinstance(tup[0][0], str):
@@ -79,12 +82,13 @@ def get_data_in_tuple(url):
         return tup
 
 
-def deal_with_url_error(url):
+def deal_with_url_error(url, proxies=None):
     """
     :param url: A url that returns a URL Error based on SSL errors
+    :proxies: proxies info to access the data
     :return: A dataframe from the URL with varify set to false.
     """
-    req = requests.get(url, verify=False)
+    req = requests.get(url, verify=False, proxies=proxies)
     s = str(req.content, 'utf-8')
     data = StringIO(s)
     df = pd.read_csv(data)
