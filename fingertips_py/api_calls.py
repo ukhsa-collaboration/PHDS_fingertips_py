@@ -15,7 +15,7 @@ def make_request(url, attr=None, proxies=None):
     """
     :param url: A url to make a request
     :param attr: The attribute that needs to be returned
-    :param proxies: proxies info to access the data
+    :param proxies: proxy info to access the data
     :return: a dict of the attribute and associated data
     """
     try:
@@ -33,7 +33,7 @@ def make_request(url, attr=None, proxies=None):
 def get_json(url, proxies=None):
     """
     :param url: A url to make a request
-    :param proxies: proxies info to access the data
+    :param proxies: proxy info to access the data
     :return: A parsed JSON object
     """
     try:
@@ -48,7 +48,7 @@ def get_json_return_df(url, transpose=True, proxies=None):
     """
     :param url: A url to make a request
     :param transpose: [OPTIONAL] transposes dataframe. Default True.
-    :param proxies: proxies info to access the data
+    :param proxies: proxy info to access the data
     :return: Dataframe generated from JSON response.
     """
     try:
@@ -67,7 +67,7 @@ def get_json_return_df(url, transpose=True, proxies=None):
 def get_data_in_tuple(url, proxies=None):
     """
     :param url: A url to make a request
-    :param proxies: proxies info to access the data
+    :param proxies: proxy info to access the data
     :return: A tuple of returned data
     """
     try:
@@ -85,7 +85,7 @@ def get_data_in_tuple(url, proxies=None):
 def deal_with_url_error(url, proxies=None):
     """
     :param url: A url that returns a URL Error based on SSL errors
-    :param proxies: proxies info to access the data
+    :param proxies: proxy info to access the data
     :return: A dataframe from the URL with varify set to false.
     """
     req = requests.get(url, verify=False, proxies=proxies)
