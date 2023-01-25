@@ -386,8 +386,8 @@ def get_profile_by_name(profile_name, proxy=None):
 
 def get_profile_by_key(profile_key, proxy=None):
     """
-    Returns a profile object given a key (as the stub following 'profile' in the
-    website URL). For example, give, a URL of the form 
+    Returns a profile object given a key (as the stub following 'profile' in
+    the website URL). For example, give, a URL of the form
     `https://fingertips.phe.org.uk/profile/general-practice/data#page/3/gid/2000...`,
     the key is 'general-practice'.
 
@@ -419,8 +419,6 @@ def get_metadata_for_indicator_as_dataframe(indicator_ids, is_test=False,
 
     if isinstance(indicator_ids, list):
         indicator_ids = ','.join(list(map(str, indicator_ids)))
-    else:
-        indicator_ids = str(indicator_ids)
 
     tmp_url = base_url + f"indicator_metadata/csv/by_indicator_id?" \
                          f"indicator_ids={indicator_ids}"
