@@ -8,6 +8,7 @@ import requests
 import json
 import pandas as pd
 from io import StringIO
+import urllib
 
 
 def make_request(url, attr=None, proxy=None):
@@ -92,6 +93,10 @@ def get_csv(url, proxy=None):
 
     except requests.exceptions.SSLError:
         req = requests.get(url, verify=False, proxies=proxy).text
+
+    except urllib.error.HTTPError:
+        raise Exception(
+            'There has been a server error with Fingertips for this request.')
 
     return pd.read_csv(StringIO(req))
 
