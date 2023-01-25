@@ -11,17 +11,17 @@ import pandas as pd
 from io import StringIO
 
 
-def make_request(url, attr=None, proxies=None):
+def make_request(url, attr=None, proxy=None):
     """
     :param url: A url to make a request
     :param attr: The attribute that needs to be returned
-    :param proxies: proxy info to access the data
+    :param proxy: proxy info to access the data
     :return: a dict of the attribute and associated data
     """
     try:
-        req = requests.get(url, proxies=proxies)
+        req = requests.get(url, proxies=proxy)
     except requests.exceptions.SSLError:
-        req = requests.get(url, verify=False, proxies=proxies)
+        req = requests.get(url, verify=False, proxies=proxy)
     json_response = json.loads(req.content.decode('utf-8'))
     data = {}
     for item in json_response:
