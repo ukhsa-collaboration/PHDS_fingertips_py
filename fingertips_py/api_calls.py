@@ -56,7 +56,7 @@ def get_json_return_df(url, transpose=True, proxy=None):
     except requests.exceptions.SSLError:
         req = requests.get(url, verify=False, proxies=proxy)
     try:
-        df = pd.read_json(req.content, encoding='utf-8')
+        df = pd.DataFrame.from_dict(req.json())
     except ValueError:
         df = pd.DataFrame.from_dict([req.json()])
     if transpose:
