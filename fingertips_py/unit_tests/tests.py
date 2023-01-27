@@ -61,8 +61,17 @@ def test_get_all_areas():
 
 def test_get_all_data_for_indicators():
     data = get_all_data_for_indicators([92949, 247], area_type_id=102, is_test=True)
+
+    # Check that what the functon returns a pd dataframe
     assert isinstance(data[0], pd.DataFrame) is True
-    assert data[0].shape[1] == 26
+
+    # Check one of the columns is named "Indicator ID"
+    assert "Indicator ID" in data[0].columns
+
+    # Check that only 92949 and 247 are in the "Indicator ID" column
+    assert all(data[0]["Indicator ID"].isin([92949, 247]))
+
+    # Check the correct URL is being used
     assert data[1] == 'http://fingertips.phe.org.uk/api/all_data/csv/by_indicator_id?indicator_ids=92949,247&child_area_type_id=102&parent_area_type_id=15'
 
 
