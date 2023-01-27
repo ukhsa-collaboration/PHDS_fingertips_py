@@ -44,9 +44,18 @@ def test_get_all_data_for_profile():
 
 def test_get_all_areas():
     data = get_all_areas(is_test=True)
+
+    # Check the function output is a tuple
+    assert isinstance(data, tuple) is True
+
+    # Check the standard output for the function is a dict
     assert isinstance(data[0], dict) is True
-    assert isinstance(data[0][1], dict) is True
-    assert isinstance(data[0][1]['Name'], str) is True
+
+    # See if the England area type is there
+    assert 15 in data[0]
+    assert data[0][15]["Name"] == "England"
+
+    # Check the correct URL is being used
     assert data[1] == 'http://fingertips.phe.org.uk/api/area_types'
 
 
