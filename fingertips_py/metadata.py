@@ -210,14 +210,14 @@ def get_metadata_for_all_indicators_from_csv(is_test=False, proxy=None):
     except URLError:
         metadata = deal_with_url_error(
             base_url + 'indicator_metadata/csv/all', proxy)
-        
+
     if is_test:
         return metadata, base_url + 'indicator_metadata/csv/all'
     return metadata
 
 
-def get_metadata_for_all_indicators(include_definition='no', 
-                                    include_system_content='no', 
+def get_metadata_for_all_indicators(include_definition=False,
+                                    include_system_content=False,
                                     is_test=False, proxy=None):
     """
     Returns the metadata for all indicators in a dataframe.
@@ -229,12 +229,55 @@ def get_metadata_for_all_indicators(include_definition='no',
     :param proxy: proxy given to the get request used to access the API
     :return: dataframe of all indicators
     """
-    url = 'indicator_metadata/all?include_definition={}&include_system_content={}'
-    url_suffix = url.format(include_definition, include_system_content)
-    metadata_df = get_json_return_df(base_url + url_suffix, proxy)
+    url_suffix = "indicator_metadata/all?include_definition="
+
+    if include_definition:
+        url_suffix += "yes"
+    else:
+        url_suffix += "no"
+
+    if include_system_content:
+        url_suffix += "&include_system_content=yes"
+    else:
+        url_suffix += "&include_system_content=no"
+
+    df = get_json_return_df(base_url + url_suffix, proxy)
+
+    # Transpose to get the Indicator ID as a column
+    df = df.transpose()
+    df.reset_index(inplace=True)
+    df.rename(columns={'index': 'Indicator ID'}, inplace=True)
+
+    # Detect columns that contain any dictionaries
+    dict_cols = []
+
+    for col_name in df.columns:
+        if any(df[col_name].apply(lambda x: isinstance(x, dict))):
+            dict_cols.append(col_name)
+
+    # Expand the dictionary columns of the metadata df
+    expanded_dfs = []
+
+    for col_name in dict_cols:
+
+        # Extract the Dict column
+        tmp_df = pd.json_normalize(df[col_name])
+
+        # Change the new column names to be unique
+        tmp_df = tmp_df.add_prefix(col_name + "_")
+
+        expanded_dfs.append(tmp_df)
+
+    # Remove the dictionary columns
+    df.drop(dict_cols, axis=1, inplace=True)
+
+    # Combine all the columns together
+    df0 = pd.concat(expanded_dfs, axis=1)
+    df = pd.concat([df, df0], axis=1)
+
     if is_test:
-        return metadata_df, base_url + url_suffix
-    return metadata_df
+        return df, base_url + url_suffix
+    return df
 
 
 def get_multiplier_and_calculation_for_indicator(indicator_number, proxy=None):
