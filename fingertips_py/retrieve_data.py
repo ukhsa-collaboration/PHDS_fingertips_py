@@ -6,6 +6,7 @@ domain (group), or geography.
 """
 
 import pandas as pd
+import numpy as np
 from urllib.error import URLError, HTTPError
 from .api_calls import base_url, get_json_return_df, deal_with_url_error
 from .metadata import get_area_type_ids_for_profile, get_csv, \
@@ -164,20 +165,27 @@ def get_all_areas_for_all_indicators(proxy=None):
     """
     url_suffix = 'available_data'
 
-    df = get_json_return_df(base_url + url_suffix, transpose=False,
-                            proxy=proxy)
+    df_avail = get_json_return_df(base_url + url_suffix, transpose=False,
+                                  proxy=proxy)
 
-    indicator_metadata = get_metadata_for_all_indicators(proxy=proxy)
+    df_meta = get_metadata_for_all_indicators(proxy=proxy)
 
-    df = pd.merge(df, indicator_metadata[['Descriptive']],
-                  left_on='IndicatorId', right_index=True)
+    # Get the descriptive columns
+    df_meta = df_meta.loc[:,
+              df_meta.columns.str.contains('Descriptive_|Indicator ID')]
+    df_meta['Indicator ID'] = df_meta['Indicator ID'].astype(np.int64)
 
-    df['IndicatorName'] = df.apply(lambda x: x['Descriptive']['Name'], axis=1)
+    df = pd.merge(df_avail, df_meta,
+                  left_on='IndicatorId',
+                  right_on='Indicator ID')
 
     areas = get_all_areas(proxy=proxy)
 
     df['GeographicalArea'] = df.apply(lambda x: areas[x['AreaTypeId']]['Name'],
                                       axis=1)
+
+    df.rename(columns={'Descriptive_Name': 'IndicatorName'},
+              inplace=True)
     df = df[['IndicatorId', 'IndicatorName', 'GeographicalArea', 'AreaTypeId']]
 
     return df
