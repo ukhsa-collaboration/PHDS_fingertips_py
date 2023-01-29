@@ -98,9 +98,17 @@ def test_get_all_areas_for_all_indicators():
 
 
 def test_get_data_for_indicator_at_all_available_geographies():
+
     data = get_data_for_indicator_at_all_available_geographies(247)
+
+    # Check that a pandas dataframe is returned by the function
     assert isinstance(data, pd.DataFrame) is True
-    assert data.shape[1] == 26
+
+    # Check one of the columns is named "Indicator ID"
+    assert "Indicator ID" in data[0].columns
+
+    # Check that only `247` is in the "Indicator ID" column
+    assert all(data[0]["Indicator ID"].isin([247]))
 
 
 def test_get_metadata_for_profile_as_dataframe():
