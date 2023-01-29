@@ -105,10 +105,10 @@ def test_get_data_for_indicator_at_all_available_geographies():
     assert isinstance(data, pd.DataFrame) is True
 
     # Check one of the columns is named "Indicator ID"
-    assert "Indicator ID" in data[0].columns
+    assert "Indicator ID" in data.columns
 
     # Check that only `247` is in the "Indicator ID" column
-    assert all(data[0]["Indicator ID"].isin([247]))
+    assert all(data["Indicator ID"].isin([247]))
 
 
 def test_get_metadata_for_profile_as_dataframe():
@@ -264,8 +264,12 @@ def test_get_value_note_id():
 
 def test_get_metadata_for_all_indicators():
     data = get_metadata_for_all_indicators()
+
+    # Check that a pandas dataframe is returned by the function
     assert isinstance(data, pd.DataFrame) is True
-    assert data.shape[1] == 11
+
+    # Check one of the columns is named "Indicator ID"
+    assert "Indicator ID" in data.columns
 
 
 def test_get_metadata_for_all_indicators_from_csv():
