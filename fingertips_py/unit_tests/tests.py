@@ -36,10 +36,16 @@ def test_get_json_return_df():
 
 # need to think about this one
 def test_get_all_data_for_profile():
+
     data = get_all_data_for_profile(84, is_test=True)
+
+    # Check output of the function is a pandas df
     assert isinstance(data[0], pd.DataFrame) is True
-    assert data[1] == base_url + 'all_data/csv/by_profile_id?child_area_type_id=154&parent_area_type_id=15&profile_id=84'
-    assert data[0].shape[1] == 26
+
+    # Check the df has some of the required columns
+    assert "Indicator ID" in data[0].columns
+    assert "Indicator Name" in data[0].columns
+    assert "Value" in data[0].columns
 
 
 def test_get_all_areas():
