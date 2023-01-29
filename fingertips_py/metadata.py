@@ -571,15 +571,15 @@ def get_metadata(indicator_ids=None, domain_ids=None, profile_ids=None,
     list_of_df = []
 
     if indicator_ids:
-        list_of_df.append(get_metadata_for_profile_as_dataframe(
-            profile_ids, proxy))
+        list_of_df.append(get_metadata_for_indicator_as_dataframe(
+            indicator_ids, proxy))
 
     if domain_ids:
         list_of_df.append(get_metadata_for_domain_as_dataframe(
             domain_ids, proxy))
 
     if profile_ids:
-        list_of_df.append(get_metadata_for_indicator_as_dataframe(
-            indicator_ids, proxy))
+        list_of_df.append(get_metadata_for_profile_as_dataframe(
+            profile_ids, proxy))
 
     return pd.concat(list_of_df)
