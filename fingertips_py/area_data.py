@@ -1,11 +1,11 @@
 """
 area_data.py
 ==================================
-Functions to retrieve data that are specific to areas and relevant to all indicators. For example: Deprivation decile.
+Functions to retrieve data that are specific to areas and relevant to all
+indicators. For example: Deprivation decile.
 """
 
 import pandas as pd
-import warnings
 from .retrieve_data import get_data_by_indicator_ids, \
     get_all_areas_for_all_indicators
 from .api_calls import get_json
