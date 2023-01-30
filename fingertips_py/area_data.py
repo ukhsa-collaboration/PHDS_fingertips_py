@@ -12,56 +12,6 @@ from .api_calls import get_json
 from .metadata import get_metadata
 
 
-def defined_qcut(df, value_series, number_of_bins, bins_for_extras,
-                 labels=False):
-    """
-    Allows users to define how values are split into bins when clustering.
-
-    :param df: Dataframe of values
-    :param value_series: Name of value column to rank upon
-    :param number_of_bins: Integer of number of bins to create
-    :param bins_for_extras: Ordered list of bin numbers to assign uneven splits
-    :param labels: Optional. Labels for bins if required
-    :return: A dataframe with a new column 'bins' which contains the cluster numbers
-    """
-    if max(bins_for_extras) > number_of_bins or any(
-            x < 0 for x in bins_for_extras):
-        raise ValueError('Attempted to allocate to a bin that doesnt exist')
-    base_number, number_of_values_to_allocate = divmod(
-        df[value_series].count(), number_of_bins)
-    bins_for_extras = bins_for_extras[:number_of_values_to_allocate]
-    if number_of_values_to_allocate == 0:
-        df['bins'] = pd.qcut(df[value_series], number_of_bins, labels=labels)
-        return df
-    elif number_of_values_to_allocate > len(bins_for_extras):
-        raise ValueError(
-            'There are more values to allocate than the list provided, please select more bins')
-    bins = {}
-    for i in range(number_of_bins):
-        number_of_values_in_bin = base_number
-        if i in bins_for_extras:
-            number_of_values_in_bin += 1
-        bins[i] = number_of_values_in_bin
-    df['rank'] = df[value_series].rank()
-    df = df.sort_values(by=['rank'])
-    df['bins'] = 0
-    row_to_start_allocate = 0
-    row_to_end_allocate = 0
-    for bin_number, number_in_bin in bins.items():
-        row_to_end_allocate += number_in_bin
-        bins.update({bin_number: [number_in_bin, row_to_start_allocate,
-                                  row_to_end_allocate]})
-        row_to_start_allocate = row_to_end_allocate
-    conditions = [df['rank'].iloc[v[1]: v[2]] for k, v in bins.items()]
-    series_to_add = pd.Series()
-    for idx, series in enumerate(conditions):
-        series[series > -1] = idx
-        series_to_add = series_to_add.append(series)
-    df['bins'] = series_to_add
-    df['bins'] = df['bins'] + 1
-    df = df.reset_index()
-    return df
-
 def deprivation_decile(area_type_id, year=None, area_code=None, proxy=None):
     """
     Takes in an area type id and returns a pandas series of deprivation deciles
