@@ -6,7 +6,10 @@ Functions to retrieve data that are specific to areas and relevant to all indica
 
 import pandas as pd
 import warnings
-from .retrieve_data import get_data_by_indicator_ids
+from .retrieve_data import get_data_by_indicator_ids, \
+    get_all_areas_for_all_indicators
+from .api_calls import get_json
+from .metadata import get_metadata
 
 
 def defined_qcut(df, value_series, number_of_bins, bins_for_extras,
@@ -73,7 +76,7 @@ extra_areas = {
 }
 
 
-def deprivation_decile(area_type_id, year='2015', area_code=None, proxy=None):
+def deprivation_decile(area_type_id, year=None, area_code=None, proxy=None):
     """
     Takes in an area type id and returns a pandas series of deprivation deciles
     for those areas (with the areas as an index. If a specific area is
@@ -87,48 +90,77 @@ def deprivation_decile(area_type_id, year='2015', area_code=None, proxy=None):
     :return: A pandas series of deprivation scores with area codes as the
     index. Or single value if area is specified.
     """
-    warnings.warn('Caution, the deprivation deciles are being calculated on '
-                  'the fly and might show some inconsistencies from the live '
-                  'Fingertips site.')
 
-    acceptable_deprivation_years_la = ['2010', '2015']
-    acceptable_deprivation_years_gp = ['2015']
-    acceptable_area_types = [3, 101, 102, 7, 153]
-    order_of_extra_values = []
-    if not isinstance(year, str):
-        year = str(year)
-    if year not in acceptable_deprivation_years_la and area_type_id is not 7:
-        raise ValueError('The acceptable years are 2010 and 2015 for local '
-                         'authorities and CCGs, please select one of these')
-    elif year not in acceptable_deprivation_years_gp:
-        raise ValueError('The acceptable years are 2015, please select this')
-    if area_type_id not in acceptable_area_types:
-        raise ValueError('Currently, we support deprivation decile for'
-                         ' District & UA, County & UA, MSOA and GP area types')
-    if area_type_id == 3:
-        indicator_id = 93275
-        area_dep_dec = get_data_by_indicator_ids(indicator_id, area_type_id,
-                                                 parent_area_type_id=101,
-                                                 profile_id=143,
-                                                 include_sortable_time_periods=True,
-                                                 proxy=proxy)
+    # find all the indicator IDs that are deprivation indexes
+    search_url = "https://fingertips.phe.org.uk/api/indicator_search" \
+                 "?search_text=index%20AND%20deprivation%20" \
+                 "AND%20score%20AND%20IMD"
+
+    ind_area_dict = get_json(search_url, proxy=proxy)
+    valid_ind = list(set([y for x in ind_area_dict.values() for y in x]))
+
+    # Find the valid area types for the indicator IDs
+    df = get_all_areas_for_all_indicators(proxy=proxy)
+    df = df.loc[df["IndicatorId"].isin(valid_ind)]
+
+    # Add in the year column
+    meta_df = get_metadata(indicator_ids=valid_ind, proxy=proxy)
+    meta_df["year"] = meta_df["Definition"].str.extract(r"(20[0-9]{2})")
+    meta_df = meta_df[["year", "Indicator ID"]]
+
+    df = pd.merge(df, meta_df,
+                  how='left',
+                  left_on="IndicatorId",
+                  right_on="Indicator ID").sort_values("year", ascending=False)
+
+    # Check the users choices
+    if int(area_type_id) not in df["AreaTypeId"].values:
+        raise ValueError(f"Invalid Area Type: {area_type_id} is not a "
+                         f"supported area type. The supported types are"
+                         f": {', '.join(set(df['AreaTypeId'].values))}.")
+
+    elif year is not None and str(year) not in df["year"].values:
+        raise ValueError(f"Invalid Year: {year} is not a "
+                         f"supported year. The supported years are"
+                         f": {', '.join(set(df['year'].values))}.")
+
+    # Filter down to the right indicator ID
+    if year is not None:
+        df0 = df[(df["year"] == str(year))
+                 & (df["AreaTypeId"] == int(area_type_id))]
     else:
-        indicator_id = 91872
-        area_dep_dec = get_data_by_indicator_ids(indicator_id, area_type_id,
-                                                 proxy=proxy)
-    if area_type_id == 102:
-        order_of_extra_values = [0, 9, 1, 2, 3, 4, 5, 6, 7, 8]
+        df0 = df[df["AreaTypeId"] == int(area_type_id)]
 
+    # Check the year, area type is a valid a combination
+    if df0.empty:
+        err_str = f"Invalid Combination: {year} and {area_type_id} are not " \
+                  f"a valid combination. The following are: \n\n"
+
+        err_str += df.to_string(columns=['GeographicalArea',
+                                         'AreaTypeId',
+                                         'year'], index=False)
+        raise ValueError(err_str)
+
+    # Extract the indicator data from the API
+    area_dep_dec = get_data_by_indicator_ids(df0["Indicator ID"].values[0],
+                                             area_type_id, proxy=proxy)
+
+    # Remove England from the data
     area_dep_dec = area_dep_dec[area_dep_dec['Area Code'] != 'E92000001']
-    if not order_of_extra_values:
-        order_of_extra_values = extra_areas[area_dep_dec['Value'].count() % 10]
-    area_dep_dec = defined_qcut(area_dep_dec, 'Value', 10,
-                                order_of_extra_values)
-    area_dep_dec.set_index('Area Code', inplace=True)
-    if area_code:
-        try:
-            return area_dep_dec.loc[area_code, 'decile']
-        except KeyError:
-            raise KeyError('This area is not available at in this area type. '
-                           'Please try another area type')
-    return area_dep_dec['bins']
+
+    # Create the decile column
+    area_dep_dec["decile"] = pd.qcut(area_dep_dec["Value"], q=10,
+                                     labels=[str(x) for x in range(1, 11)])
+
+    if area_code is None:
+        return area_dep_dec
+
+    elif area_code in area_dep_dec["Area Code"].values:
+        return area_dep_dec[area_dep_dec["Area Code"] == area_code, \
+            'decile'].values[0]
+
+    else:
+        raise LookupError(f"Area Code {area_code} not in the data. Possible "
+                          f"areas are: "
+                          f"{', '.join(area_dep_dec['Area Code'].values)}.")
+
