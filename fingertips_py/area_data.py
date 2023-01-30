@@ -62,20 +62,6 @@ def defined_qcut(df, value_series, number_of_bins, bins_for_extras,
     df = df.reset_index()
     return df
 
-
-extra_areas = {
-    1: [0],
-    2: [0, 5],
-    3: [0, 3, 7],
-    4: [0, 2, 6, 8],
-    5: [0, 2, 4, 6, 8],
-    6: [0, 1, 3, 5, 6, 8],
-    7: [0, 1, 2, 4, 5, 7, 8],
-    8: [0, 1, 2, 3, 5, 6, 7, 8],
-    9: [0, 1, 2, 3, 4, 5, 6, 7, 8]
-}
-
-
 def deprivation_decile(area_type_id, year=None, area_code=None, proxy=None):
     """
     Takes in an area type id and returns a pandas series of deprivation deciles
