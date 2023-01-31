@@ -62,8 +62,7 @@ def get_age_from_id(age_id, is_test=False, proxy=None):
     Returns an age name from given id.
 
     :param age_id: Age id used in Fingertips as an integer
-    :param is_test: Used for testing. Returns a tuple of expected return and 
-    the URL called to retrieve the data
+    :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
     :param proxy: proxy given to the get request used to access the API
     :return: Age or age range as a string
     """
@@ -77,8 +76,7 @@ def get_all_sexes(is_test=False, proxy=None):
     """
     Returns a tuple of all sex categories and their IDs.
 
-    :param is_test: Used for testing. Returns a tuple of expected return and 
-    the URL called to retrieve the data
+    :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
     :param proxy: proxy given to the get request used to access the API
     :return: Sex categories used in Fingertips with associated codes as a tuple
     """
@@ -93,8 +91,7 @@ def get_sex_id(sex, is_test=False, proxy=None):
     Returns an ID for a given sex.
 
     :param sex: Sex category as string (Case sensitive)
-    :param is_test: Used for testing. Returns a tuple of expected return and 
-    the URL called to retrieve the data
+    :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
     :param proxy: proxy given to the get request used to access the API
     :return: ID used in Fingertips to represent the sex as integer
     """
@@ -109,8 +106,7 @@ def get_sex_from_id(sex_id, is_test=False, proxy=None):
     Returns a sex name given an id.
 
     :param sex_id: ID used in Fingertips to represent the sex as integer
-    :param is_test: Used for testing. Returns a tuple of expected return and 
-    the URL called to retrieve the data
+    :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
     :param proxy: proxy given to the get request used to access the API
     :return: Sex category as string
     """
@@ -124,8 +120,7 @@ def get_all_value_notes(is_test=False, proxy=None):
     """
     Returns a dictionary of all value notes and their IDs.
 
-    :param is_test: Used for testing. Returns a tuple of expected return and 
-    the URL called to retrieve the data
+    :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
     :param proxy: proxy given to the get request used to access the API
     :return: Data value notes and their associated codes that are used in 
     Fingertips as a list of tuples
@@ -141,8 +136,7 @@ def get_value_note_id(value_note, is_test=False, proxy=None):
     Returns a value note ID for a given value note.
 
     :param value_note: Value note as string
-    :param is_test: Used for testing. Returns a tuple of expected return and 
-    the URL called to retrieve the data
+    :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
     :param proxy: proxy given to the get request used to access the API
     :return: ID used in Fingertips to represent the value note as integer
     """
@@ -157,13 +151,10 @@ def get_areas_for_area_type(area_type_id, is_test=False, proxy=None):
     Returns a dictionary of areas that match an area type id given the id as 
     integer or string.
 
-    :param area_type_id: ID of area type (ID of General Practice is 7 etc) used
-     in Fingertips as integer or string
-    :param is_test: Used for testing. Returns a tuple of expected return and 
-    the URL called to retrieve the data
+    :param area_type_id: ID of area type (ID of General Practice is 7 etc) used in Fingertips as integer or string
+    :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
     :param proxy: proxy given to the get request used to access the API
-    :return: A dictionary of dictionaries with area codes and the names of 
-    those areas
+    :return: A dictionary of dictionaries with area codes and the names of those areas
     """
     areas = make_request(
         base_url + 'areas/by_area_type?area_type_id=' + str(area_type_id),
@@ -178,11 +169,9 @@ def get_metadata_for_indicator(indicator_number, is_test=False, proxy=None):
     Returns the metadata for an indicator given the indicator number as integer
      or string.
 
-    :param indicator_number: Number used to identify an indicator within 
-    Fingertips as integer or string
+    :param indicator_number: Number used to identify an indicator within Fingertips as integer or string
     :param proxy: proxy given to the get request used to access the API
-    :param is_test: Used for testing. Returns a tuple of expected return and 
-    the URL called to retrieve the data
+    :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
     :return: A dictionary of metadata for the given indicator
     """
     metadata = get_json(base_url +
@@ -199,8 +188,7 @@ def get_metadata_for_all_indicators_from_csv(is_test=False, proxy=None):
     """
     Returns a dataframe from the csv of all metadata for all indicators.
 
-    :param is_test: Used for testing. Returns a tuple of expected return and 
-    the URL called to retrieve the data
+    :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
     :param proxy: proxy given to the get request used to access the API
     :return: A dataframe of all metadata for all indicators
     """
@@ -224,8 +212,7 @@ def get_metadata_for_all_indicators(include_definition=False,
 
     :param include_definition: optional to include definitions
     :param include_system_content: optional to include system content
-    :param is_test: Used for testing. Returns a tuple of expected return and 
-    the URL called to retrieve the data
+    :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
     :param proxy: proxy given to the get request used to access the API
     :return: dataframe of all indicators
     """
@@ -284,13 +271,10 @@ def get_multiplier_and_calculation_for_indicator(indicator_number, proxy=None):
     """
     Returns the multiplier and calculation method for a given indicator.
 
-    :param indicator_number: Number used to identify an indicator within 
-    Fingertips as integer or string
-    :param is_test: Used for testing. Returns a tuple of expected return and 
-    the URL called to retrieve the data
+    :param indicator_number: Number used to identify an indicator within Fingertips as integer or string
+    :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
     :param proxy: proxy info to access the data
-    :return: A tuple of multiplier and calculation method from Fingertips 
-    metadata
+    :return: A tuple of multiplier and calculation method from Fingertips metadata
     """
     metadata = get_metadata_for_indicator(indicator_number, proxy=proxy)
     multiplier = metadata[str(indicator_number)]['Unit']['Value']
@@ -308,8 +292,7 @@ def get_area_types_as_dict(is_test=False, proxy=None):
     """
     Returns all area types and related information such as ID and name.
 
-    :param is_test: Used for testing. Returns a tuple of expected return and 
-    the URL called to retrieve the data
+    :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
     :param proxy: proxy info to access the data
     :return: A dictionary of area types
     """
@@ -324,11 +307,9 @@ def get_profile_by_id(profile_id, is_test=False, proxy=None):
     Returns a profile as an dictionary which contains information about domains
     and sequencing.
 
-    :param profile_id: ID used in Fingertips to identify a profile as integer 
-    or string
+    :param profile_id: ID used in Fingertips to identify a profile as integer or string
     :param proxy: proxy info to access the data
-    :param is_test: Used for testing. Returns a tuple of expected return and 
-    the URL called to retrieve the data
+    :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
     :return: A dictionary of information about the profile
     """
 
@@ -344,11 +325,9 @@ def get_all_profiles(is_test=False, proxy=None):
     """
     Returns all profiles.
 
-    :param is_test: Used for testing. Returns a tuple of expected return and 
-    the URL called to retrieve the data
+    :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
     :param proxy: proxy info to access the data
-    :return: A dictionary of all profiles in Fingertips including information 
-    on domains and sequencing
+    :return: A dictionary of all profiles in Fingertips including information on domains and sequencing
     """
     profiles = get_json(base_url + 'profiles', proxy)
     if is_test:
@@ -360,8 +339,7 @@ def get_domains_in_profile(profile_id, proxy=None):
     """
     Returns the domain IDs for a given profile.
 
-    :param profile_id: ID used in Fingertips to identify a profile as integer 
-    or string
+    :param profile_id: ID used in Fingertips to identify a profile as integer or string
     :param proxy: proxy given to the get request used to access the API
     :return: A list of domain IDs
     """
@@ -373,11 +351,9 @@ def get_area_types_for_profile(profile_id, is_test=False, proxy=None):
     """
     Retrieves all the area types that have data for a given profile.
 
-    :param profile_id: ID used in Fingertips to identify a profile as integer 
-    or string
+    :param profile_id: ID used in Fingertips to identify a profile as integer or string
     :param proxy: proxy given to the get request used to access the API
-    :param is_test: Used for testing. Returns a tuple of expected return and 
-    the URL called to retrieve the data
+    :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
     :return: A list of dictionaries of area types with relevant information
     """
 
@@ -393,8 +369,7 @@ def get_area_type_ids_for_profile(profile_id, proxy=None):
     """
     Returns a list of area types used within a given profile.
 
-    :param profile_id: ID used in Fingertips to identify a profile as integer 
-    or string
+    :param profile_id: ID used in Fingertips to identify a profile as integer or string
     :param proxy: proxy given to the get request used to access the API
     :return: A list of area types used within a given profile
     """
@@ -410,11 +385,9 @@ def get_profile_by_name(profile_name, proxy=None):
     Returns a profile object given a name to search - try to be specific to get
     better results.
 
-    :param profile_name: A string or part of a string that is used as the 
-    profile name
+    :param profile_name: A string or part of a string that is used as the profile name
     :param proxy: proxy given to the get request used to access the API
-    :return: A dictionary of the profile metadata including domain information 
-    or an error message
+    :return: A dictionary of the profile metadata including domain information or an error message
     """
     all_profiles = get_all_profiles(proxy=proxy)
     profile_obj = ''
@@ -436,8 +409,7 @@ def get_profile_by_key(profile_key, proxy=None):
 
     :param profile_key: The exact key for the profile.
     :param proxy: proxy info to access the data
-    :return: A dictionary of the profile metadata including domain information 
-    or an error message
+    :return: A dictionary of the profile metadata including domain information or an error message
     """
     all_profiles = get_all_profiles(proxy=proxy)
     for profile in all_profiles:
@@ -452,10 +424,8 @@ def get_metadata_for_indicator_as_dataframe(indicator_ids, is_test=False,
     Returns a dataframe of metadata for a given indicator ID or list of 
     indicator IDs.
 
-    :param indicator_ids: Number or list of numbers used to identify an 
-    indicator within Fingertips as integer or string
-    :param is_test: Used for testing. Returns a tuple of expected return and
-    the URL called to retrieve the data
+    :param indicator_ids: Number or list of numbers used to identify an indicator within Fingertips as integer or string
+    :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
     :param proxy: proxy given to the get request used to access the API
     :return: Dataframe object with metadate for the indicator ID
     """
@@ -482,13 +452,10 @@ def get_metadata_for_domain_as_dataframe(group_ids, is_test=False, proxy=None):
     Returns a dataframe of metadata for a given domain ID or list of domain 
     IDs.
 
-    :param group_ids: Number or list of numbers used to identify a domain 
-    within Fingertips as integer or string
-    :param is_test: Used for testing. Returns a tuple of expected return and
-    the URL called to retrieve the data
+    :param group_ids: Number or list of numbers used to identify a domain within Fingertips as integer or string
+    :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
     :param proxy: proxy given to the get request used to access the API
-    :return: Dataframe object with metadata for the indicators for a given 
-    domain ID
+    :return: Dataframe object with metadata for the indicators for a given domain ID
     """
     if not isinstance(group_ids, list):
         group_ids = [group_ids]
@@ -518,11 +485,9 @@ def get_metadata_for_profile_as_dataframe(profile_ids, proxy=None):
     Returns a dataframe of metadata for a given profile ID or list of profile 
     IDs.
 
-    :param profile_ids: ID or list of IDs used in Fingertips to identify a 
-    profile as integer or string
+    :param profile_ids: ID or list of IDs used in Fingertips to identify a profile as integer or string
     :param proxy: proxy given to the get request used to access the API
-    :return: Dataframe object with metadata for the indicators for a given 
-    group ID
+    :return: Dataframe object with metadata for the indicators for a given group ID
     """
     url_suffix = "indicator_metadata/csv/by_profile_id?profile_id={}"
 
@@ -552,15 +517,11 @@ def get_metadata(indicator_ids=None, domain_ids=None, profile_ids=None,
     and/or profile given the relevant IDs. At
     least one of these IDs has to be given otherwise an error is raised.
 
-    :param indicator_ids: [OPTIONAL] Number used to identify an indicator 
-    within Fingertips as integer or string
-    :param domain_ids: [OPTIONAL] Number used to identify a domain within 
-    Fingertips as integer or string
-    :param profile_ids: [OPTIONAL] ID used in Fingertips to identify a profile 
-    as integer or string
+    :param indicator_ids: [OPTIONAL] Number used to identify an indicator within Fingertips as integer or string
+    :param domain_ids: [OPTIONAL] Number used to identify a domain within Fingertips as integer or string
+    :param profile_ids: [OPTIONAL] ID used in Fingertips to identify a profile as integer or string
     :param proxy: proxy info to access the data
-    :return: A dataframe object with metadata for the given IDs or an error if 
-    nothing is specified
+    :return: A dataframe object with metadata for the given IDs or an error if nothing is specified
     """
 
     # Works as long as there is no id that equals zero

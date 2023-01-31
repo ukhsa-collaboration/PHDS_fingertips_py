@@ -23,15 +23,11 @@ def get_data_by_indicator_ids(indicator_ids, area_type_id,
     types.
 
     :param indicator_ids: List of indicator IDs as strings
-    :param area_type_id: ID of area type (eg. CCG, Upper Tier Local Authority)
-    used in Fingertips as integer or string
-    :param parent_area_type_id: Area type of parent area - defaults to England
-    value
+    :param area_type_id: ID of area type (eg. CCG, Upper Tier Local Authority) used in Fingertips as integer or string
+    :param parent_area_type_id: Area type of parent area - defaults to England value
     :param profile_id: ID of profile to select by as either int or string
-    :param include_sortable_time_periods: Boolean as to whether to include a
-    sort-friendly data field
-    :param is_test: Used for testing. Returns a tuple of expected return and
-    the URL called to retrieve the data
+    :param include_sortable_time_periods: Boolean as to whether to include a sort-friendly data field
+    :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
     :param proxy: proxy given to the get request used to access the API
     :return: A dataframe of data relating to the given indicators
     """
@@ -66,19 +62,13 @@ def get_all_data_for_profile(profile_id, parent_area_type_id=15,
     """
     Returns a dataframe of data for all indicators within a profile.
 
-    :param profile_id: ID used in Fingertips to identify a profile as integer
-    or string.
-    :param parent_area_type_id: Area type of parent area - defaults to England.
-    value
-    :param area_type_id: Option to only return data for a given area type. Area
-    type ids are string, int or a list.
-    :param filter_by_area_codes: Option to limit returned data to areas. Areas
-    as either string or list of strings.
-    :param is_test: Used for testing. Returns a tuple of expected return and
-    the URL called to retrieve the data
+    :param profile_id: ID used in Fingertips to identify a profile as integer or string.
+    :param parent_area_type_id: Area type of parent area - defaults to England value.
+    :param area_type_id: Option to only return data for a given area type. Area type ids are string, int or a list.
+    :param filter_by_area_codes: Option to limit returned data to areas. Areas as either string or list of strings.
+    :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
     :param proxy: proxy given to the get request used to access the API
-    :return: A dataframe of data for all indicators within a profile with any
-    filters applied.
+    :return: A dataframe of data for all indicators within a profile with any filters applied.
     """
     if area_type_id:
         area_types = [area_type_id]
@@ -121,14 +111,10 @@ def get_all_data_for_indicators(indicators, area_type_id,
     Returns a dataframe of data for given indicators at an area.
 
     :param indicators: List or integer or string of indicator Ids
-    :param area_type_id: ID of area type (eg. ID of General Practice is 7 etc)
-    used in Fingertips as integer or string
-    :param parent_area_type_id: Area type of parent area - defaults to England
-    value
-    :param filter_by_area_codes: Option to limit returned data to areas. Areas
-    as either string or list of strings
-    :param is_test: Used for testing. Returns a tuple of expected return and
-    the URL called to retrieve the data
+    :param area_type_id: ID of area type (eg. ID of General Practice is 7 etc) used in Fingertips as integer or string
+    :param parent_area_type_id: Area type of parent area - defaults to England value
+    :param filter_by_area_codes: Option to limit returned data to areas. Areas as either string or list of strings
+    :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
     :param proxy: proxy given to the get request used to access the API
     :return: Dataframe of data for given indicators at an area
     """
@@ -199,8 +185,7 @@ def get_data_for_indicator_at_all_available_geographies(indicator_id,
 
     :param indicator_id: Indicator id
     :param proxy: proxy given to the get request used to access the API
-    :return: Dataframe of data for indicator for all available areas for all
-    time periods
+    :return: Dataframe of data for indicator for all available areas for all time periods
     """
     all_area_for_all_indicators = get_all_areas_for_all_indicators(proxy)
     areas_for_indicator = all_area_for_all_indicators[

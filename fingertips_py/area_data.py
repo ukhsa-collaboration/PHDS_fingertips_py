@@ -20,8 +20,7 @@ def deprivation_decile(area_type_id, year=None, area_code=None, proxy=None):
 
     :param area_type_id: Area type id as denoted by the Fingertips API
     :param year: Year of deprivation score
-    :param area_code: Optional. Area code for area type to return a single
-    value for that area
+    :param area_code: Optional. Area code for area type to return a single value for that area
     :param proxy: proxy given to the get request used to access the API
     :return: A pandas series of deprivation scores with area codes as the
     index. Or single value if area is specified.

@@ -47,7 +47,7 @@ def get_json(url, proxy=None):
 def get_json_return_df(url, transpose=True, proxy=None):
     """
     :param url: A url to make a request
-    :param transpose: [OPTIONAL] transposes dataframe. Default True.
+    :param transpose: transposes dataframe.
     :param proxy: proxy given to the get request used to access the API
     :return: Dataframe generated from JSON response.
     """
