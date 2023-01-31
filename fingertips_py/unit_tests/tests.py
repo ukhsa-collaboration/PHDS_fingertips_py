@@ -286,4 +286,11 @@ def test_get_metadata_for_all_indicators_from_csv():
 
 def test_deprivation_decile():
     data = deprivation_decile(7)
-    assert len(data.unique()) == 10
+
+    # Check one of the columns is named "Indicator ID" and one is called
+    # "Area Type".
+    assert "Indicator ID" in data.columns
+    assert "Area Type" in data.columns
+
+    # Check that the only value in the "Indicator ID" column is "GPs"
+    assert all(data["Area Type"].isin(["GPs"]))
