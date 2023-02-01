@@ -190,9 +190,12 @@ def get_data_for_indicator_at_all_available_geographies(indicator_id,
     areas_for_indicator = all_area_for_all_indicators[
         all_area_for_all_indicators['IndicatorId'] == indicator_id]
     areas_to_get = areas_for_indicator['AreaTypeId'].unique()
-    df = pd.DataFrame()
+
+    ls_of_dfs = []
     for area in areas_to_get:
-        df_temp = get_data_by_indicator_ids(indicator_id, area, proxy=proxy)
-        df = df.append(df_temp)
-    df.drop_duplicates(inplace=True)
-    return df
+        tmp_df = get_data_by_indicator_ids(indicator_id, area, proxy=proxy)
+        ls_of_dfs.append(tmp_df)
+
+    ret_df = pd.concat(ls_of_dfs)
+
+    return ret_df.drop_duplicates()
