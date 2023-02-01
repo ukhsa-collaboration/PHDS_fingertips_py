@@ -180,8 +180,7 @@ def get_all_areas_for_all_indicators(proxy=None):
 def get_data_for_indicator_at_all_available_geographies(indicator_id,
                                                         proxy=None):
     """
-    Returns a dataframe of all data for an indicator for all available
-    geographies.
+    Returns a dataframe of all data for an indicator for all available geographies.
 
     :param indicator_id: Indicator id
     :param proxy: proxy given to the get request used to access the API
