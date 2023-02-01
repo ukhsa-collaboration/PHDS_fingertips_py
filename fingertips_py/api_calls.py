@@ -98,7 +98,7 @@ def get_csv(url, proxy=None):
         raise Exception(
             'There has been a server error with Fingertips for this request.')
 
-    return pd.read_csv(StringIO(req))
+    return pd.read_csv(StringIO(req), low_memory=False)
 
 
 def deal_with_url_error(url, proxy=None):
