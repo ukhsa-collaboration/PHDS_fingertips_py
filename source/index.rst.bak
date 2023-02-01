@@ -57,7 +57,7 @@ For more information on any function, you can use:
 >>> help(*fingertips_py function name*)
 
 
-Or you can view the documents `here <https://fingertips-py.readthedocs.io/en/latest/>`_.
+Or you can view the documents [here](https://fingertips-py.readthedocs.io/en/latest/).
 
 
 Example
@@ -100,7 +100,7 @@ can be retrieved using `get_data_for_indicator_at_all_available_geographies()`
 Licence
 *******
 
-This project is released under the `GPL-3 <https://opensource.org/licenses/GPL-3.0>`_
+This project is released under the `GPL-3 <https://opensource.org/licenses/GPL-3.0>`
 licence.
 
 .. automodule:: fingertips_py.metadata
