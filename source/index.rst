@@ -68,25 +68,24 @@ on *Healthy Life Expectancy at Birth* from the *Public Health Outcomes
 Framework* profile.
 
 .. code-block:: python
+
+   import fingertips_py as ftp
+
+   # Extract the metadata for a particular profile
+   phof = ftp.get_profile_by_name('public health outcomes framework')
+   phof_meta = ftp.get_metadata_for_profile_as_dataframe(phof['Id'])
+
+   # Extract metadata for indicators containing the string "Healthy"
+   indicator_meta = phof_meta[phof_meta['Indicator'].str.contains('Healthy')]
+
+   print(indicator_meta)
+
+.. code-block:: console
    :linenos:
 
-	import fingertips_py as ftp
-
-	# Extract the metadata for a particular profile 
-	phof = ftp.get_profile_by_name('public health outcomes framework')
-	phof_meta = ftp.get_metadata_for_profile_as_dataframe(phof['Id'])
-	
-	# Extract metadata for indicators containing the string "Healthy"
-	indicator_meta = phof_meta[phof_meta['Indicator'].str.contains('Healthy')]
-	
-	print(indicator_meta)
-
-.. code-block::
-   :linenos:
-   
-	Indicator ID	Indicator  						...
-	90362		0.1i - Healthy life expectancy at birth  		...
-	92543  		2.05ii - Proportion of children aged 2-2½yrs r		... 
+   Indicator ID	     Indicator  					...
+   90362	     0.1i - Healthy life expectancy at birth  		...
+   92543	     2.05ii - Proportion of children aged 2-2½yrs r	...
 
 
 We can see that the *Healthy life expectancy at birth* indicator has an

@@ -169,21 +169,21 @@ function.</p>
 <p>This is an example of a workflow for retrieving data for the indicator
 on <em>Healthy Life Expectancy at Birth</em> from the <em>Public Health Outcomes
 Framework</em> profile.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>     <span class="kn">import</span> <span class="nn">fingertips_py</span> <span class="k">as</span> <span class="nn">ftp</span>
-<span class="linenos"> 2</span>
-<span class="linenos"> 3</span>     <span class="c1"># Extract the metadata for a particular profile</span>
-<span class="linenos"> 4</span>     <span class="n">phof</span> <span class="o">=</span> <span class="n">ftp</span><span class="o">.</span><span class="n">get_profile_by_name</span><span class="p">(</span><span class="s1">&#39;public health outcomes framework&#39;</span><span class="p">)</span>
-<span class="linenos"> 5</span>     <span class="n">phof_meta</span> <span class="o">=</span> <span class="n">ftp</span><span class="o">.</span><span class="n">get_metadata_for_profile_as_dataframe</span><span class="p">(</span><span class="n">phof</span><span class="p">[</span><span class="s1">&#39;Id&#39;</span><span class="p">])</span>
-<span class="linenos"> 6</span>
-<span class="linenos"> 7</span>     <span class="c1"># Extract metadata for indicators containing the string &quot;Healthy&quot;</span>
-<span class="linenos"> 8</span>     <span class="n">indicator_meta</span> <span class="o">=</span> <span class="n">phof_meta</span><span class="p">[</span><span class="n">phof_meta</span><span class="p">[</span><span class="s1">&#39;Indicator&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;Healthy&#39;</span><span class="p">)]</span>
-<span class="linenos"> 9</span>
-<span class="linenos">10</span>     <span class="nb">print</span><span class="p">(</span><span class="n">indicator_meta</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">fingertips_py</span> <span class="k">as</span> <span class="nn">ftp</span>
+
+<span class="c1"># Extract the metadata for a particular profile</span>
+<span class="n">phof</span> <span class="o">=</span> <span class="n">ftp</span><span class="o">.</span><span class="n">get_profile_by_name</span><span class="p">(</span><span class="s1">&#39;public health outcomes framework&#39;</span><span class="p">)</span>
+<span class="n">phof_meta</span> <span class="o">=</span> <span class="n">ftp</span><span class="o">.</span><span class="n">get_metadata_for_profile_as_dataframe</span><span class="p">(</span><span class="n">phof</span><span class="p">[</span><span class="s1">&#39;Id&#39;</span><span class="p">])</span>
+
+<span class="c1"># Extract metadata for indicators containing the string &quot;Healthy&quot;</span>
+<span class="n">indicator_meta</span> <span class="o">=</span> <span class="n">phof_meta</span><span class="p">[</span><span class="n">phof_meta</span><span class="p">[</span><span class="s1">&#39;Indicator&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;Healthy&#39;</span><span class="p">)]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">indicator_meta</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>     Indicator ID    Indicator                                               ...
-<span class="linenos">2</span>     90362           0.1i - Healthy life expectancy at birth                 ...
-<span class="linenos">3</span>     92543           2.05ii - Proportion of children aged 2-2½yrs r          ...
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="go">Indicator ID      Indicator                                          ...</span>
+<span class="linenos">2</span><span class="go">90362             0.1i - Healthy life expectancy at birth            ...</span>
+<span class="linenos">3</span><span class="go">92543             2.05ii - Proportion of children aged 2-2½yrs r     ...</span>
 </pre></div>
 </div>
 <p>We can see that the <em>Healthy life expectancy at birth</em> indicator has an
