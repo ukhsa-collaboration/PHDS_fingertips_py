@@ -1,6 +1,6 @@
 import pandas as pd
 import pytest
-from ..api_calls import get_json, get_data_in_tuple, make_request, get_json_return_df, base_url
+from ..api_calls import get_json, get_data_in_tuple, make_request, get_json_return_df, base_url, get_csv
 from ..retrieve_data import get_all_data_for_profile, get_all_data_for_indicators, get_data_by_indicator_ids, \
     get_all_areas_for_all_indicators, get_data_for_indicator_at_all_available_geographies
 from ..metadata import get_metadata_for_profile_as_dataframe, get_metadata, get_metadata_for_indicator_as_dataframe, \
@@ -10,6 +10,16 @@ from ..metadata import get_metadata_for_profile_as_dataframe, get_metadata, get_
     get_multiplier_and_calculation_for_indicator, get_sex_from_id, get_sex_id, get_value_note_id, \
     get_metadata_for_all_indicators, get_metadata_for_all_indicators_from_csv, get_all_areas, get_profile_by_key
 from ..area_data import deprivation_decile
+
+def test_get_csv():
+    data = get_csv(base_url + "indicator_metadata/csv/all")
+
+    # Check that a pandas dataframe is returned by the function
+    assert isinstance(data, pd.DataFrame)
+
+    # Check the data has been parsed correctly
+    assert "Indicator ID" in data.columns
+    assert "Indicator" in data.columns
 
 
 def test_get_json():
