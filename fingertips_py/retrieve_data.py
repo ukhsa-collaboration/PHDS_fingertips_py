@@ -17,7 +17,7 @@ def get_data_by_indicator_ids(indicator_ids, area_type_id, parent_area_type_id=1
     Returns a dataframe of indicator data given a list of indicators and area types.
 
     :param indicator_ids: List of indicator IDs as strings
-    :param area_type_id: ID of area type (eg. CCG, Upper Tier Local Authority) used in Fingertips as integer or string
+    :param area_type_id: ID of area type (eg. CCG, Upper Tier Local Authority) used in Fingertips as integer/string
     :param parent_area_type_id: Area type of parent area - defaults to England value
     :param profile_id: ID of profile to select by as either int or string
     :param include_sortable_time_periods: Boolean as to whether to include a sort-friendly data field
