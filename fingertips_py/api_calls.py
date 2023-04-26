@@ -63,7 +63,6 @@ def get_json_return_df(url, transpose=True):
 
 def get_data_in_tuple(url):
     """
-
     :param url: A url to make a request
     :return: A tuple of returned data
     """
@@ -72,7 +71,9 @@ def get_data_in_tuple(url):
     except requests.exceptions.SSLError:
         req = requests.get(url, verify=False)
     json_resp = json.loads(req.content.decode('utf-8'))
-    tup = [tuple(d.values()) for d in json_resp]
+    #tup = [tuple(d.values()) for d in json_resp]
+    first_dict = json_resp.get(list(json_resp.keys())[0])
+    tup = [(k,v) for k, v in first_dict.items()]
     if isinstance(tup[0][0], str):
         return [(t[1], t[0]) for t in tup]
     else:
