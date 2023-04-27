@@ -185,8 +185,7 @@ def get_metadata_for_all_indicators(include_definition='no', include_system_cont
     :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
     :return: dataframe of all indicators
     """
-    url = 'indicator_metadata/all?include_definition={}&include_system_content={}'
-    url_suffix = url.format(include_definition, include_system_content)
+    url_suffix = f'indicator_metadata/all?include_definition={include_definition}&include_system_content={include_system_content}'
     metadata_df = get_json_return_df(base_url + url_suffix)
     if is_test:
         return metadata_df, base_url + url_suffix
