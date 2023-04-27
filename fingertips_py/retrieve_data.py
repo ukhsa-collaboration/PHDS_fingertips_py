@@ -127,6 +127,22 @@ def get_all_data_for_indicators(indicators, area_type_id, parent_area_type_id=15
     return df
 
 
+# def get_all_areas_for_all_indicators():
+#     """
+#     Returns a dataframe of all indicators and their geographical breakdowns.
+
+#     :return: Dataframe of all indicators and their geographical breakdowns
+#     """
+#     url_suffix = 'available_data'
+#     df = get_json_return_df(base_url + url_suffix, transpose=False)
+#     indicator_metadata = get_metadata_for_all_indicators('yes')
+#     df = pd.merge(df, indicator_metadata[['Descriptive']], left_on='IndicatorId', right_index=True)
+#     df['IndicatorName'] = df.apply(lambda x: x['Descriptive']['Name'], axis=1)
+#     areas = get_all_areas()
+#     df['GeographicalArea'] = df.apply(lambda x: areas[x['AreaTypeId']]['Name'], axis=1)
+#     df = df[['IndicatorId', 'IndicatorName', 'GeographicalArea', 'AreaTypeId']]
+#     return df
+
 def get_all_areas_for_all_indicators():
     """
     Returns a dataframe of all indicators and their geographical breakdowns.
@@ -134,15 +150,18 @@ def get_all_areas_for_all_indicators():
     :return: Dataframe of all indicators and their geographical breakdowns
     """
     url_suffix = 'available_data'
-    df = get_json_return_df(base_url + url_suffix, transpose=False)
-    indicator_metadata = get_metadata_for_all_indicators()
-    df = pd.merge(df, indicator_metadata[['Descriptive']], left_on='IndicatorId', right_index=True)
-    df['IndicatorName'] = df.apply(lambda x: x['Descriptive']['Name'], axis=1)
-    areas = get_all_areas()
-    df['GeographicalArea'] = df.apply(lambda x: areas[x['AreaTypeId']]['Name'], axis=1)
-    df = df[['IndicatorId', 'IndicatorName', 'GeographicalArea', 'AreaTypeId']]
-    return df
-
+    all_areas = get_json(base_url + url_suffix)
+    all_indicators = list(set([area.get('IndicatorId') for area in all_areas]))
+    all_indicators.sort()
+    area_dict = {}
+    for ind in all_indicators:
+        area_list = []
+        for item in all_areas:
+            if item.get('IndicatorId') == ind:
+                area_list.append(item.get('AreaTypeId'))
+        area_dict[ind] = area_list
+    return area_dict
+                
 
 def get_data_for_indicator_at_all_available_geographies(indicator_id):
     """
