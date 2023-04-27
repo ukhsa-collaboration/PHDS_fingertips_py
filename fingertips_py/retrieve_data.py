@@ -135,7 +135,7 @@ def get_all_data_for_indicators(indicators, area_type_id, parent_area_type_id=15
 #     """
 #     url_suffix = 'available_data'
 #     df = get_json_return_df(base_url + url_suffix, transpose=False)
-#     indicator_metadata = get_metadata_for_all_indicators('yes')
+#     indicator_metadata = get_metadata_for_all_indicators()
 #     df = pd.merge(df, indicator_metadata[['Descriptive']], left_on='IndicatorId', right_index=True)
 #     df['IndicatorName'] = df.apply(lambda x: x['Descriptive']['Name'], axis=1)
 #     areas = get_all_areas()
@@ -147,21 +147,38 @@ def get_all_areas_for_all_indicators():
     """
     Returns a dataframe of all indicators and their geographical breakdowns.
 
-    :return: Dataframe of all indicators and their geographical breakdowns
+    :return: Dictionary of all indicators and their geographical breakdowns
     """
     url_suffix = 'available_data'
-    all_areas = get_json(base_url + url_suffix)
-    all_indicators = list(set([area.get('IndicatorId') for area in all_areas]))
+    all_area_ids = get_json(base_url + url_suffix)
+    all_indicators = list(set([x.get('IndicatorId') for x in all_area_ids]))
     all_indicators.sort()
     area_dict = {}
     for ind in all_indicators:
         area_list = []
-        for item in all_areas:
+        for item in all_area_ids:
             if item.get('IndicatorId') == ind:
                 area_list.append(item.get('AreaTypeId'))
         area_dict[ind] = area_list
     return area_dict
                 
+
+# def get_data_for_indicator_at_all_available_geographies(indicator_id):
+#     """
+#     Returns a dataframe of all data for an indicator for all available geographies.
+
+#     :param indicator_id: Indicator id
+#     :return: Dataframe of data for indicator for all available areas for all time periods
+#     """
+#     all_area_for_all_indicators = get_all_areas_for_all_indicators()
+#     areas_for_indicator = all_area_for_all_indicators[all_area_for_all_indicators['IndicatorId'] == indicator_id]
+#     areas_to_get = areas_for_indicator['AreaTypeId'].unique()
+#     df = pd.DataFrame()
+#     for area in areas_to_get:
+#         df_temp = get_data_by_indicator_ids(indicator_id, area)
+#         df = df.append(df_temp)
+#     df.drop_duplicates(inplace=True)
+#     return df
 
 def get_data_for_indicator_at_all_available_geographies(indicator_id):
     """
@@ -171,8 +188,7 @@ def get_data_for_indicator_at_all_available_geographies(indicator_id):
     :return: Dataframe of data for indicator for all available areas for all time periods
     """
     all_area_for_all_indicators = get_all_areas_for_all_indicators()
-    areas_for_indicator = all_area_for_all_indicators[all_area_for_all_indicators['IndicatorId'] == indicator_id]
-    areas_to_get = areas_for_indicator['AreaTypeId'].unique()
+    areas_to_get = all_area_for_all_indicators.get(indicator_id)
     df = pd.DataFrame()
     for area in areas_to_get:
         df_temp = get_data_by_indicator_ids(indicator_id, area)

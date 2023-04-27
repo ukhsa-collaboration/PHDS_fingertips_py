@@ -176,20 +176,20 @@ def get_metadata_for_all_indicators_from_csv(is_test=False):
     return metadata
 
 
-# def get_metadata_for_all_indicators(include_definition='no', include_system_content='no', is_test=False):
-#     """
-#     Returns the metadata for all indicators in a dataframe.
+def get_metadata_for_all_indicators(include_definition='no', include_system_content='no', is_test=False):
+    """
+    Returns the metadata for all indicators in a dataframe.
 
-#     :param include_definition: optional to include definitions
-#     :param include_system_content: optional to include system content
-#     :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
-#     :return: dataframe of all indicators
-#     """
-#     url_suffix = f'indicator_metadata/all?include_definition={include_definition}&include_system_content={include_system_content}'
-#     metadata_df = get_json_return_df(base_url + url_suffix)
-#     if is_test:
-#         return metadata_df, base_url + url_suffix
-#     return metadata_df
+    :param include_definition: optional to include definitions
+    :param include_system_content: optional to include system content
+    :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
+    :return: dataframe of all indicators
+    """
+    url_suffix = f'indicator_metadata/all?include_definition={include_definition}&include_system_content={include_system_content}'
+    metadata_df = get_json_return_df(base_url + url_suffix)
+    if is_test:
+        return metadata_df, base_url + url_suffix
+    return metadata_df
 
 def get_metadata_for_all_indicators(include_definition='no', include_system_content='no', is_test=False):
     """
