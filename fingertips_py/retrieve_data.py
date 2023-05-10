@@ -65,7 +65,10 @@ def get_all_data_for_profile(profile_id, parent_area_type_id=15, area_type_id=No
     :return: A dataframe of data for all indicators within a profile with any filters applied
     """
     if area_type_id:
-        area_types = area_type_id
+        if type(area_type_id) == int:
+            area_types = [area_type_id]
+        else:
+            area_types = area_type_id
     else:
         area_types = get_area_type_ids_for_profile(profile_id)
     url_suffix = 'all_data/csv/by_profile_id?child_area_type_id={}&parent_area_type_id={}&profile_id={}'
