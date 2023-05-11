@@ -17,7 +17,7 @@ def get_all_ages(is_test=False):
     :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
     :return: Age codes used in Fingertips in a tuple
     """
-    ages = get_data_in_tuple(base_url + 'ages')
+    ages = get_json(base_url + 'ages')
     if is_test:
         return ages, base_url + 'ages'
     return ages
