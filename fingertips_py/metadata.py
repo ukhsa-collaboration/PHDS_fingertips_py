@@ -155,9 +155,10 @@ def get_metadata_for_indicator(indicator_number, is_test=False):
     :return: A dictionary of metadata for the given indicator
     """
     metadata = get_json(base_url + 'indicator_metadata/by_indicator_id?indicator_ids=' + str(indicator_number))
+    metadata_dict = metadata.get(str(indicator_number))
     if is_test:
         return metadata, base_url + 'indicator_metadata/by_indicator_id?indicator_ids=' + str(indicator_number)
-    return metadata
+    return metadata_dict
 
 
 def get_metadata_for_all_indicators_from_csv(is_test=False):
