@@ -7,17 +7,17 @@ metadata.
 
 import pandas as pd
 from urllib.error import HTTPError, URLError
-from .api_calls import get_data_in_tuple, base_url, make_request, get_json, get_json_return_df, deal_with_url_error
+from .api_calls import get_data_in_tuple, base_url, make_request, get_json, get_json_return_df, deal_with_url_error, get_data_in_dict
 
 
 def get_all_ages(is_test=False):
     """
-    Returns a dictionary of all the age categories and their IDs.
+    Returns a dictionary of all the age categories and their IDs as the dictionary key.
 
     :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
-    :return: Age codes used in Fingertips in a tuple
+    :return: Age codes used in Fingertips in a dictionary
     """
-    ages = get_json(base_url + 'ages')
+    ages = get_data_in_dict(base_url + 'ages')
     if is_test:
         return ages, base_url + 'ages'
     return ages
@@ -66,12 +66,12 @@ def get_age_from_id(age_id, is_test=False):
 
 def get_all_sexes(is_test=False):
     """
-    Returns a tuple of all sex categories and their IDs.
+    Returns a dictionary of all sex categories and their IDs as dictionary key.
 
     :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
-    :return: Sex categories used in Fingertips with associated codes as a tuple
+    :return: Sex categories used in Fingertips with associated codes as a dictionary
     """
-    sexes = get_data_in_tuple(base_url + 'sexes')
+    sexes = get_data_in_dict(base_url + 'sexes', value = 'Name')
     if is_test:
         return sexes, base_url + 'sexes'
     return sexes
@@ -107,12 +107,12 @@ def get_sex_from_id(sex_id, is_test=False):
 
 def get_all_value_notes(is_test=False):
     """
-    Returns a dictionary of all value notes and their IDs.
+    Returns a dictionary of all value notes and their IDs as dictionary key.
 
     :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
-    :return: Data value notes and their associated codes that are used in Fingertips as a list of tuples
+    :return: Data value notes and their associated codes that are used in Fingertips as a dictionary
     """
-    value_notes = get_data_in_tuple(base_url + 'value_notes')
+    value_notes = get_data_in_dict(base_url + 'value_notes', value = 'Text')
     if is_test:
         return value_notes, base_url + 'value_notes'
     return value_notes
@@ -192,21 +192,6 @@ def get_metadata_for_all_indicators(include_definition='no', include_system_cont
         return metadata_df, base_url + url_suffix
     return metadata_df
 
-def get_metadata_for_all_indicators(include_definition='no', include_system_content='no', is_test=False):
-    """
-    Returns the metadata for all indicators in a dataframe.
-
-    :param include_definition: optional to include definitions
-    :param include_system_content: optional to include system content
-    :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
-    :return: dictionary of all indicators
-    """
-    url_suffix = f'indicator_metadata/all?include_definition={include_definition}&include_system_content={include_system_content}'
-    metadata_dict = get_json(base_url + url_suffix)
-    if is_test:
-        return metadata_dict, base_url + url_suffix
-    return metadata_dict
-
 
 def get_multiplier_and_calculation_for_indicator(indicator_number):
     """
@@ -217,8 +202,8 @@ def get_multiplier_and_calculation_for_indicator(indicator_number):
     :return: A tuple of multiplier and calculation method from Fingetips metadata
     """
     metadata = get_metadata_for_indicator(indicator_number)
-    multiplier = metadata[str(indicator_number)]['Unit']['Value']
-    calc_metadata = metadata[str(indicator_number)]['ConfidenceIntervalMethod']['Name']
+    multiplier = metadata.get('Unit').get('Value')
+    calc_metadata = metadata.get('ConfidenceIntervalMethod').get('Name')
     if 'wilson' in calc_metadata.lower():
         calc = 'Wilson'
     elif 'byar' in calc_metadata.lower():

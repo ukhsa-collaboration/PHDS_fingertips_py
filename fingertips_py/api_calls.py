@@ -71,12 +71,29 @@ def get_data_in_tuple(url):
     except requests.exceptions.SSLError:
         req = requests.get(url, verify=False)
     json_resp = json.loads(req.content.decode('utf-8'))
-    tup = list(json_resp.items())
-    if isinstance(tup[0][0], str):
-        return [(t[1], t[0]) for t in tup]
+    tup_list = []
+    for item in json_resp:
+        tup_list.append([(k, v) for k, v in item.items()])
+    if isinstance(tup_list[0][0], str):
+        return [(t[1], t[0]) for t in tup_list]
     else:
-        return tup
-
+        return tup_list
+    
+def get_data_in_dict(url, value = None):
+    """
+    :param url: A url to make a request
+    :return: A dictionary of returned data using first item as dictionary key
+    """
+    json_list = get_json(url)
+    key = list(json_list[0].keys())[0]
+    json_dict = {}
+    if value is None:
+        for js in json_list:
+            json_dict[js.get(key)] = js
+    else:
+        for js in json_list:
+            json_dict[js.get(key)] = js.get(value)
+    return json_dict
 
 def deal_with_url_error(url):
     """
