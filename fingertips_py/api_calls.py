@@ -79,10 +79,11 @@ def get_data_in_tuple(url):
     else:
         return tup_list
     
-def get_data_in_dict(url, value = None):
+def get_data_in_dict(url, key = None, value = None):
     """
     :param url: A url to make a request
-    :return: A dictionary of returned data using first item as dictionary key
+    :param value: The item in the JSON to be used as the dictionary value
+    :return: A dictionary of returned data using first item as dictionary key by default
     """
     json_list = get_json(url)
     key = list(json_list[0].keys())[0]

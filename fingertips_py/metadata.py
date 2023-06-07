@@ -179,18 +179,18 @@ def get_metadata_for_all_indicators_from_csv(is_test=False):
 
 def get_metadata_for_all_indicators(include_definition='no', include_system_content='no', is_test=False):
     """
-    Returns the metadata for all indicators in a dataframe.
+    Returns the metadata for all indicators in a dictionary.
 
     :param include_definition: optional to include definitions
     :param include_system_content: optional to include system content
     :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
-    :return: dataframe of all indicators
+    :return: dictionary of all indicators
     """
     url_suffix = f'indicator_metadata/all?include_definition={include_definition}&include_system_content={include_system_content}'
-    metadata_df = get_json_return_df(base_url + url_suffix)
+    metadata_dict = get_json(base_url + url_suffix)
     if is_test:
-        return metadata_df, base_url + url_suffix
-    return metadata_df
+        return metadata_dict, base_url + url_suffix
+    return metadata_dict
 
 
 def get_multiplier_and_calculation_for_indicator(indicator_number):
@@ -215,12 +215,12 @@ def get_multiplier_and_calculation_for_indicator(indicator_number):
 
 def get_area_types_as_dict(is_test=False):
     """
-    Returns all area types and related information such as ID and name.
+    Returns all area types and related information such as ID and name with dictionary key value as ID.
 
     :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
     :return: A dictionary of area types
     """
-    areas = get_json(base_url + 'area_types')
+    areas = get_data_in_dict(base_url + 'area_types')
     if is_test:
         return areas, base_url + 'area_types'
     return areas
@@ -247,7 +247,7 @@ def get_all_profiles(is_test=False):
     :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
     :return: A dictionary of all profiles in Fingertips including information on domains and sequencing
     """
-    profiles = get_json(base_url + 'profiles')
+    profiles = get_data_in_dict(base_url + 'profiles')
     if is_test:
         return profiles, base_url + 'profiles'
     return profiles
@@ -273,9 +273,9 @@ def get_area_types_for_profile(profile_id, is_test=False):
     :return: A list of dictionaries of area types with relevant information
     """
     if is_test:
-        return get_json(base_url + 'area_types?profile_ids=' + str(profile_id)), base_url + 'area_types?profile_ids=' + \
+        return get_data_in_dict(base_url + 'area_types?profile_ids=' + str(profile_id)), base_url + 'area_types?profile_ids=' + \
                str(profile_id)
-    return get_json(base_url + 'area_types?profile_ids=' + str(profile_id))
+    return get_data_in_dict(base_url + 'area_types?profile_ids=' + str(profile_id))
 
 
 def get_area_type_ids_for_profile(profile_id):
@@ -286,9 +286,7 @@ def get_area_type_ids_for_profile(profile_id):
     :return: A list of area types used within a given profile
     """
     area_type_obj = get_area_types_for_profile(profile_id)
-    area_type_list = []
-    for area_type in area_type_obj:
-        area_type_list.append(area_type['Id'])
+    area_type_list = list(area_type_obj.keys())
     return area_type_list
 
 
@@ -301,8 +299,8 @@ def get_profile_by_name(profile_name):
     """
     all_profiles = get_all_profiles()
     profile_obj = ''
-    for profile in all_profiles:
-        if profile_name.lower() in profile['Name'].lower():
+    for profile in all_profiles.values():
+        if profile_name.lower() in profile.get('Name').lower():
             profile_obj = profile
     if not profile_obj:
         return 'Profile could not be found'
