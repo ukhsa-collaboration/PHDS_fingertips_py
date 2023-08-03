@@ -318,9 +318,9 @@ def get_profile_by_key(profile_key):
     :return: A dictionary of the profile metadata including domain information or an error message
     """
     all_profiles = get_all_profiles()
-    for profile in all_profiles:
-        if profile['Key'] == profile_key:
-            return profile
+    for profile_id, profile_object in all_profiles.items():
+        if profile_object.get('Key') == profile_key:
+            return profile_object
     return 'Profile could not be found'
 
 
