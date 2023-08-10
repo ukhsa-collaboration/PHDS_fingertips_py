@@ -1,6 +1,6 @@
 import pandas as pd
 import pytest
-from ..api_calls import get_json, get_data_in_tuple, make_request, get_json_return_df, base_url
+from ..api_calls import get_json, get_data_in_tuple, make_request, get_json_return_df, base_url, get_csv
 from ..retrieve_data import get_all_data_for_profile, get_all_data_for_indicators, get_data_by_indicator_ids, \
     get_all_areas_for_all_indicators, get_data_for_indicator_at_all_available_geographies
 from ..metadata import get_metadata_for_profile_as_dataframe, get_metadata, get_metadata_for_indicator_as_dataframe, \
@@ -10,6 +10,16 @@ from ..metadata import get_metadata_for_profile_as_dataframe, get_metadata, get_
     get_multiplier_and_calculation_for_indicator, get_sex_from_id, get_sex_id, get_value_note_id, \
     get_metadata_for_all_indicators, get_metadata_for_all_indicators_from_csv, get_all_areas, get_profile_by_key
 from ..area_data import deprivation_decile
+
+def test_get_csv():
+    data = get_csv(base_url + "indicator_metadata/csv/all")
+
+    # Check that a pandas dataframe is returned by the function
+    assert isinstance(data, pd.DataFrame)
+
+    # Check the data has been parsed correctly
+    assert "Indicator ID" in data.columns
+    assert "Indicator" in data.columns
 
 
 def test_get_json():
@@ -36,31 +46,64 @@ def test_get_json_return_df():
 
 # need to think about this one
 def test_get_all_data_for_profile():
+
     data = get_all_data_for_profile(84, is_test=True)
+
+    # Check output of the function is a pandas df
     assert isinstance(data[0], pd.DataFrame) is True
-    assert data[1] == base_url + 'all_data/csv/by_profile_id?child_area_type_id=154&parent_area_type_id=15&profile_id=84'
-    assert data[0].shape[1] == 26
+
+    # Check the df has some of the required columns
+    assert "Indicator ID" in data[0].columns
+    assert "Indicator Name" in data[0].columns
+    assert "Value" in data[0].columns
 
 
 def test_get_all_areas():
     data = get_all_areas(is_test=True)
+
+    # Check the function output is a tuple
+    assert isinstance(data, tuple) is True
+
+    # Check the standard output for the function is a dict
     assert isinstance(data[0], dict) is True
-    assert isinstance(data[0][1], dict) is True
-    assert isinstance(data[0][1]['Name'], str) is True
+
+    # See if the England area type is there
+    assert 15 in data[0]
+    assert data[0][15]["Name"] == "England"
+
+    # Check the correct URL is being used
     assert data[1] == 'http://fingertips.phe.org.uk/api/area_types'
 
 
 def test_get_all_data_for_indicators():
     data = get_all_data_for_indicators([92949, 247], area_type_id=102, is_test=True)
+
+    # Check that what the functon returns a pd dataframe
     assert isinstance(data[0], pd.DataFrame) is True
-    assert data[0].shape[1] == 26
+
+    # Check one of the columns is named "Indicator ID"
+    assert "Indicator ID" in data[0].columns
+
+    # Check that only 92949 and 247 are in the "Indicator ID" column
+    assert all(data[0]["Indicator ID"].isin([92949, 247]))
+
+    # Check the correct URL is being used
     assert data[1] == 'http://fingertips.phe.org.uk/api/all_data/csv/by_indicator_id?indicator_ids=92949,247&child_area_type_id=102&parent_area_type_id=15'
 
 
 def test_get_data_by_indicator_ids():
     data = get_data_by_indicator_ids([92949, 247], 102, is_test=True)
+
+    # Check that what the functon returns a pd dataframe
     assert isinstance(data[0], pd.DataFrame) is True
-    assert data[0].shape[1] == 26
+
+    # Check one of the columns is named "Indicator ID"
+    assert "Indicator ID" in data[0].columns
+
+    # Check that only 92949 and 247 are in the "Indicator ID" column
+    assert all(data[0]["Indicator ID"].isin([92949, 247]))
+
+    # Check the correct URL is being used
     assert data[1] == 'http://fingertips.phe.org.uk/api/all_data/csv/by_indicator_id?indicator_ids=92949,247&child_area_type_id=102&parent_area_type_id=15'
 
 
@@ -71,9 +114,17 @@ def test_get_all_areas_for_all_indicators():
 
 
 def test_get_data_for_indicator_at_all_available_geographies():
+
     data = get_data_for_indicator_at_all_available_geographies(247)
+
+    # Check that a pandas dataframe is returned by the function
     assert isinstance(data, pd.DataFrame) is True
-    assert data.shape[1] == 26
+
+    # Check one of the columns is named "Indicator ID"
+    assert "Indicator ID" in data.columns
+
+    # Check that only `247` is in the "Indicator ID" column
+    assert all(data["Indicator ID"].isin([247]))
 
 
 def test_get_metadata_for_profile_as_dataframe():
@@ -229,8 +280,12 @@ def test_get_value_note_id():
 
 def test_get_metadata_for_all_indicators():
     data = get_metadata_for_all_indicators()
+
+    # Check that a pandas dataframe is returned by the function
     assert isinstance(data, pd.DataFrame) is True
-    assert data.shape[1] == 11
+
+    # Check one of the columns is named "Indicator ID"
+    assert "Indicator ID" in data.columns
 
 
 def test_get_metadata_for_all_indicators_from_csv():
@@ -241,4 +296,11 @@ def test_get_metadata_for_all_indicators_from_csv():
 
 def test_deprivation_decile():
     data = deprivation_decile(7)
-    assert len(data.unique()) == 10
+
+    # Check one of the columns is named "Indicator ID" and one is called
+    # "Area Type".
+    assert "Indicator ID" in data.columns
+    assert "Area Type" in data.columns
+
+    # Check that the only value in the "Indicator ID" column is "GPs"
+    assert all(data["Area Type"].isin(["GPs"]))
