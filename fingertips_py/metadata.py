@@ -275,7 +275,7 @@ def get_area_types_for_profile(profile_id, is_test=False):
     if is_test:
         return get_data_in_dict(base_url + 'area_types?profile_ids=' + str(profile_id)), base_url + 'area_types?profile_ids=' + \
                str(profile_id)
-    return get_data_in_dict(base_url + 'area_types?profile_ids=' + str(profile_id)) value='Id')
+    return get_data_in_dict(base_url + 'area_types?profile_ids=' + str(profile_id))
 
 
 def get_area_type_ids_for_profile(profile_id):
