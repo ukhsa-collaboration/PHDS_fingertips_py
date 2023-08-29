@@ -16,7 +16,7 @@ def get_data_by_indicator_ids(indicator_ids, area_type_id, parent_area_type_id=1
     """
     Returns a dataframe of indicator data given a list of indicators and area types.
 
-    :param indicator_ids: Single indicator ID or list of indicator IDs
+    :param indicator_ids: Single indicator ID or list of indicator IDs, as integers or strings
     :param area_type_id: ID of area type (eg. CCG, Upper Tier Local Authority) used in Fingertips as integer or string
     :param parent_area_type_id: Area type of parent area - defaults to England value
     :param profile_id: ID of profile to select by as either int or string
@@ -52,7 +52,7 @@ def get_data_by_indicator_ids(indicator_ids, area_type_id, parent_area_type_id=1
     return df
 
 
-def get_all_data_for_profile(profile_id, parent_area_type_id=15, area_type_id=None, filter_by_area_codes=None,
+def get_all_data_for_profile(profile_id, parent_area_type_id=15, area_type_id = None, filter_by_area_codes=None,
                              is_test=False):
     """
     Returns a dataframe of data for all indicators within a profile.
@@ -64,7 +64,7 @@ def get_all_data_for_profile(profile_id, parent_area_type_id=15, area_type_id=No
     :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
     :return: A dataframe of data for all indicators within a profile with any filters applied
     """
-    if area_type_id:
+    if area_type_id is not None:
         if type(area_type_id) == int:
             area_types = [area_type_id]
         else:
@@ -92,13 +92,12 @@ def get_all_data_for_profile(profile_id, parent_area_type_id=15, area_type_id=No
         return df, base_url + populated_url
     return df
 
-
 def get_all_data_for_indicators(indicators, area_type_id, parent_area_type_id=15, filter_by_area_codes=None,
                                 is_test=False):
     """
     Returns a dataframe of data for given indicators at an area.
 
-    :param indicators: List or integer or string of indicator Ids
+    :param indicators: List or integer or string of indicator IDs
     :param area_type_id: ID of area type (eg. ID of General Practice is 7 etc) used in Fingertips as integer or string
     :param parent_area_type_id: Area type of parent area - defaults to England value
     :param filter_by_area_codes: Option to limit returned data to areas. Areas as either string or list of strings

@@ -275,7 +275,7 @@ def get_area_types_for_profile(profile_id, is_test=False):
     if is_test:
         return get_data_in_dict(base_url + 'area_types?profile_ids=' + str(profile_id)), base_url + 'area_types?profile_ids=' + \
                str(profile_id)
-    return get_data_in_dict(base_url + 'area_types?profile_ids=' + str(profile_id))
+    return get_data_in_dict(base_url + 'area_types?profile_ids=' + str(profile_id)) value='Id')
 
 
 def get_area_type_ids_for_profile(profile_id):
@@ -283,10 +283,10 @@ def get_area_type_ids_for_profile(profile_id):
     Returns a list of area types used within a given profile.
 
     :param profile_id: ID used in Fingertips to identify a profile as integer or string
-    :return: A list of area types used within a given profile
+    :return: A list of area type IDs used within a given profile
     """
     area_type_obj = get_area_types_for_profile(profile_id)
-    area_type_list = list(area_type_obj.keys())
+    area_type_list = [value.get('Id') for value in area_type_obj.values()]
     return area_type_list
 
 
