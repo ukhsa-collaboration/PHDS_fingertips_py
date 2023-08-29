@@ -16,7 +16,7 @@ def get_data_by_indicator_ids(indicator_ids, area_type_id, parent_area_type_id=1
     """
     Returns a dataframe of indicator data given a list of indicators and area types.
 
-    :param indicator_ids: List of indicator IDs as strings
+    :param indicator_ids: Single indicator ID or list of indicator IDs
     :param area_type_id: ID of area type (eg. CCG, Upper Tier Local Authority) used in Fingertips as integer or string
     :param parent_area_type_id: Area type of parent area - defaults to England value
     :param profile_id: ID of profile to select by as either int or string
@@ -150,7 +150,7 @@ def get_all_areas_for_all_indicators():
     """
     Returns a dataframe of all indicators and their geographical breakdowns.
 
-    :return: Dictionary of all indicators and their geographical breakdowns
+    :return: Dictionary of all indicators (ID as key) and their geographical breakdowns
     """
     url_suffix = 'available_data'
     all_area_ids = get_json(base_url + url_suffix)
