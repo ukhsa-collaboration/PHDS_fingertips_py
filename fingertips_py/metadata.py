@@ -357,7 +357,7 @@ def get_metadata_for_domain_as_dataframe(group_ids, is_test=False):
         df = pd.DataFrame()
         for group_id in group_ids:
             try:
-                df = df.append(pd.read_csv(base_url + url_suffix.format(str(group_id))))
+                pd.concat([df, pd.read_csv(base_url + url_suffix.format(str(group_id)))])
             except HTTPError:
                 raise NameError('Domain {} does not exist'.format(group_id))
             except URLError:
@@ -386,7 +386,7 @@ def get_metadata_for_profile_as_dataframe(profile_ids):
         df = pd.DataFrame()
         for profile_id in profile_ids:
             try:
-                df = df.append(pd.read_csv(base_url + url_suffix.format(str(profile_id))))
+                pd.concat([df, pd.read_csv(base_url + url_suffix.format(str(profile_id)))])
             except HTTPError:
                 raise NameError('Profile {} does not exist'.format(profile_id))
             except URLError:
@@ -413,20 +413,20 @@ def get_metadata(indicator_ids=None, domain_ids=None, profile_ids=None):
     """
     if indicator_ids and domain_ids and profile_ids:
         df = get_metadata_for_profile_as_dataframe(profile_ids)
-        df = df.append(get_metadata_for_domain_as_dataframe(domain_ids))
-        df = df.append(get_metadata_for_indicator_as_dataframe(indicator_ids))
+        pd.concat([df, get_metadata_for_domain_as_dataframe(domain_ids)])
+        pd.concat([df, get_metadata_for_indicator_as_dataframe(indicator_ids)])
         return df
     if indicator_ids and domain_ids:
         df = get_metadata_for_domain_as_dataframe(domain_ids)
-        df = df.append(get_metadata_for_indicator_as_dataframe(indicator_ids))
+        pd.concat([df, get_metadata_for_indicator_as_dataframe(indicator_ids)])
         return df
     if indicator_ids and profile_ids:
         df = get_metadata_for_profile_as_dataframe(profile_ids)
-        df = df.append(get_metadata_for_indicator_as_dataframe(indicator_ids))
+        pd.concat([df, get_metadata_for_profile_as_dataframe(indicator_ids)])
         return df
     if domain_ids and profile_ids:
         df = get_metadata_for_profile_as_dataframe(profile_ids)
-        df = df.append(get_metadata_for_domain_as_dataframe(domain_ids))
+        pd.concat([df, get_metadata_for_domain_as_dataframe(domain_ids)])
         return df
     if profile_ids:
         return get_metadata_for_profile_as_dataframe(profile_ids)
