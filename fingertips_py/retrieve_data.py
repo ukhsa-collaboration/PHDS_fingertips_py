@@ -81,7 +81,7 @@ def get_all_data_for_profile(profile_id, parent_area_type_id=15, area_type_id = 
             raise Exception('There has been a server error with Fingertips for this request. ')
         except URLError:
             df_returned = deal_with_url_error(base_url + populated_url)
-        pd.concat([df, df_returned])
+        df = pd.concat([df, df_returned])
     if filter_by_area_codes:
         if isinstance(filter_by_area_codes, list):
             df = df.loc[df['Area Code'].isin(filter_by_area_codes)]
@@ -161,6 +161,6 @@ def get_data_for_indicator_at_all_available_geographies(indicator_id):
     df = pd.DataFrame()
     for area in areas_to_get:
         df_temp = get_data_by_indicator_ids(indicator_id, area)
-        pd.concat([df, df_temp])
+        df = pd.concat([df, df_temp])
     df.drop_duplicates(inplace=True)
     return df
