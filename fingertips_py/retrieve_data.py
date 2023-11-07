@@ -131,7 +131,7 @@ def get_all_data_for_indicators(indicators, area_type_id, parent_area_type_id=15
 
 def get_all_areas_for_all_indicators():
     """
-    Returns a dataframe of all indicators and their geographical breakdowns.
+    Returns a dictionary of all indicators and their geographical breakdowns.
 
     :return: Dictionary of all indicators (ID as key) and their geographical breakdowns
     """

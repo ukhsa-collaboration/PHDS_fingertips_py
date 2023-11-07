@@ -79,6 +79,7 @@ def get_data_in_tuple(url):
     else:
         return tup_list
     
+    
 def get_data_in_dict(url, key = None, value = None):
     """
     :param url: A url to make a request
@@ -95,6 +96,7 @@ def get_data_in_dict(url, key = None, value = None):
         for js in json_list:
             json_dict[js.get(key)] = js.get(value)
     return json_dict
+
 
 def deal_with_url_error(url):
     """
