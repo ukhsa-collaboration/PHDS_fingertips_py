@@ -10,5 +10,3 @@ from .metadata import get_metadata_for_profile_as_dataframe, get_metadata, get_m
     get_multiplier_and_calculation_for_indicator, get_sex_from_id, get_sex_id, get_value_note_id, \
     get_metadata_for_all_indicators, get_metadata_for_all_indicators_from_csv, get_all_areas
 from .area_data import deprivation_decile
-
-url = 'https://fingertips.phe.org.uk/api/indicator_metadata/by_indicator_id?indicator_ids=91102'

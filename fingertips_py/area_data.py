@@ -87,7 +87,7 @@ def deprivation_decile(area_type_id, year='2015', area_code=None):
     order_of_extra_values = []
     if not isinstance(year, str):
         year = str(year)
-    if year not in acceptable_deprivation_years_la and area_type_id is not 7:
+    if year not in acceptable_deprivation_years_la and area_type_id != 7:
         raise ValueError \
             ('The acceptable years are 2010 and 2015 for local authorities and CCGs, please select one of these')
     elif year not in acceptable_deprivation_years_gp:

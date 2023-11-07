@@ -64,7 +64,7 @@ def get_json_return_df(url, transpose=True):
 def get_data_in_tuple(url):
     """
     :param url: A url to make a request
-    :return: A tuple of returned data
+    :return: A list of returned data in tuples
     """
     try:
         req = requests.get(url)

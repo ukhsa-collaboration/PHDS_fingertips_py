@@ -7,9 +7,9 @@ setup(
     packages=['fingertips_py'],
     url='https://github.com/PublicHealthEngland/PHDS_fingertips_py.git',
     license='GPL-3.0',
-    author='Russell Plunkett, Public Health England',
-    author_email='russell.plunkett@phe.gov.uk, phds@phe.gov.uk',
+    author='Russell Plunkett, Public Health England, Annabel Westermann',
+    author_email='DataScience@dhsc.gov.uk, annabel.westermann@dhsc.gov.uk',
     description='This is a python package to interact with Public Health England\'s Fingertips data tool.'
                 'This can be used to load data from the Fingertips API into python for further manipulation.',
-    install_requires=['pandas>=0.18.1', 'requests']
+    install_requires=['pandas>=1.5', 'requests']
 )

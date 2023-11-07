@@ -42,7 +42,7 @@ def get_age_id(age, is_test=False):
 
     :param age: Search term of an age or age range as a string
     :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
-    :return: Code used in Fingertips to represent the age or age range as a string
+    :return: Code used in Fingertips to represent the age as an integer or age range as a string
     """
     ages = make_request(base_url + 'ages', 'Name')
     if is_test:
@@ -56,7 +56,7 @@ def get_age_from_id(age_id, is_test=False):
 
     :param age_id: Age id used in Fingertips as an integer
     :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
-    :return: Age or age range as a string
+    :return: Age, or age range, as a string
     """
     ages = make_request(base_url + 'ages', 'Id')
     if is_test:
@@ -83,7 +83,7 @@ def get_sex_id(sex, is_test=False):
 
     :param sex: Sex category as string (Case sensitive)
     :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
-    :return: ID used in Fingertips to represent the sex as integer
+    :return: ID used in Fingertips to represent the sex as an integer
     """
     sexes = make_request(base_url + 'sexes', 'Name')
     if is_test:
@@ -93,7 +93,7 @@ def get_sex_id(sex, is_test=False):
 
 def get_sex_from_id(sex_id, is_test=False):
     """
-    Returns a sex name given an id.
+    Returns a sex name given an ID.
 
     :param sex_id: ID used in Fingertips to represent the sex as integer
     :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
@@ -124,7 +124,7 @@ def get_value_note_id(value_note, is_test=False):
 
     :param value_note: Value note as string
     :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
-    :return: ID used in Fingertips to represent the value note as integer
+    :return: ID used in Fingertips to represent the value note as an integer
     """
     value_notes = make_request(base_url + 'value_notes', 'Text')
     if is_test:
@@ -138,7 +138,7 @@ def get_areas_for_area_type(area_type_id, is_test=False):
 
     :param area_type_id: ID of area type (ID of General Practice is 7 etc) used in Fingertips as integer or string
     :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
-    :return: A dictionary of dictionaries with area codes and the names of those areas
+    :return: A dictionary of dictionaries with area codes as the key 
     """
     areas = make_request(base_url + 'areas/by_area_type?area_type_id=' + str(area_type_id), 'Code')
     if is_test:
