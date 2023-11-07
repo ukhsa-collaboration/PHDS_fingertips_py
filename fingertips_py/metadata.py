@@ -337,7 +337,7 @@ def get_metadata_for_indicator_as_dataframe(indicator_ids, is_test=False):
     try:
         df = pd.read_csv(base_url + url_suffix.format(str(indicator_ids)))
     except HTTPError:
-        raise NameError('Indicator {} does not exist'.format(indicator_ids))
+        raise NameError(f'Indicator {indicator_ids} does not exist')
     except URLError:
         df = deal_with_url_error(base_url + url_suffix.format(str(indicator_ids)))
     if is_test:
@@ -359,14 +359,14 @@ def get_metadata_for_domain_as_dataframe(group_ids, is_test=False):
             try:
                 df = pd.concat([df, pd.read_csv(base_url + url_suffix.format(str(group_id)))])
             except HTTPError:
-                raise NameError('Domain {} does not exist'.format(group_id))
+                raise NameError(f'Domain {group_id} does not exist')
             except URLError:
                 df = deal_with_url_error(base_url + url_suffix.format(str(group_id)))
     else:
         try:
             df = pd.read_csv(base_url + url_suffix.format(str(group_ids)))
         except HTTPError:
-            raise NameError('Domain {} does not exist'.format(group_ids))
+            raise NameError(f'Domain {group_ids} does not exist')
         except URLError:
             df = deal_with_url_error(base_url + url_suffix.format(str(group_ids)))
     if is_test:
@@ -388,14 +388,14 @@ def get_metadata_for_profile_as_dataframe(profile_ids):
             try:
                 df = pd.concat([df, pd.read_csv(base_url + url_suffix.format(str(profile_id)))])
             except HTTPError:
-                raise NameError('Profile {} does not exist'.format(profile_id))
+                raise NameError(f'Profile {profile_id} does not exist')
             except URLError:
                 df = deal_with_url_error(base_url + url_suffix.format(str(profile_id)))
     else:
         try:
             df = pd.read_csv(base_url + url_suffix.format(str(profile_ids)))
         except HTTPError:
-            raise NameError('Profile {} does not exist'.format(profile_ids))
+            raise NameError(f'Profile {profile_ids} does not exist')
         except URLError:
             df = deal_with_url_error(base_url + url_suffix.format(str(profile_ids)))
     return df

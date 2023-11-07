@@ -27,13 +27,13 @@ def get_data_by_indicator_ids(indicator_ids, area_type_id, parent_area_type_id=1
 
     url_suffix = 'all_data/csv/by_indicator_id?indicator_ids={}&child_area_type_id={}&parent_area_type_id={}'
     if profile_id and not include_sortable_time_periods:
-        url_addition = '&profile_id={}'.format(str(profile_id))
+        url_addition = f'&profile_id={profile_id}'
         url_suffix = url_suffix + url_addition
     elif include_sortable_time_periods and not profile_id:
         url_addition = '&include_sortable_time_periods=yes'
         url_suffix = url_suffix + url_addition
     elif profile_id and include_sortable_time_periods:
-        url_addition = '&profile_id={}&include_sortable_time_periods=yes'.format(str(profile_id))
+        url_addition = f'&profile_id={profile_id}&include_sortable_time_periods=yes'
         url_suffix = url_suffix + url_addition
     if isinstance(indicator_ids, list):
         if any(isinstance(ind, int) for ind in indicator_ids):
@@ -71,10 +71,10 @@ def get_all_data_for_profile(profile_id, parent_area_type_id=15, area_type_id = 
             area_types = area_type_id
     else:
         area_types = get_area_type_ids_for_profile(profile_id)
-    url_suffix = 'all_data/csv/by_profile_id?child_area_type_id={}&parent_area_type_id={}&profile_id={}'
     df = pd.DataFrame()
     for area in area_types:
-        populated_url = url_suffix.format(area, parent_area_type_id, profile_id)
+        populated_url = f'all_data/csv/by_profile_id?child_area_type_id={area}\
+            &parent_area_type_id={parent_area_type_id}&profile_id={profile_id}'
         try:
             df_returned = pd.read_csv(base_url + populated_url)
         except HTTPError:
@@ -104,7 +104,6 @@ def get_all_data_for_indicators(indicators, area_type_id, parent_area_type_id=15
     :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
     :return: Dataframe of data for given indicators at an area
     """
-    url_suffix = 'all_data/csv/by_indicator_id?indicator_ids={}&child_area_type_id={}&parent_area_type_id={}'
     if isinstance(indicators, list):
         if any(isinstance(ind, int) for ind in indicators):
             indicators = ','.join(str(ind) for ind in indicators)
@@ -112,7 +111,9 @@ def get_all_data_for_indicators(indicators, area_type_id, parent_area_type_id=15
             indicators = ','.join(indicators)
     else:
         indicators = str(indicators)
-    populated_url = url_suffix.format(indicators, str(area_type_id), str(parent_area_type_id))
+        
+    populated_url = f'all_data/csv/by_indicator_id?indicator_ids={indicators}&\
+        child_area_type_id={area_type_id}&parent_area_type_id={parent_area_type_id}'
     try:
         df = pd.read_csv(base_url + populated_url)
     except URLError:
