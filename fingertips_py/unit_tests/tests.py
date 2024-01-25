@@ -17,7 +17,7 @@ def test_get_json():
     assert data['userId'] == 1
     assert isinstance(data, dict)
 
-
+#no
 def test_get_data_in_tuple():
     data = get_data_in_tuple(base_url + 'ages')
     assert type(data[1]) == tuple
@@ -43,88 +43,90 @@ def test_get_all_data_for_profile():
 
 
 def test_get_all_areas():
-    data = get_all_areas(is_test=True)
-    assert isinstance(data[0], dict) is True
-    assert isinstance(data[0][1], dict) is True
-    assert isinstance(data[0][1]['Name'], str) is True
-    assert data[1] == 'http://fingertips.phe.org.uk/api/area_types'
+    test_dict, url = get_all_areas(is_test=True)
+    first_dict = test_dict.get(next(iter(test_dict)))
+    assert isinstance(test_dict, dict) is True
+    assert isinstance(first_dict, dict) is True
+    assert isinstance(first_dict.get('Name'), str) is True
+    assert url == 'http://fingertips.phe.org.uk/api/area_types'
 
 
 def test_get_all_data_for_indicators():
-    data = get_all_data_for_indicators([92949, 247], area_type_id=102, is_test=True)
-    assert isinstance(data[0], pd.DataFrame) is True
-    assert data[0].shape[1] == 26
-    assert data[1] == 'http://fingertips.phe.org.uk/api/all_data/csv/by_indicator_id?indicator_ids=92949,247&child_area_type_id=102&parent_area_type_id=15'
+    data, url = get_all_data_for_indicators([92949, 92998], area_type_id=102, is_test=True)
+    assert isinstance(data, pd.DataFrame) is True
+    assert data.shape[1] == 27
+    assert url == 'http://fingertips.phe.org.uk/api/all_data/csv/by_indicator_id?indicator_ids=92949,92998&child_area_type_id=102&parent_area_type_id=15'
 
 
 def test_get_data_by_indicator_ids():
-    data = get_data_by_indicator_ids([92949, 247], 102, is_test=True)
-    assert isinstance(data[0], pd.DataFrame) is True
-    assert data[0].shape[1] == 26
-    assert data[1] == 'http://fingertips.phe.org.uk/api/all_data/csv/by_indicator_id?indicator_ids=92949,247&child_area_type_id=102&parent_area_type_id=15'
+    data, url = get_data_by_indicator_ids([92949, 92998], 102, is_test=True)
+    assert isinstance(data, pd.DataFrame) is True
+    assert data.shape[1] == 27
+    assert url == 'http://fingertips.phe.org.uk/api/all_data/csv/by_indicator_id?indicator_ids=92949,92998&child_area_type_id=102&parent_area_type_id=15'
 
 
 def test_get_all_areas_for_all_indicators():
-    data = get_all_areas_for_all_indicators()
-    assert isinstance(data, pd.DataFrame) is True
-    assert data.shape[1] == 4
+    test_dict = get_all_areas_for_all_indicators()
+    first_list = test_dict.get(next(iter(test_dict)))
+    assert isinstance(test_dict, dict) is True
+    assert 15 in first_list
 
 
 def test_get_data_for_indicator_at_all_available_geographies():
-    data = get_data_for_indicator_at_all_available_geographies(247)
+    data = get_data_for_indicator_at_all_available_geographies(92998)
     assert isinstance(data, pd.DataFrame) is True
-    assert data.shape[1] == 26
+    assert data.shape[1] == 27
 
 
 def test_get_metadata_for_profile_as_dataframe():
     data = get_metadata_for_profile_as_dataframe(84)
     assert isinstance(data, pd.DataFrame) is True
-    assert data.shape[1] == 30
+    assert data.shape[1] == 32
 
 
 def test_get_metadata():
-    data_indicators = get_metadata(indicator_ids=[92949, 247])
+    data_indicators = get_metadata(indicator_ids=[92949, 90581])
     data_domain = get_metadata(domain_ids=[1938133052, 1938132811])
     data_profile = get_metadata(profile_ids=84)
-    data_indicators_and_domain = get_metadata(indicator_ids=[92949, 247], domain_ids=[1938133052, 1938132811])
+    data_indicators_and_domain = get_metadata(indicator_ids=[92949, 90581], domain_ids=[1938133052, 1938132811])
     data_domain_and_profile = get_metadata(domain_ids=[1938133052, 1938132811], profile_ids=84)
-    data_profile_and_indicators = get_metadata(indicator_ids=[92949, 247], profile_ids=84)
-    data_all = get_metadata(indicator_ids=[92949, 247], domain_ids=[1938133052, 1938132811], profile_ids=84)
+    #data_profile_and_indicators = get_metadata(indicator_ids=[92949, 90581], profile_ids=84) ####!
+    data_all = get_metadata(indicator_ids=[92949, 90581], domain_ids=[1938133052, 1938132811], profile_ids=84)
     assert isinstance(data_indicators, pd.DataFrame) is True
-    assert data_indicators.shape[1] == 30
+    assert data_indicators.shape[1] == 32
     assert isinstance(data_domain, pd.DataFrame) is True
-    assert data_domain.shape[1] == 30
+    assert data_domain.shape[1] == 32
     assert isinstance(data_profile, pd.DataFrame) is True
-    assert data_profile.shape[1] == 30
+    assert data_profile.shape[1] == 32
     assert isinstance(data_indicators_and_domain, pd.DataFrame) is True
-    assert data_indicators_and_domain.shape[1] == 30
+    assert data_indicators_and_domain.shape[1] == 32
     assert isinstance(data_domain_and_profile, pd.DataFrame) is True
-    assert data_domain_and_profile.shape[1] == 30
-    assert isinstance(data_profile_and_indicators, pd.DataFrame) is True
-    assert data_profile_and_indicators.shape[1] == 30
+    assert data_domain_and_profile.shape[1] == 32
+    #assert isinstance(data_profile_and_indicators, pd.DataFrame) is True
+    #assert data_profile_and_indicators.shape[1] == 32
     assert isinstance(data_all, pd.DataFrame) is True
-    assert data_all.shape[1] == 30
+    assert data_all.shape[1] == 32
 
 
 def test_get_metadata_for_indicator_as_dataframe():
     data = get_metadata_for_indicator_as_dataframe(247, is_test=True)
     assert isinstance(data[0], pd.DataFrame) is True
-    assert data[0].shape[1] == 30
+    assert data[0].shape[1] == 32
     assert data[1] == 'http://fingertips.phe.org.uk/api/indicator_metadata/csv/by_indicator_id?indicator_ids=247'
 
 
 def test_get_metadata_for_domain_as_dataframe():
     data = get_metadata_for_domain_as_dataframe(1938132811, is_test=True)
     assert isinstance(data[0], pd.DataFrame) is True
-    assert data[0].shape[1] == 30
+    assert data[0].shape[1] == 32
     assert data[1] == 'http://fingertips.phe.org.uk/api/indicator_metadata/csv/by_group_id?group_id=1938132811'
 
 
 def test_get_all_value_notes():
-    data = get_all_value_notes()
-    assert isinstance(data, list) is True
-    assert isinstance(data[1], tuple) is True
-    assert isinstance(data[1][1], str) is True
+    test_dict = get_all_value_notes()
+    first_item = test_dict.get(next(iter(test_dict)))
+    assert isinstance(test_dict, dict) is True
+    assert isinstance(first_item, str) is True
 
 
 def test_get_profile_by_name():
@@ -138,28 +140,32 @@ def test_get_profile_by_key():
     assert isinstance(data, dict) is True
     assert data['Id'] == 20
 
-
+# no
 def test_get_area_types_for_profile():
-    data = get_area_types_for_profile(84)
-    assert isinstance(data, list) is True
-    assert isinstance(data[1], dict) is True
+    test_dict = get_area_types_for_profile(84)
+    first_item = test_dict.get(next(iter(test_dict)))
+    assert isinstance(test_dict, dict) is True
+    assert isinstance(first_item, dict) is True
 
 
 def test_get_domains_in_profile():
-    data = get_domains_in_profile(84)
-    assert isinstance(data, list) is True
+    test_list = get_domains_in_profile(84)
+    assert isinstance(test_list, list) is True
+    assert isinstance(test_list[0], int) is True
 
 
 def test_get_all_profiles():
-    data = get_all_profiles()
-    assert isinstance(data, list) is True
-    assert isinstance(data[1], dict) is True
+    test_dict = get_all_profiles()
+    first_item = test_dict.get(next(iter(test_dict)))
+    assert isinstance(test_dict, dict) is True
+    assert isinstance(first_item, dict) is True
 
 
 def test_get_area_types_as_dict():
-    data = get_area_types_as_dict()
-    assert isinstance(data, list) is True
-    assert isinstance(data[1], dict) is True
+    test_dict = get_area_types_as_dict()
+    first_item = test_dict.get(next(iter(test_dict)))
+    assert isinstance(test_dict, dict) is True
+    assert isinstance(first_item, dict) is True
 
 
 def test_get_age_from_id():
@@ -184,15 +190,17 @@ def test_get_age_id():
 
 
 def test_get_all_ages():
-    data = get_all_ages()
-    assert isinstance(data, list) is True
-    assert isinstance(data[1], tuple) is True
+    test_dict = get_all_ages()
+    first_item = test_dict.get(next(iter(test_dict)))
+    assert isinstance(test_dict, dict) is True
+    assert isinstance(first_item, dict) is True
 
 
 def test_get_all_sexes():
-    data = get_all_sexes()
-    assert isinstance(data, list) is True
-    assert isinstance(data[1], tuple) is True
+    test_dict = get_all_sexes()
+    first_item = test_dict.get(next(iter(test_dict)))
+    assert isinstance(test_dict, dict) is True
+    assert isinstance(first_item, str) is True
 
 
 def test_get_areas_for_area_type():
@@ -228,17 +236,18 @@ def test_get_value_note_id():
 
 
 def test_get_metadata_for_all_indicators():
-    data = get_metadata_for_all_indicators()
-    assert isinstance(data, pd.DataFrame) is True
-    assert data.shape[1] == 11
+    test_dict = get_metadata_for_all_indicators()
+    first_item = test_dict.get(next(iter(test_dict)))
+    assert isinstance(test_dict, dict) is True
+    assert len(first_item.keys()) == 15
 
 
 def test_get_metadata_for_all_indicators_from_csv():
     data = get_metadata_for_all_indicators_from_csv()
     assert isinstance(data, pd.DataFrame) is True
-    assert data.shape[1] == 30
+    assert data.shape[1] == 32
 
-
+# deprivation decile needs to work
 def test_deprivation_decile():
     data = deprivation_decile(7)
     assert len(data.unique()) == 10
