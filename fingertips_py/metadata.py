@@ -198,7 +198,6 @@ def get_multiplier_and_calculation_for_indicator(indicator_number):
     Returns the multiplier and calculation method for a given indicator.
 
     :param indicator_number: Number used to identify an indicator within Fingertips as integer or string
-    :param is_test: Used for testing. Returns a tuple of expected return and the URL called to retrieve the data
     :return: A tuple of multiplier and calculation method from Fingetips metadata
     """
     metadata = get_metadata_for_indicator(indicator_number)
