@@ -291,7 +291,7 @@ def get_area_type_ids_for_profile(profile_id):
 
 def get_profile_by_name(profile_name):
     """
-    Returns a profile object given a name to search - try to be specific to get better results.
+    Returns a profile object given a name to search – try to be specific to get better results.
 
     :param profile_name: A string or part of a string that is used as the profile name
     :return: A dictionary of the profile metadata including domain information or an error message
