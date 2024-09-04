@@ -4,6 +4,8 @@ __pycache__/
 out
 gen
 venv/
+*.egg-info
+
 # IDE files
 .idea
 .spyproject

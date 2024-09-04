@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fingertips_py"
+
+version = '0.4.0'
+
+license = {file = "LICENSE"}
+
+authors = [
+    {name = "Russell Plunkett"},
+    {name = "Annabel Westermann"},
+    {name = "Hadley Nanayakkara"},
+    {name = "Olivia Box Power"}
+]
+
+maintainers = [
+  {name = "DHSC", email = "DataScience@dhsc.gov.uk"}
+]
+
+description = "This is a python package to interact with OHID Fingertips data tool. This can be used to load data from the Fingertips API into Python for further manipulation."
+
+dependencies = [
+    "pandas>=1.5",
+    "requests"
+]
+
+readme = "README.md"
+
+classifiers = [
+  "Development Status :: 4 - Beta"
+]
+
+keywords = [
+    "DHSC",
+    "Department of Health and Social Care",
+    "OHID",
+    "Office for Health Improvement and Disparities",
+    "Public Health",
+    "indicators",
+    "Fingertips"
+]
+
+[project.urls]
+Homepage = "https://github.com/ukhsa-collaboration/PHDS_fingertips_py?tab=readme-ov-file"
+Documentation = "https://fingertips-py.readthedocs.io/en/latest/"
+Repository = "https://github.com/ukhsa-collaboration/PHDS_fingertips_py"
+Issues = "https://github.com/ukhsa-collaboration/PHDS_fingertips_py/issues"
+Changelog = "https://github.com/ukhsa-collaboration/PHDS_fingertips_py/blob/master/CHANGELOG.md"
+
+[tool.setuptools]
+packages = ["fingertips_py"]
