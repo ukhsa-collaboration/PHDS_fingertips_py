@@ -1,6 +1,6 @@
 # fingertips_py
 
-This is a python package to interact with Public Health England's 
+This is a python package to interact with OHID's 
 [Fingertips](https://fingertips.phe.org.uk/) data tool. Fingertips is a 
 major repository of population and public health indicators for England.
 The site presents the information in many ways to improve accessibility 
