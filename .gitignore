@@ -1,8 +1,12 @@
-
-.idea
+__pycache__/
+.pytest_cache/
 *.iml
 out
 gen
 venv/
-.spyproject
+*.egg-info
 
+# IDE files
+.idea
+.spyproject
+.vscode
