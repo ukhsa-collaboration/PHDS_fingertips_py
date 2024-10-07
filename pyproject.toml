@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "fingertips_py"
 
-dynamic = ["version"]
+version = "0.4.0"
 
 license = {file = "LICENSE"}
 
@@ -56,6 +56,3 @@ Changelog = "https://github.com/ukhsa-collaboration/PHDS_fingertips_py/blob/mast
 
 [tool.setuptools]
 packages = ["fingertips_py"]
-
-[tool.setuptools.dynamic]
-version = {attr = "fingertips_py.__version__"}
