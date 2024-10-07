@@ -53,6 +53,3 @@ Documentation = "https://fingertips-py.readthedocs.io/en/latest/"
 Repository = "https://github.com/ukhsa-collaboration/PHDS_fingertips_py"
 Issues = "https://github.com/ukhsa-collaboration/PHDS_fingertips_py/issues"
 Changelog = "https://github.com/ukhsa-collaboration/PHDS_fingertips_py/blob/master/CHANGELOG.md"
-
-[tool.setuptools]
-packages = ["fingertips_py"]
