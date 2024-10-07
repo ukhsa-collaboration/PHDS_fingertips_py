@@ -1,5 +1,7 @@
 __all__ = ['api_calls', 'metadata', 'retrieve_data']
 
+__version__ = '0.4.0'
+
 from .api_calls import get_json, get_data_in_tuple, make_request
 from .retrieve_data import get_all_data_for_profile, get_all_data_for_indicators, get_data_by_indicator_ids, \
     get_all_areas_for_all_indicators, get_data_for_indicator_at_all_available_geographies
