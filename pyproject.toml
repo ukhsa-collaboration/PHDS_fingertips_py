@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "fingertips_py"
 
-version = "0.4.0"
+dynamic = ["version"]
 
 license = {file = "LICENSE"}
 
@@ -53,3 +53,6 @@ Documentation = "https://fingertips-py.readthedocs.io/en/latest/"
 Repository = "https://github.com/ukhsa-collaboration/PHDS_fingertips_py"
 Issues = "https://github.com/ukhsa-collaboration/PHDS_fingertips_py/issues"
 Changelog = "https://github.com/ukhsa-collaboration/PHDS_fingertips_py/blob/master/CHANGELOG.md"
+
+[tool.setuptools.dynamic]
+version = {attr = "fingertips_py.__version__"}
