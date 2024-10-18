@@ -7,8 +7,8 @@ A group of functions to retrieve data from Fingertips by indicator, profile, dom
 
 import pandas as pd
 from urllib.error import URLError, HTTPError
-from .api_calls import base_url, deal_with_url_error, get_json
-from .metadata import get_area_type_ids_for_profile, get_metadata_for_all_indicators, get_all_areas
+from fingertips_py.api_calls import base_url, deal_with_url_error, get_json
+from fingertips_py.metadata import get_area_type_ids_for_profile, get_metadata_for_all_indicators, get_all_areas
 
 
 def get_data_by_indicator_ids(indicator_ids, area_type_id, parent_area_type_id=15, profile_id=None,

@@ -7,8 +7,7 @@ Functions to retrieve data that are specific to areas and relevant to all indica
 
 import pandas as pd
 import warnings
-from .retrieve_data import get_data_by_indicator_ids
-
+from fingertips_py.retrieve_data import get_data_by_indicator_ids
 
 def defined_qcut(df, value_series, number_of_bins, bins_for_extras, labels=False):
     """
