@@ -10,4 +10,4 @@ from fingertips_py.metadata import get_metadata_for_profile_as_dataframe, get_me
     get_profile_by_id, get_age_id, get_all_ages, get_all_sexes, get_areas_for_area_type, get_metadata_for_indicator, \
     get_multiplier_and_calculation_for_indicator, get_sex_from_id, get_sex_id, get_value_note_id, \
     get_metadata_for_all_indicators, get_metadata_for_all_indicators_from_csv, get_all_areas
-from fingertips_py.area_data import deprivation_decile, abc
+from fingertips_py.area_data import deprivation_decile
