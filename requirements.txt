@@ -1,3 +1,5 @@
 pandas
 requests
 pytest
+sphinx
+sphinx_rtd_theme

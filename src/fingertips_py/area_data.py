@@ -1,6 +1,4 @@
 """
-area_data.py
-==================================
 Functions to retrieve data that are specific to areas and relevant to all indicators. For example: Deprivation decile.
 """
 

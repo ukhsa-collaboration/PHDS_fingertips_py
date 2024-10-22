@@ -6,6 +6,7 @@ gen
 venv/
 *.egg-info
 dist/
+docs/build/
 
 # IDE files
 .idea

@@ -1,6 +1,4 @@
 """
-metadata.py
-==================================
 Calls used to retrieve metadata about areas, ages, sexes, value notes, calculation methods, rates, and indicator
 metadata.
 """

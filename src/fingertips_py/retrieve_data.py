@@ -1,6 +1,4 @@
 """
-retrieve_data.py
-==================================
 A group of functions to retrieve data from Fingertips by indicator, profile, domain (group), or geography.
 """
 

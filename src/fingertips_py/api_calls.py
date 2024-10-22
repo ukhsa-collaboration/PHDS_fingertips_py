@@ -1,6 +1,4 @@
 """
-api_calls.py
-==================================
 A group of functions to query the Fingertips api and retrieve data in a variety of formats.
 """
 
@@ -16,6 +14,7 @@ def make_request(url, attr=None):
     :param url: A url to make a request
     :param attr: The attribute that needs to be returned
     :return: a dict of the attribute and associated data
+
     """
     try:
         req = requests.get(url)
@@ -47,6 +46,8 @@ def get_json_return_df(url, transpose=True):
     :param url: A url to make a request
     :param transpose: [OPTIONAL] transposes dataframe. Default True.
     :return: Dataframe generated from JSON response.
+
+    :meta private:
     """
     try:
         req = requests.get(url)
@@ -86,6 +87,8 @@ def get_data_in_dict(url, key = None, value = None):
     :param key: The item in the JSON to be used as the dictionary key
     :param value: The item in the JSON to be used as the dictionary value
     :return: A dictionary of returned data using first item as dictionary key by default
+
+    :meta private:
     """
     json_list = get_json(url)
     if key is None:
@@ -104,6 +107,8 @@ def deal_with_url_error(url):
     """
     :param url: A url that returns a URL Error based on SSL errors
     :return: A dataframe from the URL with varify set to false.
+
+    :meta private:
     """
     req = requests.get(url, verify=False)
     s = str(req.content, 'utf-8')
